@@ -27,7 +27,7 @@ void Domain::add_new_person(string name, string gender, int birthyear, int death
     DB.write_to_DB(v);
 }
 
-void Domain::sort_and_display(string sortMenu) {       // sorterar vektorinn...
+vector<Person> Domain::sort_and_display(string sortMenu) {        // sorterar vektorinn...
 
     do{
         if(sortMenu.compare("1") == 0) {
@@ -56,33 +56,20 @@ void Domain::sort_and_display(string sortMenu) {       // sorterar vektorinn...
             cin >> sortMenu;
         }
     } while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5);
-
-    displayDatabase();
-}
-
-void Domain::displayDatabase()      // Prentar út vektorinn...
-{
-    for(unsigned int i = 0; i < v.size(); i++)
-    {
-        cout << endl;
-        v[i].displayData();
-    }
-    cout << size() << " scientists!" << endl;
+    return v;
 }
 
 
-void Domain::searchstring(string num, string search) {
+vector<Person> Domain::searchstring(string num, string search) {
 
-    int countM = 0;
-    cout << endl;
+    vector<Person> vec;
 
     if(num.compare("1") == 0) {
         for(unsigned int i = 0; i < v.size(); i++)
         {
             if (v[i].getname().find(search) != string::npos)
             {
-                v[i].displayData();
-                countM++;
+                vec.push_back(v[i]);
             }
         }
     }
@@ -91,8 +78,7 @@ void Domain::searchstring(string num, string search) {
         {
             if (v[i].getgender().find(search) != string::npos)
             {
-                v[i].displayData();
-                countM++;
+                vec.push_back(v[i]);
             }
         }
     }
@@ -101,8 +87,7 @@ void Domain::searchstring(string num, string search) {
         {
             if (v[i].getbirthyear() == atoi(search.c_str()))
             {
-                v[i].displayData();
-                countM++;
+                vec.push_back(v[i]);
             }
         }
     }
@@ -111,8 +96,7 @@ void Domain::searchstring(string num, string search) {
         {
             if (v[i].getdeathyear()== atoi(search.c_str()))
             {
-                v[i].displayData();
-                countM++;
+                vec.push_back(v[i]);
             }
         }
     }
@@ -121,17 +105,10 @@ void Domain::searchstring(string num, string search) {
         {
             if (v[i].getbio().find(search) != string::npos)
             {
-                v[i].displayData();
-                countM++;
+                vec.push_back(v[i]);
             }
         }
     }
-
-    if(countM == 0)
-    {
-        cout << "Sorry, no match." << endl;
-    }
-    else {
-        cout << countM << " match(es)!" << endl;
-    }
+    return vec;
 }
+
