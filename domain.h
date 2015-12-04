@@ -18,9 +18,8 @@ private:
 public:
     Domain();
     void add_new_person(string name, string gender, int birthyear, int deathyear, string bio);
-    void sort_and_display(string sortMenu);
-    void displayDatabase();
-    void searchstring(string num, string search) ;
+    vector<Person> sort_and_display(string sortMenu);
+    vector<Person>  searchstring(string num, string search);
     int size();
 
 };
