@@ -1,7 +1,4 @@
-#include <fstream>
-#include <vector>
-#include <QtSql>
-#include <QtDebug>
+
 #include "person.h"
 #include "data.h"
 
@@ -9,29 +6,28 @@
 
 void Database::connectToDatabase()
 {
-        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-        QString dbSoC = "database.sqlite";
-        db.setDatabaseName(dbSoC);
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    QString dbSoC = "database.sqlite";
+    db.setDatabaseName(dbSoC);
 
-        db.open();
+    db.open();
 
-        QSqlQuery query(db);
+    QSqlQuery query(db);
 
-        if (!db.open())
-        {
-            cout << "Unable to open database. Will create a new one!" << endl;
+    if (!db.open())
+    {
+        cout << "Unable to open database. Will create a new one!" << endl;
 
-            query.exec("CREATE DATABASE database");
-            query.exec("CREATE TABLE 'scientists' ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL UNIQUE, 'Name' TEXT NOT NULL , 'Gender' TEXT NOT NULL , 'DOB' INTEGER, 'DOD' INTEGER, 'Bio' TEXT)");
-            query.exec("CREATE TABLE \"computers\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE, \"Name\" TEXT NOT NULL , \"Type\" INTEGER NOT NULL ,\"BuildYear\" INTEGER, \"Built\" CHAR NOT NULL)");
-            query.exec("CREATE TABLE \"link\" (\"SID\" INTEGER NOT NULL PRIMARY KEY, \"CID\" INTEGER NOT NULL)");
-        }
+        query.exec("CREATE TABLE 'scientists' ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL UNIQUE, 'Name' TEXT NOT NULL , 'Gender' TEXT NOT NULL , 'DOB' INTEGER, 'DOD' INTEGER, 'Bio' TEXT)");
+        query.exec("CREATE TABLE \"computers\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE, \"Name\" TEXT NOT NULL , \"Type\" INTEGER NOT NULL ,\"BuildYear\" INTEGER, \"Built\" CHAR NOT NULL)");
+        query.exec("CREATE TABLE \"link\" (\"SID\" INTEGER NOT NULL PRIMARY KEY, \"CID\" INTEGER NOT NULL)");
+    }
 }
 
 vector<Person> Database::read_from_DB()
 {
 
-    /*vector<Person> v;
+    vector<Person> v;
 
     ifstream file;
     file.open("database.csv");
@@ -51,7 +47,7 @@ vector<Person> Database::read_from_DB()
         cerr << "Unable to open file" << endl;
 
     file.close();
-    return v;*/
+    return v;
 
 }
 

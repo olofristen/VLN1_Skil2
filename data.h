@@ -4,7 +4,8 @@
 #include "person.h"
 #include <vector>
 #include <fstream>
-
+#include <QtDebug>
+#include <QtSql>
 
 class Database {
 
