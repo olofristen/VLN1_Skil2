@@ -4,15 +4,17 @@
 
 // Database layer (ifstream/ofstream,read/write,...)
 
-void Database::connectToDatabase()
+Database::Database()        // Database búinn til/opnaður í constructor
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     QString dbSoC = "database.sqlite";
     db.setDatabaseName(dbSoC);
 
     db.open();
+}
 
-    QSqlQuery query(db);
+/*
+ * QSqlQuery query(db);
 
     if (!db.open())
     {
@@ -22,7 +24,7 @@ void Database::connectToDatabase()
         query.exec("CREATE TABLE \"computers\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE, \"Name\" TEXT NOT NULL , \"Type\" INTEGER NOT NULL ,\"BuildYear\" INTEGER, \"Built\" CHAR NOT NULL)");
         query.exec("CREATE TABLE \"link\" (\"SID\" INTEGER NOT NULL PRIMARY KEY, \"CID\" INTEGER NOT NULL)");
     }
-}
+    */
 
 vector<Person> Database::read_from_DB()
 {
