@@ -49,7 +49,7 @@ vector<Person> Domain::sort_and_display(string sortMenu) {        // sorterar ve
             sort(v.begin(), v.end(), sortbyyearofdeath);
         }
         else if(sortMenu.compare("Q") == 0 || sortMenu.compare("q") == 0) {
-            return;
+            return vector<Person>();
         }
         else {
             cout << "Invalid input! " << endl;

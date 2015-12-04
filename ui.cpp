@@ -29,8 +29,9 @@ void UI::choices()
     cout << "   |  What do you want to do?                                      |" << endl;
     cout << "   |    1.  Register new computer scientist/s                      |" << endl;
     cout << "   |    2.  Register new computer                                  |" << endl;
-    cout << "   |    3.  See all computer scientists registered                 |" << endl;
-    cout << "   |    4.  Search the database                                    |" << endl;
+    cout << "   |    3.  Register link between scientist/s and computer/s       |" << endl;
+    cout << "   |    4.  See all computer scientists registered                 |" << endl;
+    cout << "   |    5.  Search the database                                    |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
     cin >> menu;
@@ -45,6 +46,15 @@ void UI::choices()
         registerMessageComputer();
     }
     else if(menu.compare("3") == 0){
+        system("CLS");
+        //registerMessageLink();
+    }
+    else if(menu.compare("4") == 0) {
+        system("CLS");
+        sortMessage();
+        //searchData();
+    }
+    else if(menu.compare("5") == 0) {
         system("CLS");
         searchData();
     }
@@ -107,6 +117,7 @@ void UI::sortMessage()     // sleppa því að taka inn vektorinn, á ekki að v
     vector<Person> vec = my_dom.sort_and_display(sortMenu);
     if(!vec.empty()) {
         displayDatabase(vec);
+    }
 }
 
 
@@ -163,7 +174,9 @@ void UI::searchData()
 }
 
 
-void UI::reading_person() {
+
+void UI::reading_person()
+{
 
     string number = "";
     int num = 0;
@@ -190,7 +203,8 @@ void UI::reading_person() {
     for(int i = 0; i < num; i++)
     {
         cout << "Name: ";
-        cin >> name;
+        cin.ignore();
+        getline(cin, name);
 
         do{
             cout << "Gender (F/M): ";
@@ -259,7 +273,7 @@ void UI::displayDatabase(vector<Person> v)      // Prentar út vektorinn...
     cout << endl << v.size() << " scientists!" << endl;
 }
 
-        //connectToDatabase();
+       /* connectToDatabase();
 
         string DOB;
         string DOD;
@@ -278,6 +292,7 @@ void UI::displayDatabase(vector<Person> v)      // Prentar út vektorinn...
 
         string temp = "INSERT INTO scientists(name, gender, DOB, DOD, Bio) VALUES ('" + name +
         "', " + "'" + gender + "', " + DOB + ", " + DOD + ", " + "'" + bio + "');";
+*/
 
         /*QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
         QString dbSoC = "database.sqlite";
@@ -294,6 +309,6 @@ void UI::displayDatabase(vector<Person> v)      // Prentar út vektorinn...
         else
             query.exec(temp);*/ //virkar ekki for some reason.... arg
 
-        my_dom.add_new_person(name, gender, birthyear, deathyear, bio);
-    }
-}
+     //  my_dom.add_new_person(name, gender, birthyear, deathyear, bio);
+
+
