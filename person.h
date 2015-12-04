@@ -22,7 +22,6 @@ class Person
         Person();
         Person (string name, string gender, int birthYear, int deathYear, string bio);
         void readData(ifstream& file);
-        void displayData();
         void searchData();
         string getname();
         string getgender();
@@ -34,6 +33,8 @@ class Person
         friend bool sortbyyearofdeath (const Person& a, const Person &b);
         friend bool sortbygender (const Person& a, const Person &b);
         bool operator < (const Person& r);
+        
+        friend ostream& operator << (ostream& out, const Person& P);
 
 
 };
