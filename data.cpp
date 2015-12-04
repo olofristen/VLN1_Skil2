@@ -1,20 +1,45 @@
 
 #include "person.h"
 #include "data.h"
+#include <QString>
 
 // Database layer (ifstream/ofstream,read/write,...)
 
 Database::Database()        // Database búinn til/opnaður í constructor
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db = QSqlDatabase::addDatabase("QSQLITE");
     QString dbSoC = "database.sqlite";
     db.setDatabaseName(dbSoC);
 
     db.open();
+    cout << "opening db..." << endl;
 }
 
-/*
- * QSqlQuery query(db);
+Database::~Database() {
+    if(db.open()) {
+        db.close();
+        cout << "closing db..." << endl;
+    }
+}
+
+void Database::add_new_scientist(Person P) {
+
+    QSqlQuery query(db);
+    QString q = "CREATE TABLE IF NOT EXISTS scientists ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT , 'Name' TEXT NOT NULL , 'Gender' TEXT NOT NULL , 'DOB' INTEGER, 'DOD' INTEGER, 'Bio' TEXT)";
+    query.exec(q);
+
+    query.prepare("INSERT INTO scientists (Name, Gender, DOB, DOD, Bio ) VALUES(:name,:gender,:dob,:dod,:bio)");
+    query.bindValue(":name", QString::fromStdString(P.getname()));
+    query.bindValue(":gender", QString::fromStdString(P.getgender()));
+    query.bindValue(":dob", P.getbirthyear());
+    query.bindValue(":dod", P.getdeathyear());
+    query.bindValue(":bio", QString::fromStdString(P.getbio()));
+    query.exec();
+
+    // VIRKAR!! Setur inn í Database-inn! JÍÍÍHAAA!
+
+}
+/* QSqlQuery query(db);
 
     if (!db.open())
     {

@@ -23,6 +23,7 @@ public:
     void searchMessage();
     void searchData();
     void return_home();
+    void clear_screen();
     
     void displayDatabase(vector<Person> v);
 

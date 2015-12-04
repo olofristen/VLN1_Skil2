@@ -23,8 +23,10 @@ int Domain::size() {
 
 void Domain::add_new_person(string name, string gender, int birthyear, int deathyear, string bio) {     // Bætir nýrri persónu inn i vektorinn...
 
-    v.push_back(Person(name, gender, birthyear, deathyear, bio));
-    DB.write_to_DB(v);
+    Person newP = Person(name, gender, birthyear, deathyear, bio);
+    v.push_back(newP);
+    DB.add_new_scientist(newP);
+    //DB.write_to_DB(v);
 }
 
 vector<Person> Domain::sort_and_display(string sortMenu) {        // sorterar vektorinn...

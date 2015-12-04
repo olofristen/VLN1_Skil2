@@ -1,9 +1,19 @@
 #include "ui.h"
 
+
 // UI, heldur utan um öll samskipti við notendur, cin, cout, main.... -> samskipti við domain(worker) sem útfærir vektor o.s.frv.
 // helstu atriði sem eru í boði: add, sort og printlist, search
 // Þarf ekki endilega að vera klasi en getur haft samskipti við Person-klasa sem er óháður layerunum
 
+void UI::clear_screen()
+{
+#ifdef _WIN32
+    system("cls");
+#else
+    // Assume POSIX
+    system ("clear");
+#endif
+}
 
 void UI::welcome()
 {
@@ -37,25 +47,25 @@ void UI::choices()
     cin >> menu;
 
     if(menu.compare("1") == 0){
-        system("CLS");
+        clear_screen();
         registerMessageScientist();
         reading_person();
     }
     else if(menu.compare("2") == 0){
-        system("CLS");
+        clear_screen();
         registerMessageComputer();
     }
     else if(menu.compare("3") == 0){
-        system("CLS");
+        clear_screen();
         //registerMessageLink();
     }
     else if(menu.compare("4") == 0) {
-        system("CLS");
+        clear_screen();
         sortMessage();
         //searchData();
     }
     else if(menu.compare("5") == 0) {
-        system("CLS");
+        clear_screen();
         searchData();
     }
     else {
