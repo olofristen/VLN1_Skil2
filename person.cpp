@@ -40,19 +40,21 @@ string Person::getbio() {
     return bio;
 }
 
-void Person::displayData()
+
+ostream& operator << (ostream& out, const Person& P)
 {
-    cout << "Name: " << getname() << endl
-         << "Gender: " << getgender() << endl
-         << "Year of birth: " << getbirthyear() << endl;
-    if(getdeathyear() == -1) {
-        cout << "Alive and well!" << endl;
+    out << "Name: " << P.name << endl
+         << "Gender: " << P.gender << endl
+         << "Year of birth: " << P.birthYear << endl;
+    if(P.deathYear == -1) {
+        out << "Blive and well!" << endl;
     }
     else {
-        cout << "Year of death: " << getdeathyear() << endl;
+        out << "Year of death: " << P.deathYear << endl;
     }
-    cout << endl << "Bio: " << getbio() << endl
+    out << endl << "Bio: " << P.bio << endl
          << "------------------------------------------------------------------" << endl;
+    return out;
 }
 
 void Person::readData(ifstream& file)
