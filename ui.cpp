@@ -104,10 +104,9 @@ void UI::sortMessage()     // sleppa því að taka inn vektorinn, á ekki að v
 
     cin >> sortMenu;
 
-    if(sortMenu == "Q" || sortMenu == "q") {
-        return ;
-    }
-    my_dom.sort_and_display(sortMenu);
+    vector<Person> vec = my_dom.sort_and_display(sortMenu);
+    if(!vec.empty()) {
+        displayDatabase(vec);
 }
 
 
@@ -153,7 +152,14 @@ void UI::searchData()
     }  while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
 
     cin >> search;
-    my_dom.searchstring(searchMenu, search);
+    vector<Person> vec = my_dom.searchstring(searchMenu, search);
+
+    displayDatabase(vec);
+
+    if(vec.size() == 0)
+    {
+        cout << "Sorry, no match." << endl;
+    }
 }
 
 
@@ -235,10 +241,23 @@ void UI::reading_person() {
 
         }while(deathyear != -1 && deathyear < birthyear || deathyear > 2015);
 
-
         cout << "Bio: ";
-        cin >> bio;
+        cin.ignore();
+        getline(cin, bio);
         cout << endl;
+
+        my_dom.add_new_person(name, gender, birthyear, deathyear, bio);
+    }
+}
+
+void UI::displayDatabase(vector<Person> v)      // Prentar út vektorinn...
+{
+    for(unsigned int i = 0; i < v.size(); i++)
+    {
+        cout << endl << v[i];
+    }
+    cout << endl << v.size() << " scientists!" << endl;
+}
 
         //connectToDatabase();
 
