@@ -2,6 +2,7 @@
 #define DATA_H
 
 #include "person.h"
+#include "computer.h"
 #include <vector>
 #include <fstream>
 #include <QtDebug>

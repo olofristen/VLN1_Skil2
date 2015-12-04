@@ -10,8 +10,19 @@ bool sortbygender (const Person& a, const Person &b) {
 }
 bool sortbyyearofdeath (const Person& a, const Person &b) {
     return a.deathYear < b.deathYear;
+
+}
+/*bool sortbybuildyear (const Computer& a, const Computer &b) {
+    return a.buildYear < b.buildYear;
 }
 
+bool sortbytype (const Computer& a, const Computer &b) {
+    return a.type < b.type;
+}
+bool sortbywasBuilt (const Computer& a, const Computer &b) {
+    return a.wasBuilt < b.wasBuilt;
+}
+*/
 Domain::Domain() {
 
     v = DB.read_from_DB();
@@ -27,7 +38,12 @@ void Domain::add_new_person(string name, string gender, int birthyear, int death
     DB.write_to_DB(v);
 }
 
-vector<Person> Domain::sort_and_display(string sortMenu) {        // sorterar vektorinn...
+void Domain::add_new_computer(string name, int buildyear, int type, bool wasBuilt) {     // Bætir nýrri persónu inn i vektorinn...
+
+    v.push_back(Computer(name, buildyear, type, wasBuilt));
+    DB.write_to_DB(v);
+}
+vector<Person> Domain::sort_and_displayScientist(string sortMenu) {        // sorterar vektorinn...
 
     do{
         if(sortMenu.compare("1") == 0) {
@@ -59,8 +75,34 @@ vector<Person> Domain::sort_and_display(string sortMenu) {        // sorterar ve
     return v;
 }
 
+vector<Computer> Domain::sort_and_displayComputer(string sortMenu) {        // sorterar vektorinn...
 
-vector<Person> Domain::searchstring(string num, string search) {
+    do{
+        if(sortMenu.compare("1") == 0) {
+            sort(v.begin(), v.end());
+        }
+        else if(sortMenu.compare("2") == 0) {
+            sort(v.rbegin(), v.rend());
+        }
+        else if(sortMenu.compare("3") == 0) {
+            sort(v.begin(), v.end());
+            sort(v.begin(), v.end(), sortbybuildyear);
+        }
+        else if(sortMenu.compare("4") == 0) {
+            sort(v.begin(), v.end());
+            sort(v.begin(), v.end(), sortbytype);
+        }
+        else if(sortMenu.compare("Q") == 0 || sortMenu.compare("q") == 0) {
+            return vector<Computer>();
+        }
+        else {
+            cout << "Invalid input! " << endl;
+            cin >> sortMenu;
+        }
+    } while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5);
+    return v;
+}
+vector<Person> Domain::searchStringScientist(string num, string search) {
 
     vector<Person> vec;
 
@@ -109,6 +151,50 @@ vector<Person> Domain::searchstring(string num, string search) {
             }
         }
     }
+    return vec;
+}
+
+vector<Computer> Domain::searchStringComputer(string num, string search) {
+
+    vector<Computer> vec;
+
+    if(num.compare("1") == 0) {
+        for(unsigned int i = 0; i < v.size(); i++)
+        {
+            if (v[i].getname().find(search) != string::npos)
+            {
+                vec.push_back(v[i]);
+            }
+        }
+    }
+    else if(num.compare("2") == 0) {
+        for(unsigned int i = 0; i < v.size(); i++)
+        {
+            if (v[i].getbuildyear() == atoi(search.c_str()))
+            {
+                vec.push_back(v[i]);
+            }
+        }
+    }
+    else if(num.compare("3") == 0) {
+         for(unsigned int i = 0; i < v.size(); i++)
+        {
+            if (v[i].gettype() == atoi(search.c_str()))
+            {
+                vec.push_back(v[i]);
+            }
+        }
+    }
+    else if(num.compare("4") == 0) {
+        for(unsigned int i = 0; i < v.size(); i++)
+        {
+            if (v[i].getwasbuilt()== atoi(search.c_str()))
+            {
+                vec.push_back(v[i]);
+            }
+        }
+    }
+
     return vec;
 }
 

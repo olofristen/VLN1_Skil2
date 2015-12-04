@@ -13,13 +13,17 @@ class Domain {
 private:
 
     vector<Person> v;
+    vector<Computer> ve;
     Database DB;
 
 public:
     Domain();
     void add_new_person(string name, string gender, int birthyear, int deathyear, string bio);
-    vector<Person> sort_and_display(string sortMenu);
-    vector<Person>  searchstring(string num, string search);
+    void add_new_computer(string name, int buildyear, int type, bool wasBuilt);
+    vector<Person> sort_and_displayScientist(string sortMenu);
+    vector<Computer> sort_and_displayComputer(string sortMenu);
+    vector<Person>  searchstringScientist(string num, string search);
+    vector<Computer>  searchstringComputer(string num, string search);
     int size();
 
 };
