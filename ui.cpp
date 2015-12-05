@@ -232,7 +232,7 @@ void UI::searchComputer()
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
 
-    do{
+    /*do{
         cin >> searchMenu;
 
         if(searchMenu.compare("1") == 0) {
@@ -260,12 +260,11 @@ void UI::searchComputer()
     if(vec.size() == 0)
     {
         cout << "Sorry, no match." << endl;
-    }
+    }*/
 }
 
 void UI::reading_person()
 {
-
     string number = "";
     int num = 0;
 
@@ -341,7 +340,7 @@ void UI::reading_person()
                 cout << "Invalid input! " << endl;
             }
 
-        }while((deathyear != -1) && (deathyear < birthyear) || (deathyear > 2015));
+        }while((deathyear != -1) && ((deathyear < birthyear) || (deathyear > 2015)));
 
         cout << "Bio: ";
         cin.ignore();
@@ -374,8 +373,9 @@ void UI::reading_computer()
 
     cout << endl << "Type in computer: " << endl << endl;
 
-    string name = "", buildyear = "", type = "", wasbuilt = "";
-    int whichbuildyear = 0, whattype = 0;
+    string name = "", buildyear = "", type = "", info = "", wb = "";
+    bool wasBuilt;
+    int tempBY = 0;
     string a = "";
 
     for(int i = 0; i < num; i++)
@@ -385,21 +385,10 @@ void UI::reading_computer()
         getline(cin, name);
 
         do{
-            cout << "Year of buildness (1700 - 2010): ";
-            cin >> buildyear;
-
-            if(buildyear < "1700" || buildyear > "2010") {
-                cout << "Invalid input" << endl;
-            }
-        }while(buildyear < "1700" || buildyear > "2010");
-
-      whichbuildyear = atoi(buildyear.c_str());
-
-        do{
             cout << "Was the computer:" << endl;
             cout << "A. Mechanic" << endl;
             cout << "B. Electronic " << endl;
-            cout << "C. Transistor computer " << endl;
+            cout << "C. Transistor computer" << endl;
             cin >> a;
 
             if(a.compare("A") == 0 || a.compare("a") == 0){
@@ -416,15 +405,42 @@ void UI::reading_computer()
             }
         }while(type == "");
 
+        do{
+            cout << "Was the computer ever built (Y/N)?" ;
+            cin >> wb;
 
-        cout << "Was the computer built? (Y/N)?: " << endl;
-        cin >> wasbuilt;
+            if(wb == "Y" || wb == "y")
+                wasBuilt = true;
+            else if(wb == "N" || wb == "n")
+                wasBuilt = false;
+            else
+                cout << "Invalid input" << endl;
+        }while(wb == "");
 
-        //cin.ignore();
-        //getline(cin, bio);
-        //cout << endl;
+        if(wasBuilt == true)
+        {
+            do{
+                cout << "Year of buildness (1700 - 2010): ";
+                cin >> buildyear;
 
-        my_dom.add_new_computer(name, whichbuildyear, type, wasbuilt);
+                if(buildyear < "1700" || buildyear > "2010") {
+                    cout << "Invalid input" << endl;
+                }
+            }while(buildyear < "1700" || buildyear > "2010");
+        }
+        else
+        {
+            cout << "When was the computer documented? ";
+            cin >> buildyear;
+        }
+        tempBY = atoi(buildyear.c_str());
+
+        cout << "Info: ";
+        cin.ignore();
+        getline(cin, info);
+        cout << endl;
+
+        my_dom.add_new_computer(name, tempBY, type, wasBuilt, info);
     }
 }
 
@@ -445,6 +461,7 @@ void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út vektor
     }
     cout << endl << ve.size() << " computers!" << endl;
 }
+
        /* connectToDatabase();
 
         string DOB;
