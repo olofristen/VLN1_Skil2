@@ -12,7 +12,7 @@ bool sortbyyearofdeath (const Person& a, const Person &b) {
     return a.deathYear < b.deathYear;
 
 }
-/*bool sortbybuildyear (const Computer& a, const Computer &b) {
+bool sortbyyearofbuilt (const Computer& a, const Computer &b) {
     return a.buildYear < b.buildYear;
 }
 
@@ -22,10 +22,11 @@ bool sortbytype (const Computer& a, const Computer &b) {
 bool sortbywasBuilt (const Computer& a, const Computer &b) {
     return a.wasBuilt < b.wasBuilt;
 }
-*/
+
 Domain::Domain() {
 
-    v = DB.read_from_DB();
+    v = DB.read_Scientist_from_DB();
+    ve = DB.read_Computer_from_DB();
 }
 
 int Domain::size() {
@@ -34,14 +35,17 @@ int Domain::size() {
 
 void Domain::add_new_person(string name, string gender, int birthyear, int deathyear, string bio) {     // Bætir nýrri persónu inn i vektorinn...
 
-    v.push_back(Person(name, gender, birthyear, deathyear, bio));
-    DB.write_to_DB(v);
+    Person newP = Person(name, gender, birthyear, deathyear, bio);
+    v.push_back(newP);
+    DB.add_new_scientist(newP);
+    //DB.write_to_DB(v);
 }
 
-void Domain::add_new_computer(string name, int buildyear, int type, bool wasBuilt) {     // Bætir nýrri persónu inn i vektorinn...
+void Domain::add_new_computer(string name, int buildyear, string type, string wasBuilt) {     // Bætir nýrri tölvu inn i vektorinn...
 
-    v.push_back(Computer(name, buildyear, type, wasBuilt));
-    DB.write_to_DB(v);
+    Computer newC = Computer(name, buildyear, type, wasBuilt);
+    ve.push_back(newC);
+    DB.add_new_computer(newC);
 }
 vector<Person> Domain::sort_and_displayScientist(string sortMenu) {        // sorterar vektorinn...
 
@@ -79,18 +83,18 @@ vector<Computer> Domain::sort_and_displayComputer(string sortMenu) {        // s
 
     do{
         if(sortMenu.compare("1") == 0) {
-            sort(v.begin(), v.end());
+            sort(ve.begin(), ve.end());
         }
         else if(sortMenu.compare("2") == 0) {
-            sort(v.rbegin(), v.rend());
+            sort(ve.rbegin(), ve.rend());
         }
         else if(sortMenu.compare("3") == 0) {
-            sort(v.begin(), v.end());
-            sort(v.begin(), v.end(), sortbybuildyear);
+            sort(ve.begin(), ve.end());
+            sort(ve.begin(), ve.end(), sortbyyearofbuilt);
         }
         else if(sortMenu.compare("4") == 0) {
-            sort(v.begin(), v.end());
-            sort(v.begin(), v.end(), sortbytype);
+            sort(ve.begin(), ve.end());
+            sort(ve.begin(), ve.end(), sortbytype);
         }
         else if(sortMenu.compare("Q") == 0 || sortMenu.compare("q") == 0) {
             return vector<Computer>();
@@ -100,7 +104,7 @@ vector<Computer> Domain::sort_and_displayComputer(string sortMenu) {        // s
             cin >> sortMenu;
         }
     } while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5);
-    return v;
+    return ve;
 }
 vector<Person> Domain::searchStringScientist(string num, string search) {
 
@@ -159,38 +163,38 @@ vector<Computer> Domain::searchStringComputer(string num, string search) {
     vector<Computer> vec;
 
     if(num.compare("1") == 0) {
-        for(unsigned int i = 0; i < v.size(); i++)
+        for(unsigned int i = 0; i < ve.size(); i++)
         {
-            if (v[i].getname().find(search) != string::npos)
+            if (ve[i].getname().find(search) != string::npos)
             {
-                vec.push_back(v[i]);
+                vec.push_back(ve[i]);
             }
         }
     }
     else if(num.compare("2") == 0) {
-        for(unsigned int i = 0; i < v.size(); i++)
+        for(unsigned int i = 0; i < ve.size(); i++)
         {
-            if (v[i].getbuildyear() == atoi(search.c_str()))
+            if (ve[i].getbuildyear() == atoi(search.c_str()))
             {
-                vec.push_back(v[i]);
+                vec.push_back(ve[i]);
             }
         }
     }
     else if(num.compare("3") == 0) {
-         for(unsigned int i = 0; i < v.size(); i++)
+         for(unsigned int i = 0; i < ve.size(); i++)
         {
-            if (v[i].gettype() == atoi(search.c_str()))
+            if (ve[i].gettype().find(search) != string::npos)
             {
-                vec.push_back(v[i]);
+                vec.push_back(ve[i]);
             }
         }
     }
     else if(num.compare("4") == 0) {
-        for(unsigned int i = 0; i < v.size(); i++)
+        for(unsigned int i = 0; i < ve.size(); i++)
         {
-            if (v[i].getwasbuilt()== atoi(search.c_str()))
+            if (ve[i].getwasbuilt().find(search) != string::npos)
             {
-                vec.push_back(v[i]);
+                vec.push_back(ve[i]);
             }
         }
     }

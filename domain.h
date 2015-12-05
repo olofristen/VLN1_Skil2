@@ -19,11 +19,11 @@ private:
 public:
     Domain();
     void add_new_person(string name, string gender, int birthyear, int deathyear, string bio);
-    void add_new_computer(string name, int buildyear, int type, bool wasBuilt);
+    void add_new_computer(string name, int buildyear, string type, string wasBuilt);
     vector<Person> sort_and_displayScientist(string sortMenu);
     vector<Computer> sort_and_displayComputer(string sortMenu);
-    vector<Person>  searchstringScientist(string num, string search);
-    vector<Computer>  searchstringComputer(string num, string search);
+    vector<Person>  searchStringScientist(string num, string search);
+    vector<Computer>  searchStringComputer(string num, string search);
     int size();
 
 };

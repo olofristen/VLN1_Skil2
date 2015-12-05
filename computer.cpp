@@ -8,10 +8,10 @@ bool Computer::operator < (const Computer &r) {
 Computer::Computer() {
     name = " ";
     buildYear = 0;
-    type = 0;
-    wasBuilt = 0;
+    type = " ";
+    wasBuilt = " ";
 }
-Computer::Computer(string name, int buildyear, int type, bool wasBuilt)
+Computer::Computer(string name, int buildyear, string type, string wasBuilt)
 {
     this->name = name;
     this->buildYear = buildyear;
@@ -24,34 +24,35 @@ string Computer::getname() {
 int Computer::getbuildyear() {
     return buildYear;
 }
-int Computer::gettype() {
+string Computer::gettype() {
     return type;
 }
-bool Computer::getwasbuilt() {
+string Computer::getwasbuilt() {
     return wasBuilt;
 }
-void Computer::displayData()
+
+ostream& operator << (ostream& out, const Computer& C)
 {
-    cout << "Name: " << getname() << endl
-         << "Made in: " << getbuildyear() << endl
-         << "Type: " << gettype() << endl;
-    if(getwasbuilt() == -1) {
-        cout << "This computer was only a thought!" << endl;
+    cout << "Name: " << C.name << endl
+         << "Made in: " << C.buildYear << endl
+         << "Type: " << C.type << endl;
+    if(C.wasBuilt == "N") {
+        out << "This computer was only a thought!" << endl;
     }
     else {
-        cout << "Yes, this computer was built. " << endl;
+        out << "Yes, this computer was built. " << endl;
     }
-        cout << "------------------------------------------------------------------" << endl;
+        out << "------------------------------------------------------------------" << endl;
+        return out;
 }
-/*void Computer::readData(ifstream& file)
+void Computer::readData(ifstream& file)
 {
-    string tempBuilt, tempType, tempWasbuilt;
+    string tempBuilt;
     getline(file, name);
     getline(file, tempBuilt);
-    getline(file, tempType);
+    getline(file, type);
     getline(file, wasBuilt);
-    builtYear = atoi(tempBuilt.c_str());
-    type = atoi(tempType.c_str());
-    wasBuilt = atoi(tempWasbuilt.c_str());
-}*/
+    buildYear = atoi(tempBuilt.c_str());
+}
 
+//void Computer::displayData()

@@ -21,7 +21,7 @@ int main()
         cout << endl;
         cout << "Do you wish to continue? (Y/N) " << endl;
         cin >> check;
-        system("CLS");
+        ui.clear_screen();
 
     } while(check == 'y' || check == 'Y');
 

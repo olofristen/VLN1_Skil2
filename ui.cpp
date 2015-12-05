@@ -1,9 +1,19 @@
 #include "ui.h"
 
+
 // UI, heldur utan um öll samskipti við notendur, cin, cout, main.... -> samskipti við domain(worker) sem útfærir vektor o.s.frv.
 // helstu atriði sem eru í boði: add, sort og printlist, search
 // Þarf ekki endilega að vera klasi en getur haft samskipti við Person-klasa sem er óháður layerunum
 
+void UI::clear_screen()
+{
+#ifdef _WIN32
+    system("cls");
+#else
+    // Assume POSIX
+    system ("clear");
+#endif
+}
 
 void UI::welcome()
 {
@@ -39,34 +49,34 @@ void UI::choices()
     cin >> menu;
 
     if(menu.compare("1") == 0){
-        system("CLS");
+        clear_screen();
         registerMessageScientist();
         reading_person();
     }
     else if(menu.compare("2") == 0){
-        system("CLS");
+        clear_screen();
         registerMessageComputer();
         reading_computer();
     }
     else if(menu.compare("3") == 0){
-        system("CLS");
+        clear_screen();
         //registerMessageLink();
     }
     else if(menu.compare("4") == 0) {
-        system("CLS");
+        clear_screen();
         sortMessageScientist();
         //searchData();
     }
     else if(menu.compare("5") == 0) {
-        system("CLS");
+        clear_screen();
         sortMessageComputer();
     }
     else if(menu.compare("6") == 0) {
-        system("CLS");
+        clear_screen();
         searchScientist();
     }
     else if(menu.compare("7") == 0) {
-        system("CLS");
+        clear_screen();
         searchComputer();
     }
     else {
@@ -200,7 +210,7 @@ void UI::searchScientist()
     }  while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
 
     cin >> search;
-    vector<Person> vec = my_dom.searchstringScientist(searchMenu, search);
+    vector<Person> vec = my_dom.searchStringScientist(searchMenu, search);
 
     displayDatabaseScientist(vec);
 
@@ -243,7 +253,7 @@ void UI::searchComputer()
     }  while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
 
     cin >> search;
-    vector<Computer> vec = my_dom.searchstringComputer(searchMenu, search);
+    vector<Computer> vec = my_dom.searchStringComputer(searchMenu, search);
 
     displayDatabaseComputer(vec);
 
@@ -383,23 +393,23 @@ void UI::reading_computer()
             }
         }while(buildyear < "1700" || buildyear > "2010");
 
-        buildyear = atoi(buildyear.c_str());
+      whichbuildyear = atoi(buildyear.c_str());
 
         do{
             cout << "Was the computer:" << endl;
-            cout << "1. Mechanic" << endl;
-            cout << "2. Electronic " << endl;
-            cout << "3. Transistoric " << endl;
+            cout << "A. Mechanic" << endl;
+            cout << "B. Electronic " << endl;
+            cout << "C. Transistor computer " << endl;
             cin >> a;
 
-            if(a.compare("1") == 0){
+            if(a.compare("A") == 0 || a.compare("a") == 0){
                 type = "Mechanic";
             }
-            else if(a.compare("2") == 0){
+            else if(a.compare("B") == 0 || a.compare("b") == 0){
                 type = "Electronic";
             }
-            else if(a.compare("3") == 0){
-                type = "Transistoric";
+            else if(a.compare("C") == 0 || a.compare("c") == 0){
+                type = "Transistor computer";
             }
             else{
                 cout << "Invalid input" << endl;
@@ -414,7 +424,7 @@ void UI::reading_computer()
         //getline(cin, bio);
         //cout << endl;
 
-        my_dom.add_new_computer(name, buildyear, type, wasbuilt);
+        my_dom.add_new_computer(name, whichbuildyear, type, wasbuilt);
     }
 }
 
@@ -427,13 +437,13 @@ void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorin
     cout << endl << v.size() << " scientists!" << endl;
 }
 
-void UI::displayDatabaseComputer(vector<Computer> v)      // Prentar út vektorinn...
+void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út vektorinn...
 {
-    for(unsigned int i = 0; i < v.size(); i++)
+    for(unsigned int i = 0; i < ve.size(); i++)
     {
-        cout << endl << v[i];
+        cout << endl << ve[i];
     }
-    cout << endl << v.size() << " computers!" << endl;
+    cout << endl << ve.size() << " computers!" << endl;
 }
        /* connectToDatabase();
 
