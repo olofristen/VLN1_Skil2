@@ -1,24 +1,32 @@
 #include "domain.h"
 
 
-bool sortbyyearofbirth (const Person& a, const Person &b) {
+bool sortbyyearofbirth (const Person& a, const Person &b)
+{
     return a.birthYear < b.birthYear;
 }
 
-bool sortbygender (const Person& a, const Person &b) {
+bool sortbygender (const Person& a, const Person &b)
+{
     return a.gender < b.gender;
 }
-bool sortbyyearofdeath (const Person& a, const Person &b) {
+
+bool sortbyyearofdeath (const Person& a, const Person &b)
+{
     return a.deathYear < b.deathYear;
 
 }
-bool sortbyyearofbuilt (const Computer& a, const Computer &b) {
+
+bool sortbyyearofbuilt (const Computer& a, const Computer &b)
+{
     return a.buildYear < b.buildYear;
 }
 
-bool sortbytype (const Computer& a, const Computer &b) {
+bool sortbytype (const Computer& a, const Computer &b)
+{
     return a.type < b.type;
 }
+
 bool sortbywasBuilt (const Computer& a, const Computer &b) {
     return a.wasBuilt < b.wasBuilt;
 }
@@ -41,12 +49,13 @@ void Domain::add_new_person(string name, string gender, int birthyear, int death
     //DB.write_to_DB(v);
 }
 
-void Domain::add_new_computer(string name, int buildyear, string type, string wasBuilt) {     // Bætir nýrri tölvu inn i vektorinn...
+void Domain::add_new_computer(string name, int buildYear, string type, bool wasBuilt, string info) {     // Bætir nýrri tölvu inn i vektorinn...
 
-    Computer newC = Computer(name, buildyear, type, wasBuilt);
+    Computer newC = Computer(name, type, wasBuilt, buildYear, info);
     ve.push_back(newC);
     DB.add_new_computer(newC);
 }
+
 vector<Person> Domain::sort_and_displayScientist(string sortMenu) {        // sorterar vektorinn...
 
     do{
@@ -160,7 +169,7 @@ vector<Person> Domain::searchStringScientist(string num, string search) {
 
 vector<Computer> Domain::searchStringComputer(string num, string search) {
 
-    vector<Computer> vec;
+    /*vector<Computer> vec;
 
     if(num.compare("1") == 0) {
         for(unsigned int i = 0; i < ve.size(); i++)
@@ -199,6 +208,6 @@ vector<Computer> Domain::searchStringComputer(string num, string search) {
         }
     }
 
-    return vec;
+    return vec;*/
 }
 

@@ -1,4 +1,3 @@
-
 #include "person.h"
 #include "data.h"
 #include <QString>
@@ -25,7 +24,7 @@ Database::~Database() {
 void Database::add_new_scientist(Person P) {
 
     QSqlQuery query(db);
-    QString q = "CREATE TABLE IF NOT EXISTS scientists ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT , 'Name' TEXT NOT NULL , 'Gender' TEXT NOT NULL , 'DOB' INTEGER, 'DOD' INTEGER, 'Bio' TEXT)";
+    QString q = "CREATE TABLE IF NOT EXISTS scientists ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT UNIQUE, 'Name' TEXT NOT NULL , 'Gender' TEXT NOT NULL , 'DOB' INTEGER, 'DOD' INTEGER, 'Bio' TEXT)";
     query.exec(q);
 
     query.prepare("INSERT INTO scientists (Name, Gender, DOB, DOD, Bio ) VALUES(:name,:gender,:dob,:dod,:bio)");
@@ -35,53 +34,36 @@ void Database::add_new_scientist(Person P) {
     query.bindValue(":dod", P.getdeathyear());
     query.bindValue(":bio", QString::fromStdString(P.getbio()));
     query.exec();
-
-    // VIRKAR!! Setur inn í Database-inn! JÍÍÍHAAA!
-
 }
 
 void Database::add_new_computer(Computer C) {
 
     QSqlQuery query(db);
-    QString q = "CREATE TABLE IF NOT EXISTS computers ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT , 'Name' TEXT NOT NULL , 'BY' INTEGER, 'TYPE' TEXT NOT NULL, 'WB' TEXT NOT NULL)";
+    QString q = "CREATE TABLE IF NOT EXISTS computers ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT UNIQUE, 'Name' TEXT NOT NULL , 'Type' TEXT NOT NULL, 'WB' BOOL NOT NULL, 'BuildYear' INTEGER, 'Info' TEXT NOT NULL)";
     query.exec(q);
 
-    query.prepare("INSERT INTO computers (Name, BY, TYPE, WB ) VALUES(:name,:by,:type,:wb)");
+    query.prepare("INSERT INTO computers (Name, Type, WB, BuildYear, Info) VALUES(:name,:type,:wb,:buildyear,:info)");
     query.bindValue(":name", QString::fromStdString(C.getname()));
-    query.bindValue(":by", C.getbuildyear());
     query.bindValue(":type", QString::fromStdString(C.gettype()));
-    query.bindValue(":wb", QString::fromStdString(C.getwasbuilt()));
+    query.bindValue(":wb", C.getwasbuilt());
+    query.bindValue(":buildyear", C.getbuildyear());
+    query.bindValue(":info", QString::fromStdString(C.getinfo()));
     query.exec();
-
-    // VIRKAR!! Setur inn í Database-inn! JÍÍÍHAAA!
-
 }
-/* QSqlQuery query(db);
-
-    if (!db.open())
-    {
-        cout << "Unable to open database. Will create a new one!" << endl;
-
-        query.exec("CREATE TABLE 'scientists' ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL UNIQUE, 'Name' TEXT NOT NULL , 'Gender' TEXT NOT NULL , 'DOB' INTEGER, 'DOD' INTEGER, 'Bio' TEXT)");
-        query.exec("CREATE TABLE \"computers\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE, \"Name\" TEXT NOT NULL , \"Type\" INTEGER NOT NULL ,\"BuildYear\" INTEGER, \"Built\" CHAR NOT NULL)");
-        query.exec("CREATE TABLE \"link\" (\"SID\" INTEGER NOT NULL PRIMARY KEY, \"CID\" INTEGER NOT NULL)");
-    }
-    */
 
 vector<Person> Database::read_Scientist_from_DB()
 {
 
     vector<Person> v;
 
-    ifstream file;
-    file.open("database.csv");
+    Database();
 
-    if(file.is_open())
+    if(db.is_open())
     {
-        while(!file.eof())
+        while(!db.eof())
         {
             Person a;
-            a.readData(file);       //
+            a.readData(db);       //
 
             v.push_back(a);
         }
@@ -90,7 +72,7 @@ vector<Person> Database::read_Scientist_from_DB()
     else
         cerr << "Unable to open file" << endl;
 
-    file.close();
+    db.close();
     return v;
 
 }
@@ -100,12 +82,11 @@ vector<Computer> Database::read_Computer_from_DB()
 
     vector<Computer> ve;
 
-    ifstream file;
-    file.open("database.csv");
+    Database();
 
-    if(file.is_open())
+    if(db.is_open())
     {
-        while(!file.eof())
+        while(!db.eof())
         {
             Computer a;
             a.readData(file);       //
@@ -117,20 +98,19 @@ vector<Computer> Database::read_Computer_from_DB()
     else
         cerr << "Unable to open file" << endl;
 
-    file.close();
+    db.close();
     return ve;
 
 }
 
 void Database::write_to_DB(vector<Person> v)
 {
-    ofstream file;
-    file.open("database.csv", ios::out);
+    Database();
 
-    if(file.is_open())
+    if(db.is_open())
     {
-        for(unsigned int i = 0; i < v.size(); i++) {
-
+        for(unsigned int i = 0; i < v.size(); i++)
+        {
             file << v[i].getname() << endl;
             file << v[i].getgender() << endl;
             file << v[i].getbirthyear() << endl;

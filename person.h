@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <QString>
 
 using namespace std;
 
@@ -21,7 +22,7 @@ class Person
     public:
         Person();
         Person (string name, string gender, int birthYear, int deathYear, string bio);
-        void readData(ifstream& file);
+        void readData(QString &db);
         void searchData();
         string getname();
         string getgender();

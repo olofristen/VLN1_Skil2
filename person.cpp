@@ -23,23 +23,29 @@ Person::Person(string name, string gender, int birthYear, int deathYear, string 
     this->bio = bio;
 }
 
-
-string Person::getname() {
+string Person::getname()
+{
     return name;
 }
-string Person::getgender() {
+
+string Person::getgender()
+{
     return gender;
 }
-int Person::getbirthyear() {
+
+int Person::getbirthyear()
+{
     return birthYear;
 }
-int Person::getdeathyear() {
+
+int Person::getdeathyear()
+{
     return deathYear;
 }
+
 string Person::getbio() {
     return bio;
 }
-
 
 ostream& operator << (ostream& out, const Person& P)
 {
@@ -57,16 +63,22 @@ ostream& operator << (ostream& out, const Person& P)
     return out;
 }
 
-void Person::readData(ifstream& file)
+void Person::readData(QString& db)
 {
-    string tempBirth, tempDeath;
+    name = query.value("Name").toString().toStdString();
+    gender = query.value("Gender").toString().toStdString();
+    birthYear = query.value("DOB").toUInt();
+    deathYear = query.value("DOD").toUInt();
+    bio = query.value("Bio").toString().toStdString();
+
+    /*string tempBirth, tempDeath;
     getline(file, name);
     getline(file, gender);
     getline(file, tempBirth);
     getline(file, tempDeath);
     getline(file, bio);
     birthYear = atoi(tempBirth.c_str());
-    deathYear = atoi(tempDeath.c_str());
+    deathYear = atoi(tempDeath.c_str());*/
 }
 
 

@@ -12,19 +12,21 @@ class Computer
 {
     private:
         string name;
-        int buildYear;
         string type;
-        string wasBuilt;
+        bool wasBuilt;
+        int buildYear;
+        string info;
     public:
         Computer();
-        Computer(string name, int buildYear, string type, string wasBuilt);
+        Computer(string name, string type, bool wasBuilt, int buildYear, string info);
         void readData(ifstream& file);
         void displayData();
         void searchData();
         string getname();
         int getbuildyear();
         string gettype();
-        string getwasbuilt();
+        bool getwasbuilt();
+        string getinfo();
 
         friend bool sortbyyearofbuilt(const Computer& a, const Computer &b);
         friend bool sortbytype(const Computer& a, const Computer &b);

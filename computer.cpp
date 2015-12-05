@@ -4,31 +4,46 @@ bool Computer::operator < (const Computer &r) {
      return this->name < r.name;
 }
 
-
 Computer::Computer() {
     name = " ";
-    buildYear = 0;
     type = " ";
     wasBuilt = " ";
+    buildYear = 0;
+    info = " ";
 }
-Computer::Computer(string name, int buildyear, string type, string wasBuilt)
+
+Computer::Computer(string name, string type, bool wasBuilt, int buildYear, string info)
 {
     this->name = name;
-    this->buildYear = buildyear;
     this->type = type;
     this->wasBuilt = wasBuilt;
+    this->buildYear = buildYear;
+    this->info = info;
 }
-string Computer::getname() {
+
+string Computer::getname()
+{
     return name;
 }
-int Computer::getbuildyear() {
+
+int Computer::getbuildyear()
+{
     return buildYear;
 }
-string Computer::gettype() {
+
+string Computer::gettype()
+{
     return type;
 }
-string Computer::getwasbuilt() {
+
+bool Computer::getwasbuilt()
+{
     return wasBuilt;
+}
+
+string Computer::getinfo()
+{
+    return info;
 }
 
 ostream& operator << (ostream& out, const Computer& C)
@@ -36,7 +51,7 @@ ostream& operator << (ostream& out, const Computer& C)
     cout << "Name: " << C.name << endl
          << "Made in: " << C.buildYear << endl
          << "Type: " << C.type << endl;
-    if(C.wasBuilt == "N") {
+    if(C.wasBuilt == false) {
         out << "This computer was only a thought!" << endl;
     }
     else {
@@ -45,14 +60,15 @@ ostream& operator << (ostream& out, const Computer& C)
         out << "------------------------------------------------------------------" << endl;
         return out;
 }
-void Computer::readData(ifstream& file)
+/*void Computer::readData(ifstream& file)
 {
     string tempBuilt;
     getline(file, name);
     getline(file, tempBuilt);
     getline(file, type);
     getline(file, wasBuilt);
+    getline(file, info)
     buildYear = atoi(tempBuilt.c_str());
-}
+}*/
 
 //void Computer::displayData()
