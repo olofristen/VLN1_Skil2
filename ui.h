@@ -17,15 +17,19 @@ public:
     void welcome();
     void choices();
     void reading_person();
-    void sortMessage();
+    void reading_computer();
+    void sortMessageScientist();
+    void sortMessageComputer();
     void registerMessageScientist();
     void registerMessageComputer();
     void searchMessage();
-    void searchData();
+    void searchScientist();
+    void searchComputer();
     void return_home();
     void clear_screen();
     
-    void displayDatabase(vector<Person> v);
+    void displayDatabaseScientist(vector<Person> v);
+    void displayDatabaseComputer(vector<Computer> ve);
 
 };
 

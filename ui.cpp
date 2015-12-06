@@ -41,7 +41,9 @@ void UI::choices()
     cout << "   |    2.  Register new computer                                  |" << endl;
     cout << "   |    3.  Register link between scientist/s and computer/s       |" << endl;
     cout << "   |    4.  See all computer scientists registered                 |" << endl;
-    cout << "   |    5.  Search the database                                    |" << endl;
+    cout << "   |    5.  See all computers registered                           |" << endl;
+    cout << "   |    6.  Search for a scientist                                 |" << endl;
+    cout << "   |    7.  Search for a computer                                  |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
     cin >> menu;
@@ -54,6 +56,7 @@ void UI::choices()
     else if(menu.compare("2") == 0){
         clear_screen();
         registerMessageComputer();
+        reading_computer();
     }
     else if(menu.compare("3") == 0){
         clear_screen();
@@ -61,12 +64,20 @@ void UI::choices()
     }
     else if(menu.compare("4") == 0) {
         clear_screen();
-        sortMessage();
+        sortMessageScientist();
         //searchData();
     }
     else if(menu.compare("5") == 0) {
         clear_screen();
-        searchData();
+        sortMessageComputer();
+    }
+    else if(menu.compare("6") == 0) {
+        clear_screen();
+        searchScientist();
+    }
+    else if(menu.compare("7") == 0) {
+        clear_screen();
+        searchComputer();
     }
     else {
         cout << "Invalid input! " << endl;
@@ -102,7 +113,7 @@ void UI::searchMessage()
 
 }
 
-void UI::sortMessage()     // sleppa því að taka inn vektorinn, á ekki að vera hér...
+void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á ekki að vera hér...
 {
     string sortMenu = "";
 
@@ -124,14 +135,40 @@ void UI::sortMessage()     // sleppa því að taka inn vektorinn, á ekki að v
 
     cin >> sortMenu;
 
-    vector<Person> vec = my_dom.sort_and_display(sortMenu);
+    vector<Person> vec = my_dom.sort_and_displayScientist(sortMenu);
     if(!vec.empty()) {
-        displayDatabase(vec);
+        displayDatabaseScientist(vec);
     }
 }
 
+void UI::sortMessageComputer()     // sleppa því að taka inn vektorinn, á ekki að vera hér...
+{
+    string sortMenu = "";
 
-void UI::searchData()
+    cout << "   =================================================================" << endl;
+    cout << "   |     THE DATABASE - SORT                                       |" << endl;
+    cout << "   =================================================================" << endl;
+    cout << endl;
+    cout << "   Press Q/q to exit" << endl << endl;
+
+    cout << "   =================================================================" << endl;
+    cout << "   |  How do you want the computing geniuses to appear?            |" << endl;
+    cout << "   |    1.  A-Z                                                    |" << endl;
+    cout << "   |    2.  Z-A                                                    |" << endl;
+    cout << "   |    3.  By year it was built                                   |" << endl;
+    cout << "   |    4.  By type                                                |" << endl;
+    cout << "   |  Please enter the number of your choice!                      |" << endl;
+    cout << "   =================================================================" << endl;
+
+    cin >> sortMenu;
+
+    vector<Computer> vec = my_dom.sort_and_displayComputer(sortMenu);
+    if(!vec.empty()) {
+        displayDatabaseComputer(vec);
+    }
+}
+
+void UI::searchScientist()
 {
     string searchMenu = "", search = "";
     searchMessage();
@@ -173,17 +210,58 @@ void UI::searchData()
     }  while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
 
     cin >> search;
-    vector<Person> vec = my_dom.searchstring(searchMenu, search);
+    vector<Person> vec = my_dom.searchStringScientist(searchMenu, search);
 
-    displayDatabase(vec);
+    displayDatabaseScientist(vec);
 
     if(vec.size() == 0)
     {
         cout << "Sorry, no match." << endl;
     }
 }
+void UI::searchComputer()
+{
+    string searchMenu = "", search = "";
+    searchMessage();
 
+    cout << "   =================================================================" << endl;
+    cout << "   |  in which category would you prefer to search?                |" << endl;
+    cout << "   |    1.  By name                                                |" << endl;
+    cout << "   |    2.  By year it was built                                   |" << endl;
+    cout << "   |    3.  By type                                                |" << endl;
+    cout << "   |  Please enter the number of your choice!                      |" << endl;
+    cout << "   =================================================================" << endl;
 
+    do{
+        cin >> searchMenu;
+
+        if(searchMenu.compare("1") == 0) {
+            cout << "What name would you like to find?: ";
+        }
+        else if(searchMenu.compare("2") == 0) {
+            cout << "What year was the computer built?: ";
+        }
+        else if(searchMenu.compare("3") == 0) {
+            cout << "Which type was the computer?: ";
+        }
+        else if(searchMenu.compare("Q") == 0 || searchMenu.compare("q") == 0) {
+            return ;
+        }
+        else {
+            cout << "Invalid input! " << endl;
+        }
+    }  while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
+
+    cin >> search;
+    vector<Computer> vec = my_dom.searchStringComputer(searchMenu, search);
+
+    displayDatabaseComputer(vec);
+
+    if(vec.size() == 0)
+    {
+        cout << "Sorry, no match." << endl;
+    }
+}
 
 void UI::reading_person()
 {
@@ -263,7 +341,7 @@ void UI::reading_person()
                 cout << "Invalid input! " << endl;
             }
 
-        }while(deathyear != -1 && deathyear < birthyear || deathyear > 2015);
+        }while((deathyear != -1) && (deathyear < birthyear) || (deathyear > 2015));
 
         cout << "Bio: ";
         cin.ignore();
@@ -274,7 +352,83 @@ void UI::reading_person()
     }
 }
 
-void UI::displayDatabase(vector<Person> v)      // Prentar út vektorinn...
+
+void UI::reading_computer()
+{
+
+    string number = "";
+    int num = 0;
+
+    do{
+        cout << "How many computers do you want to register? ";
+        cin >> number;
+
+        if(number == "Q" || number == "q") {
+            return;
+        }
+        num = atoi(number.c_str());
+        if(num <= 0) {
+            cout << "Invalid input! " << endl;
+        }
+    } while(num <= 0);
+
+    cout << endl << "Type in computer: " << endl << endl;
+
+    string name = "", buildyear = "", type = "", wasbuilt = "";
+    int whichbuildyear = 0, whattype = 0;
+    string a = "";
+
+    for(int i = 0; i < num; i++)
+    {
+        cout << "Name: ";
+        cin.ignore();
+        getline(cin, name);
+
+        do{
+            cout << "Year of buildness (1700 - 2010): ";
+            cin >> buildyear;
+
+            if(buildyear < "1700" || buildyear > "2010") {
+                cout << "Invalid input" << endl;
+            }
+        }while(buildyear < "1700" || buildyear > "2010");
+
+      whichbuildyear = atoi(buildyear.c_str());
+
+        do{
+            cout << "Was the computer:" << endl;
+            cout << "A. Mechanic" << endl;
+            cout << "B. Electronic " << endl;
+            cout << "C. Transistor computer " << endl;
+            cin >> a;
+
+            if(a.compare("A") == 0 || a.compare("a") == 0){
+                type = "Mechanic";
+            }
+            else if(a.compare("B") == 0 || a.compare("b") == 0){
+                type = "Electronic";
+            }
+            else if(a.compare("C") == 0 || a.compare("c") == 0){
+                type = "Transistor computer";
+            }
+            else{
+                cout << "Invalid input" << endl;
+            }
+        }while(type == "");
+
+
+        cout << "Was the computer built? (Y/N)?: " << endl;
+        cin >> wasbuilt;
+
+        //cin.ignore();
+        //getline(cin, bio);
+        //cout << endl;
+
+        my_dom.add_new_computer(name, whichbuildyear, type, wasbuilt);
+    }
+}
+
+void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorinn...
 {
     for(unsigned int i = 0; i < v.size(); i++)
     {
@@ -283,6 +437,14 @@ void UI::displayDatabase(vector<Person> v)      // Prentar út vektorinn...
     cout << endl << v.size() << " scientists!" << endl;
 }
 
+void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út vektorinn...
+{
+    for(unsigned int i = 0; i < ve.size(); i++)
+    {
+        cout << endl << ve[i];
+    }
+    cout << endl << ve.size() << " computers!" << endl;
+}
        /* connectToDatabase();
 
         string DOB;
