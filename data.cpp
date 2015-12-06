@@ -14,7 +14,8 @@ Database::Database()        // Database búinn til/opnaður í constructor
     //cout << "opening db..." << endl;
 }
 
-Database::~Database() {
+Database::~Database()
+{
     if(db.isOpen()) {
         db.close();
         //cout << "closing db..." << endl;
@@ -26,6 +27,7 @@ void Database::add_new_scientist(Person P)
     QSqlQuery query(db);
     QString q = "CREATE TABLE IF NOT EXISTS scientists ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT UNIQUE, 'Name' TEXT NOT NULL , 'Gender' TEXT NOT NULL , 'DOB' INTEGER, 'DOD' INTEGER, 'Bio' TEXT)";
     query.exec(q);
+
     query.prepare("INSERT INTO scientists (Name, Gender, DOB, DOD, Bio ) VALUES(:name,:gender,:dob,:dod,:bio)");
     query.bindValue(":name", QString::fromStdString(P.getname()));
     query.bindValue(":gender", QString::fromStdString(P.getgender()));
@@ -35,7 +37,8 @@ void Database::add_new_scientist(Person P)
     query.exec();
 }
 
-void Database::add_new_computer(Computer C) {
+void Database::add_new_computer(Computer C)
+{
 
     QSqlQuery query(db);
     QString q = "CREATE TABLE IF NOT EXISTS computers ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT UNIQUE, 'Name' TEXT NOT NULL , 'Type' TEXT NOT NULL, 'WB' BOOL NOT NULL, 'BuildYear' INTEGER, 'Info' TEXT NOT NULL)";
@@ -49,6 +52,18 @@ void Database::add_new_computer(Computer C) {
     query.bindValue(":info", QString::fromStdString(C.getinfo()));
     query.exec();
 }
+
+/*void Database::add_new_link(Link L)
+{
+    QSqlQuery query(db);
+    QString q = "CREATE TABLE IF NOT EXISTS links ('SID' INTEGER FOREIGN KEY REFRENCES scientists(ID), 'CID' INTEGER FOREIGN KEY REFRENCES computers(ID), UNIQUE(SID, CID))";
+    query.exec(q);
+
+    query.prepare("INSERT INTO links (SID, CID) VALUES(:sid, :cid)");
+    query.bindValue(":sid", L.getSID());
+    query.bindValue(":cid", L.getCID());
+    query.exec();
+}*/
 
 vector<Person> Database::read_Scientist_from_DB()
 {
