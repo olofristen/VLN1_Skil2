@@ -32,6 +32,12 @@ Domain::Domain() {
 int Domain::size() {
     return v.size();
 }
+int Domain::scientistsSize() {
+    return v.size();
+}
+int Domain::computersSize() {
+    return ve.size();
+}
 
 void Domain::add_new_person(string name, string gender, int birthyear, int deathyear, string bio) {     // Bætir nýrri persónu inn i vektorinn...
 

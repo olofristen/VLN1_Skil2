@@ -28,7 +28,7 @@ void UI::welcome()
     cout << "In this program you will be able to register and go through the most known "
          << "computer scientists of all time!" << endl;
     cout << endl;
-    cout << "Now, the database includes " << my_dom.size() << " scientist(s)!" << endl << endl;
+    cout << "Now, the database includes: " << my_dom.scientistsSize() << " scientist(s) & " << my_dom.computersSize() << " computer(s)!" << endl << endl;
 }
 
 void UI::choices()
@@ -341,7 +341,7 @@ void UI::reading_person()
                 cout << "Invalid input! " << endl;
             }
 
-        }while((deathyear != -1) && (deathyear < birthyear) || (deathyear > 2015));
+        }while((deathyear != -1 && deathyear < birthyear) || (deathyear > 2015));
 
         cout << "Bio: ";
         cin.ignore();
@@ -375,8 +375,7 @@ void UI::reading_computer()
     cout << endl << "Type in computer: " << endl << endl;
 
     string name = "", buildyear = "", type = "", wasbuilt = "";
-    int whichbuildyear = 0, whattype = 0;
-    string a = "";
+    int whichbuildyear = 0, a = 0;
 
     for(int i = 0; i < num; i++)
     {
@@ -397,18 +396,18 @@ void UI::reading_computer()
 
         do{
             cout << "Was the computer:" << endl;
-            cout << "A. Mechanic" << endl;
-            cout << "B. Electronic " << endl;
-            cout << "C. Transistor computer " << endl;
+            cout << "1. Mechanic" << endl;
+            cout << "2. Electronic " << endl;
+            cout << "3. Transistor computer " << endl;
             cin >> a;
 
-            if(a.compare("A") == 0 || a.compare("a") == 0){
+            if(a == 1){
                 type = "Mechanic";
             }
-            else if(a.compare("B") == 0 || a.compare("b") == 0){
+            else if(a == 2){
                 type = "Electronic";
             }
-            else if(a.compare("C") == 0 || a.compare("c") == 0){
+            else if(a == 3){
                 type = "Transistor computer";
             }
             else{

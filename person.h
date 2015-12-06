@@ -28,6 +28,7 @@ class Person
         string getbio();
         int getbirthyear();
         int getdeathyear();
+        //int scientistsSize();
 
         friend bool sortbyyearofbirth (const Person& a, const Person &b);
         friend bool sortbyyearofdeath (const Person& a, const Person &b);

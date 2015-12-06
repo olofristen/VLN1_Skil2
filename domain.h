@@ -25,6 +25,9 @@ public:
     vector<Person>  searchStringScientist(string num, string search);
     vector<Computer>  searchStringComputer(string num, string search);
     int size();
+    int scientistsSize();
+    int computersSize();
+
 
 };
 
