@@ -12,13 +12,13 @@ Database::Database()        // Database búinn til/opnaður í constructor
     db.setDatabaseName(dbSoC);
 
     db.open();
-    cout << "opening db..." << endl;
+    //cout << "opening db..." << endl;
 }
 
 Database::~Database() {
     if(db.open()) {
         db.close();
-        cout << "closing db..." << endl;
+        //cout << "closing db..." << endl;
     }
 }
 
