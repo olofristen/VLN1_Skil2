@@ -45,14 +45,12 @@ ostream& operator << (ostream& out, const Computer& C)
         out << "------------------------------------------------------------------" << endl;
         return out;
 }
-void Computer::readData(ifstream& file)
+void Computer::readData(QSqlQuery query)
 {
-    string tempBuilt;
-    getline(file, name);
-    getline(file, tempBuilt);
-    getline(file, type);
-    getline(file, wasBuilt);
-    buildYear = atoi(tempBuilt.c_str());
+    name = query.value("Name").toString().toStdString();
+    buildYear = query.value("BY").toUInt();
+    type = query.value("TYPE").toString().toStdString();
+    wasBuilt = query.value("WB").toString().toStdString();
 }
 
 //void Computer::displayData()

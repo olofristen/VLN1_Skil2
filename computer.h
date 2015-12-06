@@ -5,6 +5,8 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <QtDebug>
+#include <QtSql>
 
 using namespace std;
 
@@ -18,7 +20,7 @@ class Computer
     public:
         Computer();
         Computer(string name, int buildYear, string type, string wasBuilt);
-        void readData(ifstream& file);
+        void readData(QSqlQuery query);
         void displayData();
         void searchData();
         string getname();

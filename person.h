@@ -6,6 +6,9 @@
 #include <fstream>
 #include <cstdlib>
 
+#include <QtDebug>
+#include <QtSql>
+
 using namespace std;
 
 // Klasi sem geymir upplýsingar um hverja einustu persónu, þ.e. nafn, kyn, fæðingar- og dánarár og stutt æviágrip ef við á.
@@ -28,6 +31,7 @@ class Person
         string getbio();
         int getbirthyear();
         int getdeathyear();
+        void readData(QSqlQuery query);
         //int scientistsSize();
 
         friend bool sortbyyearofbirth (const Person& a, const Person &b);

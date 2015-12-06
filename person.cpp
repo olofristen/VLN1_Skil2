@@ -57,16 +57,13 @@ ostream& operator << (ostream& out, const Person& P)
     return out;
 }
 
-void Person::readData(ifstream& file)
+void Person::readData(QSqlQuery query)
 {
-    string tempBirth, tempDeath;
-    getline(file, name);
-    getline(file, gender);
-    getline(file, tempBirth);
-    getline(file, tempDeath);
-    getline(file, bio);
-    birthYear = atoi(tempBirth.c_str());
-    deathYear = atoi(tempDeath.c_str());
+    name = query.value("Name").toString().toStdString();
+    gender = query.value("Gender").toString().toStdString();
+    birthYear = query.value("DOB").toUInt();
+    deathYear = query.value("DOD").toUInt();
+    bio = query.value("Bio").toString().toStdString();
 }
 
 

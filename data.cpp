@@ -1,4 +1,3 @@
-
 #include "person.h"
 #include "data.h"
 #include <QString>
@@ -78,14 +77,10 @@ vector<Person> Database::read_Scientist_from_DB()
     if(db.isOpen())
     {
         while(query.next()){
-            //int id = query.value("ID").toUInt();
-            string name = query.value("Name").toString().toStdString();
-            string gender = query.value("Gender").toString().toStdString();
-            int DOB = query.value("DOB").toUInt();
-            int DOD = query.value("DOD").toUInt();
-            string bio = query.value("Bio").toString().toStdString();
+            Person sci;
+            sci.readData(query);
 
-            scientists.push_back(Person(name, gender, DOB, DOD, bio));
+            scientists.push_back(sci);
         }
     }
     else {
@@ -99,7 +94,7 @@ vector<Person> Database::read_Scientist_from_DB()
 vector<Computer> Database::read_Computer_from_DB()
 {
 
-    vector<Computer> comp;
+    vector<Computer> computer;
 
     QSqlQuery query(db);
     query.exec("SELECT * FROM computers");
@@ -107,19 +102,15 @@ vector<Computer> Database::read_Computer_from_DB()
     if(db.isOpen())
     {
         while(query.next()){
-            //int id = query.value("ID").toUInt();
-            string name = query.value("Name").toString().toStdString();
-            int BY = query.value("BY").toUInt();
-            string type = query.value("TYPE").toString().toStdString();
-            string wb = query.value("WB").toString().toStdString();
-
-            comp.push_back(Computer(name, BY, type, wb));
+            Computer comp;
+            comp.readData(query);
+            computer.push_back(comp);
         }
     }
     else {
         cerr << "Unable to open database!" << endl;
     }
 
-    return comp;
+    return computer;
 }
 
