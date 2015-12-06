@@ -16,7 +16,7 @@ Database::Database()        // Database búinn til/opnaður í constructor
 }
 
 Database::~Database() {
-    if(db.open()) {
+    if(db.isOpen()) {
         db.close();
         //cout << "closing db..." << endl;
     }
@@ -70,58 +70,60 @@ void Database::add_new_computer(Computer C) {
 
 vector<Person> Database::read_Scientist_from_DB()
 {
+    vector<Person> scientists;
 
-    vector<Person> v;
+    QSqlQuery query(db);
+    query.exec("SELECT * FROM scientists");
 
-    ifstream file;
-    file.open("database.csv");
-
-    if(file.is_open())
+    if(db.isOpen())
     {
-        while(!file.eof())
-        {
-            Person a;
-            a.readData(file);       //
+        while(query.next()){
+            //int id = query.value("ID").toUInt();
+            string name = query.value("Name").toString().toStdString();
+            string gender = query.value("Gender").toString().toStdString();
+            int DOB = query.value("DOB").toUInt();
+            int DOD = query.value("DOD").toUInt();
+            string bio = query.value("Bio").toString().toStdString();
 
-            v.push_back(a);
+            scientists.push_back(Person(name, gender, DOB, DOD, bio));
         }
-        v.erase(v.end()-1);     //Skip the last newline ('\n') character, it would make a new (empty) person class
     }
-    else
-        cerr << "Unable to open file" << endl;
+    else {
+        cerr << "Unable to open database!" << endl;
+    }
 
-    file.close();
-    return v;
+    return scientists;
 
 }
 
 vector<Computer> Database::read_Computer_from_DB()
 {
 
-    vector<Computer> ve;
+    vector<Computer> comp;
 
-    ifstream file;
-    file.open("database.csv");
+    QSqlQuery query(db);
+    query.exec("SELECT * FROM computers");
 
-    if(file.is_open())
+    if(db.isOpen())
     {
-        while(!file.eof())
-        {
-            Computer a;
-            a.readData(file);       //
+        while(query.next()){
+            //int id = query.value("ID").toUInt();
+            string name = query.value("Name").toString().toStdString();
+            int BY = query.value("BY").toUInt();
+            string type = query.value("TYPE").toString().toStdString();
+            string wb = query.value("WB").toString().toStdString();
 
-            ve.push_back(a);
+            comp.push_back(Computer(name, BY, type, wb));
         }
-        ve.erase(ve.end()-1);     //Skip the last newline ('\n') character, it would make a new (empty) person class
     }
-    else
-        cerr << "Unable to open file" << endl;
+    else {
+        cerr << "Unable to open database!" << endl;
+    }
 
-    file.close();
-    return ve;
-
+    return comp;
 }
 
+/*
 void Database::write_to_DB(vector<Person> v)
 {
     ofstream file;
@@ -165,4 +167,4 @@ void Database::write_to_DB(vector<Computer> ve)
         cerr << "Unable to open file";
 
     file.close();
-}
+}*/
