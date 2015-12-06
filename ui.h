@@ -3,7 +3,6 @@
 
 #include "domain.h"
 #include <QtSql>
-#include <QtDebug>
 #include <sstream>
 
 // Klasi sem heldur utan um notendaviðmótið.  Notandinn getur t.d. bætt inn nýjum einstakling, lesið alla einstaklingana út

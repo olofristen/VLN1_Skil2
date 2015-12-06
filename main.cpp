@@ -24,6 +24,4 @@ int main()
         ui.clear_screen();
 
     } while(check == 'y' || check == 'Y');
-
-
 }

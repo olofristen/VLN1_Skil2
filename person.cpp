@@ -4,7 +4,6 @@ bool Person::operator < (const Person &r) {
      return this->name < r.name;
 }
 
-
 Person::Person()
 {
     name = " ";
@@ -43,7 +42,8 @@ int Person::getdeathyear()
     return deathYear;
 }
 
-string Person::getbio() {
+string Person::getbio()
+{
     return bio;
 }
 
@@ -65,13 +65,15 @@ ostream& operator << (ostream& out, const Person& P)
 
 void Person::readData(QString& db)
 {
+    /*QSqlQuery query(db);
+
     name = query.value("Name").toString().toStdString();
     gender = query.value("Gender").toString().toStdString();
     birthYear = query.value("DOB").toUInt();
     deathYear = query.value("DOD").toUInt();
     bio = query.value("Bio").toString().toStdString();
 
-    /*string tempBirth, tempDeath;
+    string tempBirth, tempDeath;
     getline(file, name);
     getline(file, gender);
     getline(file, tempBirth);

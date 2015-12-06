@@ -27,21 +27,25 @@ bool sortbytype (const Computer& a, const Computer &b)
     return a.type < b.type;
 }
 
-bool sortbywasBuilt (const Computer& a, const Computer &b) {
+bool sortbywasBuilt (const Computer& a, const Computer &b)
+{
     return a.wasBuilt < b.wasBuilt;
 }
 
-Domain::Domain() {
+Domain::Domain()
+{
 
     v = DB.read_Scientist_from_DB();
     ve = DB.read_Computer_from_DB();
 }
 
-int Domain::size() {
+int Domain::size()
+{
     return v.size();
 }
 
-void Domain::add_new_person(string name, string gender, int birthyear, int deathyear, string bio) {     // Bætir nýrri persónu inn i vektorinn...
+void Domain::add_new_person(string name, string gender, int birthyear, int deathyear, string bio)
+{     // Bætir nýrri persónu inn i vektorinn...
 
     Person newP = Person(name, gender, birthyear, deathyear, bio);
     v.push_back(newP);
@@ -49,14 +53,16 @@ void Domain::add_new_person(string name, string gender, int birthyear, int death
     //DB.write_to_DB(v);
 }
 
-void Domain::add_new_computer(string name, int buildYear, string type, bool wasBuilt, string info) {     // Bætir nýrri tölvu inn i vektorinn...
+void Domain::add_new_computer(string name, int buildYear, string type, bool wasBuilt, string info)
+{     // Bætir nýrri tölvu inn i vektorinn...
 
     Computer newC = Computer(name, type, wasBuilt, buildYear, info);
     ve.push_back(newC);
     DB.add_new_computer(newC);
 }
 
-vector<Person> Domain::sort_and_displayScientist(string sortMenu) {        // sorterar vektorinn...
+vector<Person> Domain::sort_and_displayScientist(string sortMenu)
+{        // sorterar vektorinn...
 
     do{
         if(sortMenu.compare("1") == 0) {
@@ -88,7 +94,8 @@ vector<Person> Domain::sort_and_displayScientist(string sortMenu) {        // so
     return v;
 }
 
-vector<Computer> Domain::sort_and_displayComputer(string sortMenu) {        // sorterar vektorinn...
+vector<Computer> Domain::sort_and_displayComputer(string sortMenu)
+{        // sorterar vektorinn...
 
     do{
         if(sortMenu.compare("1") == 0) {
@@ -115,8 +122,9 @@ vector<Computer> Domain::sort_and_displayComputer(string sortMenu) {        // s
     } while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5);
     return ve;
 }
-vector<Person> Domain::searchStringScientist(string num, string search) {
 
+vector<Person> Domain::searchStringScientist(string num, string search)
+{
     vector<Person> vec;
 
     if(num.compare("1") == 0) {

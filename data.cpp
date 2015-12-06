@@ -54,13 +54,11 @@ void Database::add_new_computer(Computer C) {
 vector<Person> Database::read_Scientist_from_DB()
 {
 
-    vector<Person> v;
+    return vector<Person>();/*
 
-    Database();
-
-    if(db.is_open())
+    if(db.open())
     {
-        while(!db.eof())
+        while(query.next())
         {
             Person a;
             a.readData(db);       //
@@ -72,19 +70,16 @@ vector<Person> Database::read_Scientist_from_DB()
     else
         cerr << "Unable to open file" << endl;
 
-    db.close();
-    return v;
+    return v;*/
 
 }
 
 vector<Computer> Database::read_Computer_from_DB()
 {
 
-    vector<Computer> ve;
+    return vector<Computer>();/*
 
-    Database();
-
-    if(db.is_open())
+    if(db.open())
     {
         while(!db.eof())
         {
@@ -98,16 +93,13 @@ vector<Computer> Database::read_Computer_from_DB()
     else
         cerr << "Unable to open file" << endl;
 
-    db.close();
-    return ve;
+    return ve;*/
 
 }
 
 void Database::write_to_DB(vector<Person> v)
 {
-    Database();
-
-    if(db.is_open())
+    /*if(db.open())
     {
         for(unsigned int i = 0; i < v.size(); i++)
         {
@@ -120,9 +112,7 @@ void Database::write_to_DB(vector<Person> v)
 
     }
     else
-        cerr << "Unable to open file";
-
-    file.close();
+        cerr << "Unable to open file";*/
 }
 
 void Database::write_to_DB(vector<Computer> ve)
@@ -143,6 +133,4 @@ void Database::write_to_DB(vector<Computer> ve)
     }
     else
         cerr << "Unable to open file";
-
-    file.close();
 }

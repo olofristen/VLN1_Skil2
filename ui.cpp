@@ -1,6 +1,5 @@
 #include "ui.h"
 
-
 // UI, heldur utan um öll samskipti við notendur, cin, cout, main.... -> samskipti við domain(worker) sem útfærir vektor o.s.frv.
 // helstu atriði sem eru í boði: add, sort og printlist, search
 // Þarf ekki endilega að vera klasi en getur haft samskipti við Person-klasa sem er óháður layerunum
@@ -19,10 +18,9 @@ void UI::welcome()
 {
 
     cout << "                         ===================================" << endl;
-    cout << "                         |             WELCOME             |" << endl;
+    cout << "                         |            WELCOME              |" << endl;
     cout << "                         |               to                |" << endl;
-    cout << "                         |     the Computer Scientist      |" << endl;
-    cout << "                         |             Database            |" << endl;
+    cout << "                         |     the Computing Database      |" << endl;
     cout << "                         ===================================" << endl;
     cout << endl;
     cout << "In this program you will be able to register and go through the most known "
@@ -319,7 +317,6 @@ void UI::reading_person()
 
         birthyear = atoi(year.c_str());
 
-
         cout << "Is the scientist dead (Y/N)?: " << endl;
         cin >> dead;
         do{
@@ -354,7 +351,6 @@ void UI::reading_person()
 
 void UI::reading_computer()
 {
-
     string number = "";
     int num = 0;
 
@@ -433,6 +429,7 @@ void UI::reading_computer()
             cout << "When was the computer documented? ";
             cin >> buildyear;
         }
+
         tempBY = atoi(buildyear.c_str());
 
         cout << "Info: ";
