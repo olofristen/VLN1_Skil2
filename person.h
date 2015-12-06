@@ -20,16 +20,17 @@ class Person
         int deathYear;
         string bio;
 
+        void readData(QSqlQuery query);
+
     public:
         Person();
         Person (string name, string gender, int birthYear, int deathYear, string bio);
-        void searchData();
+        Person(QSqlQuery query);
         string getname();
         string getgender();
         string getbio();
         int getbirthyear();
         int getdeathyear();
-        void readData(QSqlQuery query);
 
         friend bool sortbyyearofbirth (const Person& a, const Person &b);
         friend bool sortbyyearofdeath (const Person& a, const Person &b);

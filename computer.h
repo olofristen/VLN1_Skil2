@@ -18,12 +18,14 @@ class Computer
         bool wasBuilt;
         int buildYear;
         string info;
+
+        void readData(QSqlQuery query);
+
     public:
         Computer();
         Computer(string name, string type, bool wasBuilt, int buildYear, string info);
-        void readData(QSqlQuery query);
-        void displayData();
-        void searchData();
+        Computer(QSqlQuery q);
+
         string getname();
         int getbuildyear();
         string gettype();

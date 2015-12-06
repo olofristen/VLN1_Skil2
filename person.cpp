@@ -22,6 +22,11 @@ Person::Person(string name, string gender, int birthYear, int deathYear, string 
     this->bio = bio;
 }
 
+Person::Person(QSqlQuery query)
+{
+    readData(query);
+}
+
 string Person::getname()
 {
     return name;
@@ -63,7 +68,7 @@ ostream& operator << (ostream& out, const Person& P)
     return out;
 }
 
-  void Person::readData(QSqlQuery query)
+void Person::readData(QSqlQuery query)
 {
     name = query.value("Name").toString().toStdString();
     gender = query.value("Gender").toString().toStdString();

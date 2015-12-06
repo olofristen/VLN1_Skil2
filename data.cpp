@@ -60,9 +60,7 @@ vector<Person> Database::read_Scientist_from_DB()
     if(db.isOpen())
     {
         while(query.next()){
-            Person sci;
-            sci.readData(query);
-            scientists.push_back(sci);
+            scientists.push_back(Person(query));        // So beautiful..
         }
     }
     else {
@@ -83,9 +81,7 @@ vector<Computer> Database::read_Computer_from_DB()
     {
         while(query.next())
         {
-            Computer comp;
-            comp.readData(query);
-            computer.push_back(comp);
+            computer.push_back(Computer(query));        // Oh, so pretty...
         }
     }
     else {

@@ -21,6 +21,11 @@ Computer::Computer(string name, string type, bool wasBuilt, int buildYear, strin
     this->info = info;
 }
 
+Computer::Computer(QSqlQuery q)     // Þvílík snilld...
+{
+    readData(q);
+}
+
 string Computer::getname()
 {
     return name;
