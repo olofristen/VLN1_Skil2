@@ -28,8 +28,7 @@ void UI::welcome()
     cout << "In this program you will be able to register and go through the most known "
          << "computer scientists of all time!" << endl;
     cout << endl;
-    cout << "Now, the database includes: " << my_dom.scientistsSize() << " scientist(s)!" << endl << endl;
-    cout << "Now, the database includes: " << my_dom.computersSize() << " computer(s)!" << endl << endl;
+    cout << "Now, the database includes: " << my_dom.scientistsSize() << " scientist(s) & " << my_dom.computersSize() << " computer(s)!" << endl << endl;
 }
 
 void UI::choices()
