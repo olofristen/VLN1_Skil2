@@ -1,6 +1,5 @@
 #include "domain.h"
 
-
 bool sortbyyearofbirth (const Person& a, const Person &b)
 {
     return a.birthYear < b.birthYear;
@@ -34,15 +33,10 @@ bool sortbywasBuilt (const Computer& a, const Computer &b)
 
 Domain::Domain()
 {
-
     v = DB.read_Scientist_from_DB();
     ve = DB.read_Computer_from_DB();
 }
 
-int Domain::size()
-{
-    return v.size();
-}
 int Domain::scientistsSize() {
     return v.size();
 }
@@ -52,7 +46,6 @@ int Domain::computersSize() {
 
 void Domain::add_new_person(string name, string gender, int birthyear, int deathyear, string bio)
 {     // Bætir nýrri persónu inn i vektorinn...
-
     Person newP = Person(name, gender, birthyear, deathyear, bio);
     v.push_back(newP);
     DB.add_new_scientist(newP);
@@ -69,7 +62,6 @@ void Domain::add_new_computer(string name, int buildYear, string type, bool wasB
 
 vector<Person> Domain::sort_and_displayScientist(string sortMenu)
 {        // sorterar vektorinn...
-
     do{
         if(sortMenu.compare("1") == 0) {
             sort(v.begin(), v.end());
@@ -102,7 +94,6 @@ vector<Person> Domain::sort_and_displayScientist(string sortMenu)
 
 vector<Computer> Domain::sort_and_displayComputer(string sortMenu)
 {        // sorterar vektorinn...
-
     do{
         if(sortMenu.compare("1") == 0) {
             sort(ve.begin(), ve.end());
@@ -212,7 +203,7 @@ vector<Computer> Domain::searchStringComputer(string num, string search) {
             }
         }
     }
-    else if(num.compare("4") == 0) {
+    else if(num.compare("4") == 0) {  //þarf að útfæra þetta fall nánar
         for(unsigned int i = 0; i < ve.size(); i++)
         {
             if (ve[i].getwasbuilt() == true)

@@ -7,7 +7,7 @@ bool Computer::operator < (const Computer &r) {
 Computer::Computer() {
     name = " ";
     type = " ";
-    wasBuilt = " ";
+    wasBuilt = false;
     buildYear = 0;
     info = " ";
 }
@@ -65,15 +65,11 @@ ostream& operator << (ostream& out, const Computer& C)
     return out;
 }
 
-/*void Computer::readData(ifstream& file)
+void Computer::readData(QSqlQuery query)
 {
-    string tempBuilt;
-    getline(file, name);
-    getline(file, tempBuilt);
-    getline(file, type);
-    getline(file, wasBuilt);
-    getline(file, info)
-    buildYear = atoi(tempBuilt.c_str());
-}*/
-
-//void Computer::displayData()
+    name = query.value("Name").toString().toStdString();
+    buildYear = query.value("BuildYear").toUInt();
+    type = query.value("Type").toString().toStdString();
+    wasBuilt = query.value("WB").toBool();
+    info = query.value("Info").toString().toStdString();
+}

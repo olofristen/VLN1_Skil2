@@ -6,6 +6,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <QString>
+#include <QtSql>
 
 using namespace std;
 
@@ -22,14 +23,13 @@ class Person
     public:
         Person();
         Person (string name, string gender, int birthYear, int deathYear, string bio);
-        void readData(QString &db);
         void searchData();
         string getname();
         string getgender();
         string getbio();
         int getbirthyear();
         int getdeathyear();
-        //int scientistsSize();
+        void readData(QSqlQuery query);
 
         friend bool sortbyyearofbirth (const Person& a, const Person &b);
         friend bool sortbyyearofdeath (const Person& a, const Person &b);

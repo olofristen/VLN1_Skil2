@@ -329,7 +329,7 @@ void UI::reading_person()
 
         birthyear = atoi(year.c_str());
 
-        cout << "Is the scientist dead (Y/N)?: " << endl;
+        cout << "Is the scientist dead (Y/N)?: ";
         cin >> dead;
         do{
             if(dead.compare("y") == 0 || dead.compare("Y") == 0) {
@@ -471,43 +471,3 @@ void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út vektor
     }
     cout << endl << ve.size() << " computers!" << endl;
 }
-
-       /* connectToDatabase();
-
-        string DOB;
-        string DOD;
-
-       ostringstream convert;
-       convert << birthyear;
-       DOB = convert.str();
-
-        if (deathyear == (-1))
-            DOD = "NULL";
-        else
-        {
-            convert << deathyear;
-            DOD = convert.str();
-        }
-
-        string temp = "INSERT INTO scientists(name, gender, DOB, DOD, Bio) VALUES ('" + name +
-        "', " + "'" + gender + "', " + DOB + ", " + DOD + ", " + "'" + bio + "');";
-*/
-
-        /*QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-        QString dbSoC = "database.sqlite";
-        db.setDatabaseName(dbSoC);
-
-        db.open();
-
-        QSqlQuery query(db);
-
-        if (!db.open())
-        {
-            cout << "Unable to open database." << endl;
-        }
-        else
-            query.exec(temp);*/ //virkar ekki for some reason.... arg
-
-     //  my_dom.add_new_person(name, gender, birthyear, deathyear, bio);
-
-

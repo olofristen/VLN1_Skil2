@@ -62,3 +62,12 @@ ostream& operator << (ostream& out, const Person& P)
          << "------------------------------------------------------------------" << endl;
     return out;
 }
+
+  void Person::readData(QSqlQuery query)
+{
+    name = query.value("Name").toString().toStdString();
+    gender = query.value("Gender").toString().toStdString();
+    birthYear = query.value("DOB").toUInt();
+    deathYear = query.value("DOD").toUInt();
+    bio = query.value("Bio").toString().toStdString();
+}
