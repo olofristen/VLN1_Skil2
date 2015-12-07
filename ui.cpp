@@ -319,13 +319,13 @@ void UI::reading_person()
         }while(gender == "");
 
         do{
-            cout << "Year of birth (1700 - 2010): ";
+            cout << "Year of birth (1600 - 2010): ";
             cin >> year;
 
-            if(year < "1700" || year > "2010") {
+            if(year < "1600" || year > "2010") {
                 cout << "Invalid input" << endl;
             }
-        }while(year < "1700" || year > "2010");
+        }while(year < "1600" || year > "2010");
 
         birthyear = atoi(year.c_str());
 
@@ -398,7 +398,7 @@ void UI::reading_computer()
             cout << "1. Mechanic" << endl;
             cout << "2. Electronic" << endl;
             cout << "3. Transistor computer" << endl;
-            cout << "4. Other types" << endl;
+            cout << "4. Other" << endl;
         do{
             cin >> a;
 
