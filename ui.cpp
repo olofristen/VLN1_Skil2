@@ -398,6 +398,7 @@ void UI::reading_computer()
             cout << "1. Mechanic" << endl;
             cout << "2. Electronic" << endl;
             cout << "3. Transistor computer" << endl;
+            cout << "4. Other types" << endl;
             cin >> a;
 
             if(a == 1){
@@ -409,13 +410,16 @@ void UI::reading_computer()
             else if(a == 3){
                 type = "Transistor computer";
             }
+            else if(a == 4){
+                type = "Other";
+            }
             else{
                 cout << "Invalid input" << endl;
             }
         }while(type == "");
 
         do{
-            cout << "Was the computer ever built (Y/N)? " ;
+            cout << "Was the computer ever made (Y/N)? " ;
             cin >> wb;
 
             if(wb == "Y" || wb == "y")
@@ -429,7 +433,7 @@ void UI::reading_computer()
         if(wasBuilt == true)
         {
             do{
-                cout << "Year of buildness (1700 - 2010): ";
+                cout << "Year of production (1700 - 2010): ";
                 cin >> buildyear;
 
                 if(buildyear < "1700" || buildyear > "2010") {

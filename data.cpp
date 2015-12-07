@@ -39,9 +39,8 @@ void Database::add_new_scientist(Person P)
 
 void Database::add_new_computer(Computer C)
 {
-
     QSqlQuery query(db);
-    QString q = "CREATE TABLE IF NOT EXISTS computers ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT UNIQUE, 'Name' TEXT NOT NULL , 'Type' TEXT NOT NULL, 'WB' BOOL NOT NULL, 'BuildYear' INTEGER, 'Info' TEXT NOT NULL)";
+    QString q = "CREATE TABLE IF NOT EXISTS computers ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT, 'Name' TEXT NOT NULL , 'Type' TEXT NOT NULL, 'WB' BOOL NOT NULL, 'BuildYear' INTEGER, 'Info' TEXT NOT NULL)";
     query.exec(q);
 
     query.prepare("INSERT INTO computers (Name, Type, WB, BuildYear, Info) VALUES(:name,:type,:wb,:buildyear,:info)");
@@ -53,22 +52,22 @@ void Database::add_new_computer(Computer C)
     query.exec();
 }
 
-/*void Database::add_new_link(Link L)
+/*void Database::add_new_link(pair<Person, Computer> link)
 {
     QSqlQuery query(db);
-    QString q = "CREATE TABLE IF NOT EXISTS links ('SID' INTEGER FOREIGN KEY REFRENCES scientists(ID), 'CID' INTEGER FOREIGN KEY REFRENCES computers(ID), UNIQUE(SID, CID))";
+    QString q = "CREATE TABLE links ('SID' INTEGER, 'CID' INTEGER, FOREIGN KEY (SID) REFERENCES scientists(ID), FOREIGN KEY (CID) REFERENCES computers(ID), PRIMARY KEY(SID, CID))";
     query.exec(q);
 
     query.prepare("INSERT INTO links (SID, CID) VALUES(:sid, :cid)");
-    query.bindValue(":sid", L.getSID());
-    query.bindValue(":cid", L.getCID());
+    query.bindValue(":sid", link.first.getID());        //getID ekki útfært!
+    query.bindValue(":cid", link.second.getID());
     query.exec();
 }*/
+
 
 vector<Person> Database::read_Scientist_from_DB()
 {
     vector<Person> scientists;
-
     QSqlQuery query(db);
     query.exec("SELECT * FROM scientists");
 
