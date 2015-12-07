@@ -18,8 +18,8 @@ private:
 public:
     Database();
     ~Database();
-    void add_new_scientist(Person P);
-    void add_new_computer(Computer C);
+    unsigned int add_new_scientist(Person P);
+    unsigned int add_new_computer(Computer C);
     void add_new_link(pair<Person, Computer> link);
 
     vector<Person> read_Scientist_from_DB();

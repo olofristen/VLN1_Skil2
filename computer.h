@@ -13,6 +13,7 @@ using namespace std;
 class Computer
 {
     private:
+        int ID;
         string name;
         string type;
         bool wasBuilt;
@@ -31,6 +32,7 @@ class Computer
         string gettype();
         bool getwasbuilt();
         string getinfo();
+        void setID(int id);
 
         friend bool sortbyyearofbuilt(const Computer& a, const Computer &b);
         friend bool sortbytype(const Computer& a, const Computer &b);

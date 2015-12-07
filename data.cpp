@@ -22,7 +22,7 @@ Database::~Database()
     }
 }
 
-void Database::add_new_scientist(Person P)
+unsigned int Database::add_new_scientist(Person P)
 {
     QSqlQuery query(db);
     QString q = "CREATE TABLE IF NOT EXISTS scientists ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT UNIQUE, 'Name' TEXT NOT NULL , 'Gender' TEXT NOT NULL , 'DOB' INTEGER, 'DOD' INTEGER, 'Bio' TEXT)";
@@ -35,9 +35,16 @@ void Database::add_new_scientist(Person P)
     query.bindValue(":dod", P.getdeathyear());
     query.bindValue(":bio", QString::fromStdString(P.getbio()));
     query.exec();
+    query.prepare("SELECT ID FROM scientists WHERE Name = :name");        //4
+    query.bindValue(":name", QString::fromStdString(P.getname()));
+    query.exec();
+    if(query.next())
+    {
+        return query.value("ID").toInt();
+   }
 }
 
-void Database::add_new_computer(Computer C)
+unsigned int Database::add_new_computer(Computer C)
 {
     QSqlQuery query(db);
     QString q = "CREATE TABLE IF NOT EXISTS computers ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT, 'Name' TEXT NOT NULL , 'Type' TEXT NOT NULL, 'WB' BOOL NOT NULL, 'BuildYear' INTEGER, 'Info' TEXT NOT NULL)";
@@ -50,19 +57,29 @@ void Database::add_new_computer(Computer C)
     query.bindValue(":buildyear", C.getbuildyear());
     query.bindValue(":info", QString::fromStdString(C.getinfo()));
     query.exec();
+
+    query.prepare("SELECT ID FROM computers WHERE Name = :name");        //4
+    query.bindValue(":name", QString::fromStdString(C.getname()));
+    query.exec();
+    if(query.next())
+    {
+        return query.value("ID").toInt();
+   }
 }
 
-/*void Database::add_new_link(pair<Person, Computer> link)
+void Database::add_new_link(pair<Person, Computer> link)
 {
     QSqlQuery query(db);
     QString q = "CREATE TABLE links ('SID' INTEGER, 'CID' INTEGER, FOREIGN KEY (SID) REFERENCES scientists(ID), FOREIGN KEY (CID) REFERENCES computers(ID), PRIMARY KEY(SID, CID))";
     query.exec(q);
 
-    query.prepare("INSERT INTO links (SID, CID) VALUES(:sid, :cid)");
-    query.bindValue(":sid", link.first.getID());        //getID ekki útfært!
-    query.bindValue(":cid", link.second.getID());
+    query.prepare("INSERT INTO links (SID, CID) VALUES ((SELECT ID FROM scientists WHERE Name LIKE '%:sname%'), (SELECT ID FROM computers WHERE Name LIKE '%:cname%'))");
+
+    query.bindValue(":sname", QString::fromStdString(link.first.getname()));
+    query.bindValue(":cname", QString::fromStdString(link.second.getname()));
     query.exec();
-}*/
+
+}
 
 
 vector<Person> Database::read_Scientist_from_DB()

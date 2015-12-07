@@ -491,3 +491,13 @@ void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út vektor
     }
     cout << endl << ve.size() << " computers!" << endl;
 }
+
+void UI::displayDatabaseLink(vector<pair<Person, Computer>> vlink)      // Prentar út par af Person og Computer...
+{
+    for(unsigned int i = 0; i < vlink.size(); i++)
+    {
+        cout << endl << vlink[i].first;     // Person
+        cout << endl << vlink[i].second;    // Computer
+    }
+    cout << endl << vlink.size() << " links!" << endl;
+}
