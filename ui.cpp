@@ -339,6 +339,7 @@ void UI::reading_person()
 
                 if(deathyear < birthyear || deathyear > 2015) {
                     cout << "Invalid input! " << endl;
+                    cin >> dead;
                 }
             }
             else if(dead.compare("n") == 0 || dead.compare("N") == 0) {
@@ -347,6 +348,7 @@ void UI::reading_person()
 
             else{          // Ekki vitað, spyr aftur
                 cout << "Invalid input! " << endl;
+                cin >> dead;
             }
 
         }while((deathyear != -1) && ((deathyear < birthyear) || (deathyear > 2015)));
@@ -381,10 +383,9 @@ void UI::reading_computer()
 
     cout << endl << "Type in computer: " << endl << endl;
 
-    string name = "", buildyear = "", type = "", info = "", wb = "";
+    string name = "", buildyear = "", type = "", info = "", wb = "", a = "";
     bool wasBuilt;
     int tempBY = 0;
-    int a = 0;
 
     for(int i = 0; i < num; i++)
     {
@@ -392,25 +393,25 @@ void UI::reading_computer()
         cin.ignore();
         getline(cin, name);
 
-        do{
-            cout << "Was the computer:" << endl;
 
+            cout << "Was the computer:" << endl;
             cout << "1. Mechanic" << endl;
             cout << "2. Electronic" << endl;
             cout << "3. Transistor computer" << endl;
             cout << "4. Other types" << endl;
+        do{
             cin >> a;
 
-            if(a == 1){
+            if(a.compare("1") == 0){
                 type = "Mechanic";
             }
-            else if(a == 2){
+            else if(a.compare("2") == 0){
                 type = "Electronic";
             }
-            else if(a == 3){
+            else if(a.compare("3") == 0){
                 type = "Transistor computer";
             }
-            else if(a == 4){
+            else if(a.compare("4") == 0){
                 type = "Other";
             }
             else{
@@ -422,12 +423,19 @@ void UI::reading_computer()
             cout << "Was the computer ever made (Y/N)? " ;
             cin >> wb;
 
-            if(wb == "Y" || wb == "y")
+            if(wb == "Y" || wb == "y"){
+
                 wasBuilt = true;
-            else if(wb == "N" || wb == "n")
+            }
+            else if(wb == "N" || wb == "n"){
+
                 wasBuilt = false;
-            else
+            }
+            else{
+
                 cout << "Invalid input" << endl;
+                wb = "";
+            }
         }while(wb == "");
 
         if(wasBuilt == true)
@@ -444,7 +452,15 @@ void UI::reading_computer()
         else
         {
             cout << "When was the computer documented? ";
-            cin >> buildyear;
+            do{
+
+                cin >> buildyear;
+
+                if(buildyear < "1700" || buildyear > "2015"){
+
+                    cout << "Invalid input" << endl;
+                }
+            }while(buildyear < "1700" || buildyear > "2015");
         }
 
         tempBY = atoi(buildyear.c_str());
