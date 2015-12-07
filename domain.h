@@ -14,7 +14,7 @@ private:
 
     vector<Person> v;
     vector<Computer> ve;
-    vector<pair<Person, Computer>> vlink;
+    vector<pair<Person, Computer> > vlink;
     Database DB;
 
 public:

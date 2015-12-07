@@ -300,7 +300,8 @@ void UI::reading_person()
     for(int i = 0; i < num; i++)
     {
         cout << "Name: ";
-        cin.ignore();
+        if (i == 0)
+            cin.ignore();
         getline(cin, name);
 
         do{
@@ -390,7 +391,8 @@ void UI::reading_computer()
     for(int i = 0; i < num; i++)
     {
         cout << "Name: ";
-        cin.ignore();
+        if(i == 0)
+            cin.ignore();
         getline(cin, name);
 
 
@@ -492,7 +494,7 @@ void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út vektor
     cout << endl << ve.size() << " computers!" << endl;
 }
 
-void UI::displayDatabaseLink(vector<pair<Person, Computer>> vlink)      // Prentar út par af Person og Computer...
+void UI::displayDatabaseLink(vector<pair<Person, Computer> > vlink)      // Prentar út par af Person og Computer...
 {
     for(unsigned int i = 0; i < vlink.size(); i++)
     {
