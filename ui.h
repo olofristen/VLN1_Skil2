@@ -30,6 +30,7 @@ public:
     
     void displayDatabaseScientist(vector<Person> v);
     void displayDatabaseComputer(vector<Computer> ve);
+    void displayDatabaseLink(vector<pair<Person, Computer>> vlink);
 
 };
 

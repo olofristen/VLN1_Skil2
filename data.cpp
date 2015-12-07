@@ -52,17 +52,18 @@ void Database::add_new_computer(Computer C)
     query.exec();
 }
 
-/*void Database::add_new_link(pair<Person, Computer> link)
+void Database::add_new_link(pair<Person, Computer> link)
 {
     QSqlQuery query(db);
-    QString q = "CREATE TABLE links ('SID' INTEGER, 'CID' INTEGER, FOREIGN KEY (SID) REFERENCES scientists(ID), FOREIGN KEY (CID) REFERENCES computers(ID), PRIMARY KEY(SID, CID))";
+    QString q = "CREATE TABL<E links ('SID' INTEGER, 'CID' INTEGER, FOREIGN KEY (SID) REFERENCES scientists(ID), FOREIGN KEY (CID) REFERENCES computers(ID), PRIMARY KEY(SID, CID))";
     query.exec(q);
 
-    query.prepare("INSERT INTO links (SID, CID) VALUES(:sid, :cid)");
-    query.bindValue(":sid", link.first.getID());        //getID ekki útfært!
-    query.bindValue(":cid", link.second.getID());
+    query.prepare("INSERT INTO links (SID, CID) VALUES ((SELECT ID FROM scientists WHERE Name LIKE '%:sname%'), (SELECT ID FROM computers WHERE Name LIKE '%:cname%'))");
+
+    query.bindValue(":sname", QString::fromStdString(link.first.getname()));
+    query.bindValue(":cname", QString::fromStdString(link.second.getname()));
     query.exec();
-}*/
+}
 
 
 vector<Person> Database::read_Scientist_from_DB()

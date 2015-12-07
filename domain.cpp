@@ -35,6 +35,7 @@ Domain::Domain()
 {
     v = DB.read_Scientist_from_DB();
     ve = DB.read_Computer_from_DB();
+    //vlink = DB.read_link_from_DB();
 }
 
 int Domain::scientistsSize() {
@@ -59,6 +60,14 @@ void Domain::add_new_computer(string name, int buildYear, string type, bool wasB
     ve.push_back(newC);
     DB.add_new_computer(newC);
 }
+
+void Domain::add_new_link(Person p, Computer c)
+{     // Bætir nýrri tölvu inn i vektorinn...
+    pair<Person, Computer> link = make_pair(p,c);
+    vlink.push_back(link);
+    DB.add_new_link(link);
+}
+
 
 vector<Person> Domain::sort_and_displayScientist(string sortMenu)
 {        // sorterar vektorinn...
