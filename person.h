@@ -14,6 +14,7 @@ using namespace std;
 class Person
 {
     private:
+        unsigned int ID;
         string name;
         string gender;
         int birthYear;
@@ -31,6 +32,7 @@ class Person
         string getbio();
         int getbirthyear();
         int getdeathyear();
+        void setID(unsigned int id);
 
         friend bool sortbyyearofbirth (const Person& a, const Person &b);
         friend bool sortbyyearofdeath (const Person& a, const Person &b);

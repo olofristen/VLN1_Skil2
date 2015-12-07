@@ -48,17 +48,16 @@ int Domain::computersSize() {
 void Domain::add_new_person(string name, string gender, int birthyear, int deathyear, string bio)
 {     // Bætir nýrri persónu inn i vektorinn...
     Person newP = Person(name, gender, birthyear, deathyear, bio);
+    newP.setID(DB.add_new_scientist(newP));
     v.push_back(newP);
-    DB.add_new_scientist(newP);
-    //DB.write_to_DB(v);
 }
 
 void Domain::add_new_computer(string name, int buildYear, string type, bool wasBuilt, string info)
 {     // Bætir nýrri tölvu inn i vektorinn...
 
     Computer newC = Computer(name, type, wasBuilt, buildYear, info);
+    newC.setID(DB.add_new_computer(newC));
     ve.push_back(newC);
-    DB.add_new_computer(newC);
 }
 
 void Domain::add_new_link(Person p, Computer c)

@@ -1,10 +1,13 @@
 #include "computer.h"
 
-bool Computer::operator < (const Computer &r) {
+bool Computer::operator < (const Computer &r)
+{
      return this->name < r.name;
 }
 
-Computer::Computer() {
+Computer::Computer()
+{
+    ID = 0;
     name = " ";
     type = " ";
     wasBuilt = false;
@@ -53,6 +56,7 @@ string Computer::getinfo()
 
 ostream& operator << (ostream& out, const Computer& C)
 {
+    out << "ID: " << C.ID << endl;
     out << "Name: " << C.name << endl
          << "Type: " << C.type << endl;
     if(C.wasBuilt == false)
@@ -72,9 +76,14 @@ ostream& operator << (ostream& out, const Computer& C)
 
 void Computer::readData(QSqlQuery query)
 {
+    ID = query.value("ID").toInt();
     name = query.value("Name").toString().toStdString();
-    buildYear = query.value("BuildYear").toUInt();
+    buildYear = query.value("BuildYear").toInt();
     type = query.value("Type").toString().toStdString();
     wasBuilt = query.value("WB").toBool();
     info = query.value("Info").toString().toStdString();
+}
+void Computer::setID(int id)
+{
+    ID = id;
 }
