@@ -59,7 +59,6 @@ int Person::getId()
 
 ostream& operator << (ostream& out, const Person& P)
 {
-    out << "ID: "  << P.ID << endl;
     out << "Name: " << P.name << endl
         << "Gender: " << P.gender << endl
         << "Year of birth: " << P.birthYear << endl;

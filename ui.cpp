@@ -487,12 +487,11 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
     int sid, cid;
     cout << "Choose one scientist (ID) and one computer (ID)!" << endl << endl;
     cout << "Scientists from the database: " << endl;
-    //displayDatabaseScientist(myDom.returnAllScientists());
+    displayDatabaseScientistShort(myDom.returnAllScientists());
     cout << endl << "Scientist ID: ";
     cin >> sid;
-    sid = sid -1;
     cout << endl << "Computers in the database: " << endl;
-   // displayDatabaseComputer(myDom.returnAllComputers());
+    displayDatabaseComputerShort(myDom.returnAllComputers());
     cout << endl << "Computer ID: ";
     cin >> cid;
     pair<Person, Computer> link = myDom.addNewLink(sid, cid);
@@ -506,6 +505,32 @@ void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorin
         cout << endl << v[i];
     }
     cout << endl << v.size() << " scientists!" << endl;
+}
+
+void UI::displayDatabaseScientistShort(vector<Person> v)
+{
+    cout << "ID   NAME                       BIRTH YEAR" << endl;
+
+
+    for(unsigned int i = 0; i < v.size(); i++)
+    {
+        cout << setw(5) << std::left << i;
+        displayShort(v[i]);
+    }
+    cout << endl << v.size() << " scientists!" << endl;
+}
+
+void UI::displayDatabaseComputerShort(vector<Computer> ve)
+{
+    cout << "ID   NAME" << endl;
+
+
+    for(unsigned int i = 0; i < ve.size(); i++)
+    {
+        cout << setw(5) << std::left << i;
+        displayShortCom(ve[i]);
+    }
+    cout << endl << ve.size() << " computers!" << endl;
 }
 
 void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út vektorinn...
@@ -537,3 +562,13 @@ void UI::displayDatabaseLinks()
     cout << endl << vLink.size() << " links!" << endl;
 }
 
+void UI::displayShort(Person P)
+{   
+    cout << setw(30) << std::left << P.getName();
+    cout << P.getBirthYear() << endl;
+}
+
+void UI::displayShortCom(Computer C)
+{
+    cout << setw(30) << std::left << C.getName() << endl;
+}
