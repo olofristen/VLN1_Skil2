@@ -486,7 +486,7 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
 {
     int sid, cid;
     cout << "Choose one scientist (ID) and one computer (ID)!" << endl << endl;
-    cout << "Scientists in the database: " << endl;
+    cout << "Scientists from the database: " << endl;
     //displayDatabaseScientist(myDom.returnAllScientists());
     cout << endl << "Scientist ID: ";
     cin >> sid;

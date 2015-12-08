@@ -95,9 +95,7 @@ void Database::addNewLink(pair<Person, Computer> link)
     query.bindValue(":sid", link.first.getId());
     query.bindValue(":cid", link.second.getId());
     query.exec();
-
 }
-
 
 vector<Person> Database::readScientistFromDb()
 {
