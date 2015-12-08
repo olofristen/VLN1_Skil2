@@ -369,7 +369,6 @@ void UI::readingPerson()
     }
 }
 
-
 void UI::readingComputer()
 {
     string number = "";
@@ -490,6 +489,7 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
     //displayDatabaseScientist(myDom.returnAllScientists());
     cout << endl << "Scientist ID: ";
     cin >> sid;
+    sid = sid -1;
     cout << endl << "Computers in the database: " << endl;
    // displayDatabaseComputer(myDom.returnAllComputers());
     cout << endl << "Computer ID: ";
@@ -524,11 +524,12 @@ void UI::displayLink(pair<Person, Computer> link)      // Prentar út par af Per
 
     //cout << endl << vlink.size() << " links!" << endl;
 }
+
 void UI::displayDatabaseLinks()
 {
     vector<pair<Person, Computer> > vLink = myDom.returnAllLinks();
 
-    for(int i = 0; i < vLink.size(); i++) {
+    for(unsigned int i = 0; i < vLink.size(); i++) {
         cout << "Link " << i << ":" << endl;
         displayLink(vLink[i]);
     }
