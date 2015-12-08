@@ -663,7 +663,7 @@ void UI::displayDatabaseLinks()
     vector<pair<Person, Computer> > vLink = myDom.returnAllLinks();
 
     sort(vLink.begin(), vLink.end(), sortPairVector);
-    cout << endl << " SCIENTISTS:              COMPUTERS:" << endl << endl;
+    cout << endl << "       SCIENTISTS:             COMPUTERS:" << endl << endl;
     for(unsigned int i = 0; i < vLink.size(); i++)
     {
 
