@@ -28,14 +28,6 @@ unsigned int Database::addNewScientist(Person P)
     QString q = "CREATE TABLE IF NOT EXISTS scientists ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT, 'Name' TEXT NOT NULL , 'Gender' TEXT NOT NULL , 'DOB' INTEGER, 'DOD' INTEGER, 'Bio' TEXT)";
     query.exec(q);
 
-
-    query.prepare("INSERT INTO scientists (Name, Gender, DOB, DOD, Bio ) VALUES(:id, :name,:gender,:dob,:dod,:bio)");
-    query.bindValue(":name", QString::fromStdString(P.getName()));
-    query.bindValue(":gender", QString::fromStdString(P.getGender()));
-    query.bindValue(":dob", P.getBirthYear());
-    query.bindValue(":dod", P.getDeathYear());
-    query.bindValue(":bio", QString::fromStdString(P.getBio()));
-
     query.prepare("INSERT INTO scientists (Name, Gender, DOB, DOD, Bio ) VALUES(:name,:gender,:dob,:dod,:bio)");
     query.bindValue(":name", QString::fromStdString(P.getName()));
     query.bindValue(":gender", QString::fromStdString(P.getGender()));
@@ -58,13 +50,6 @@ unsigned int Database::addNewComputer(Computer C)
     QSqlQuery query(db);
     QString q = "CREATE TABLE IF NOT EXISTS computers ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT, 'Name' TEXT NOT NULL , 'Type' TEXT NOT NULL, 'WB' BOOL NOT NULL, 'BuildYear' INTEGER, 'Info' TEXT NOT NULL)";
     query.exec(q);
-
-    query.prepare("INSERT INTO computers (Name, Type, WB, BuildYear, Info) VALUES(:id, :name,:type,:wb,:buildyear,:info)");
-    query.bindValue(":name", QString::fromStdString(C.getName()));
-    query.bindValue(":type", QString::fromStdString(C.getType()));
-    query.bindValue(":wb", C.getWasBuilt());
-    query.bindValue(":buildyear", C.getBuildYear());
-    query.bindValue(":info", QString::fromStdString(C.getInfo()));
 
     query.prepare("INSERT INTO computers (Name, Type, WB, BuildYear, Info) VALUES(:name,:type,:wb,:buildyear,:info)");
     query.bindValue(":name", QString::fromStdString(C.getName()));
@@ -138,7 +123,76 @@ vector<Computer> Database::readComputerFromDb()
 
     return computer;
 }
-/*void Database::readLinkFromDb()
-{
 
-}*/
+vector<Person> Database::searchScientistFromDb(string num, string search)
+{
+    vector<Person> scientists;
+    QSqlQuery query(db);
+
+    if(num.compare("1") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE Name LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("2") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE Gender LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("3") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE DOB LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("4") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE DOD LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("5") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE Bio LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    if(db.isOpen())
+    {
+        while(query.next()){
+            scientists.push_back(Person(query));        // So beautiful..
+        }
+    }
+    else {
+        cerr << "Unable to open database!" << endl;
+    }
+
+    return scientists;
+}
+
+vector<Computer> Database::searchComputerFromDb(string num, string search)
+{
+    vector<Computer> computers;
+    QSqlQuery query(db);
+
+    if(num.compare("1") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE Name LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("2") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE Type LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("3") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE WB LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("4") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE BuildYear LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    if(db.isOpen())
+    {
+        while(query.next()){
+            computers.push_back(Computer(query));        // So beautiful..
+        }
+    }
+    else {
+        cerr << "Unable to open database!" << endl;
+    }
+
+    return computers;
+}
+

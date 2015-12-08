@@ -269,7 +269,8 @@ void UI::searchComputer()
         }
     }  while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
 
-    cin >> search;
+    cin.ignore();
+    getline(cin, search);
     vector<Computer> vec = myDom.searchStringComputer(searchMenu, search);
 
     displayDatabaseComputer(vec);
@@ -512,7 +513,6 @@ void UI::displayDatabaseScientistShort(vector<Person> v)      // Prentar út vek
     for(unsigned int i = 0; i < v.size(); i++)
     {
         displayShort(v[i]);
-        //cout << endl << vs[i];
     }
     cout << endl << v.size() << " scientists!" << endl;
 }
