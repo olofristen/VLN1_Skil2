@@ -62,14 +62,15 @@ ostream& operator << (ostream& out, const Person& P)
     out << "Name: " << P.name << endl
         << "Gender: " << P.gender << endl
         << "Year of birth: " << P.birthYear << endl;
-    if(P.deathYear == -1) {
+    if(P.deathYear == -1)
+    {
         out << "Alive and well!" << endl;
     }
-    else {
+    else
+    {
         out << "Year of death: " << P.deathYear << endl;
     }
-    out << endl << "Bio: " << P.bio << endl
-         << "------------------------------------------------------------------" << endl;
+    out << endl << "Bio: " << P.bio << endl;
     return out;
 }
 
