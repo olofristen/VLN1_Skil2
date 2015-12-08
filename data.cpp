@@ -16,7 +16,8 @@ Database::Database()        // Database búinn til/opnaður í constructor
 
 Database::~Database()
 {
-    if(db.isOpen()) {
+    if(db.isOpen())
+    {
         db.close();
         //cout << "closing db..." << endl;
     }
@@ -72,7 +73,7 @@ unsigned int Database::addNewComputer(Computer C)
 void Database::addNewLink(pair<Person, Computer> link)
 {
     QSqlQuery query(db);
-    QString q = "CREATE TABLE links ('SID' INTEGER, 'CID' INTEGER, FOREIGN KEY (SID) REFERENCES scientists(ID), FOREIGN KEY (CID) REFERENCES computers(ID), PRIMARY KEY(SID, CID))";
+    QString q = "CREATE TABLE IF NOT EXISTS links ('SID' INTEGER, 'CID' INTEGER, FOREIGN KEY (SID) REFERENCES scientists(ID), FOREIGN KEY (CID) REFERENCES computers(ID), PRIMARY KEY(SID, CID))";
     query.exec(q);
 
     query.prepare("INSERT INTO links (SID, CID) VALUES (:sid, :cid)");
@@ -90,11 +91,13 @@ vector<Person> Database::readScientistFromDb()
 
     if(db.isOpen())
     {
-        while(query.next()){
+        while(query.next())
+        {
             scientists.push_back(Person(query));        // So beautiful..
         }
     }
-    else {
+    else
+    {
         cerr << "Unable to open database!" << endl;
     }
 
@@ -115,7 +118,8 @@ vector<Computer> Database::readComputerFromDb()
             computer.push_back(Computer(query));        // Oh, so pretty...
         }
     }
-    else {
+    else
+    {
         cerr << "Unable to open database!" << endl;
     }
 
@@ -226,11 +230,13 @@ vector<Person> Database::searchScientistFromDb(string num, string search)
     }
     if(db.isOpen())
     {
-        while(query.next()){
+        while(query.next())
+        {
             scientists.push_back(Person(query));        // So beautiful..
         }
     }
-    else {
+    else
+    {
         cerr << "Unable to open database!" << endl;
     }
 
@@ -258,24 +264,35 @@ vector<Computer> Database::searchComputerFromDb(string num, string search)
     {
         query.exec("SELECT * FROM computers WHERE BuildYear LIKE '%" + QString::fromStdString(search) + "%'");
     }
-    else if(num.compare("4") == 0)
+    else if(num.compare("3") == 0)
     {
+        query.exec("SELECT * FROM computers WHERE Type LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+   /* else if(num.compare("4") == 0)  Hvernig viljum við útfæra þetta?  (Boolean-breytan wasBuilt)
+    {
+<<<<<<< HEAD
         query.exec("SELECT * FROM computers WHERE Info LIKE '%" + QString::fromStdString(search) + "%'");
     }
+=======
+        query.exec("SELECT * FROM computers WHERE WB LIKE '%" + QString::fromStdString(search) + "%'");
+    }*/
+
     if(db.isOpen())
     {
-        while(query.next()){
+        while(query.next())
+        {
             computers.push_back(Computer(query));        // So beautiful..
         }
     }
-    else {
+    else
+    {
         cerr << "Unable to open database!" << endl;
     }
 
     return computers;
 }
 
-vector<pair<Person, Computer> > Database::readLinkFromDb()   //VIRKAR ÓMÆGAD!
+vector<pair<Person, Computer> > Database::readLinkFromDb()
 {
     vector<pair<Person, Computer> > vlink;
 

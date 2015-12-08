@@ -31,6 +31,7 @@ bool sortByWasBuilt (const Computer& a, const Computer &b)
     return a.wasBuilt < b.wasBuilt;
 }
 
+
 Domain::Domain()
 {
     v = DB.readScientistFromDb();
@@ -56,10 +57,30 @@ void Domain::addNewPerson(string name, string gender, int birthYear, int deathYe
 
 void Domain::addNewComputer(string name, int buildYear, string type, bool wasBuilt, string info)
 {     // Bætir nýrri tölvu inn i vektorinn...
-
     Computer newC = Computer(name, type, wasBuilt, buildYear, info);
     newC.setId(DB.addNewComputer(newC));
     ve.push_back(newC);
+}
+
+vector<Computer> Domain::getCompFromLinks(int pID)
+{
+    vector<Computer> comp;
+    for(int i = 0; i < vLink.size(); i++) {
+        if(pID == vLink[i].first.getId()) {
+            comp.push_back(vLink[i].second);
+        }
+    }
+    return comp;
+}
+vector<Person> Domain::getSciFromLinks(int cID)
+{
+    vector<Person> comp;
+    for(int i = 0; i < vLink.size(); i++) {
+        if(cID == vLink[i].second.getId()) {
+            comp.push_back(vLink[i].first);
+        }
+    }
+    return comp;
 }
 
 vector<Person> Domain::returnAllScientists()
@@ -76,10 +97,18 @@ vector<pair<Person, Computer> > Domain::returnAllLinks()
     return vLink;
 }
 
-pair<Person, Computer> Domain::addNewLink(int pID, int cID)
+pair<Person, Computer> Domain::addNewLink(int pInd, int cInd)   // Setur linknar saman Person og Computer fyrir database og pair vektor!
 {
-    pair<Person, Computer> link = make_pair(v[pID-1],ve[cID-1]);
-    vLink.push_back(link);
+    pair<Person, Computer> link = make_pair(v[pInd],ve[cInd]);
+    for(int i = 0; i < vLink.size(); i++)
+    {
+        if((vLink[i].first.getId() == link.first.getId()) && (vLink[i].second.getId() == link.second.getId()))
+        {
+            cout << endl << "Found duplicate link! This command was not confirmed."  << endl;
+            return link;
+        }
+     }
+    vLink.push_back(link);      // Hoppum yfir þetta ef við finnum parið nú þegar í vektornum
     DB.addNewLink(link);
     return link;
 }
@@ -87,60 +116,86 @@ pair<Person, Computer> Domain::addNewLink(int pID, int cID)
 
 vector<Person> Domain::sortAndDisplayScientist(string sortMenu)
 {        // sorterar vektorinn...
+
     /*do{
         if(sortMenu.compare("1") == 0) {
+=======
+    do{
+        if(sortMenu.compare("1") == 0)
+        {
+>>>>>>> 39ae4e08f7f21891762f24244df4bdcce84a09a2
             sort(v.begin(), v.end());
         }
-        else if(sortMenu.compare("2") == 0) {
+        else if(sortMenu.compare("2") == 0)
+        {
             sort(v.rbegin(), v.rend());
         }
-        else if(sortMenu.compare("3") == 0) {
+        else if(sortMenu.compare("3") == 0)
+        {
             sort(v.begin(), v.end());
             sort(v.begin(), v.end(), sortByGender);
         }
-        else if(sortMenu.compare("4") == 0) {
+        else if(sortMenu.compare("4") == 0)
+        {
             sort(v.begin(), v.end());
             sort(v.begin(), v.end(), sortByYearOfBirth);
         }
-        else if(sortMenu.compare("5") == 0) {
+        else if(sortMenu.compare("5") == 0)
+        {
             sort(v.begin(), v.end());
             sort(v.begin(), v.end(), sortByYearOfDeath);
         }
-        else if(sortMenu.compare("Q") == 0 || sortMenu.compare("q") == 0) {
+        else if(sortMenu.compare("Q") == 0 || sortMenu.compare("q") == 0)
+        {
             return vector<Person>();
         }
-        else {
+        else
+        {
             cout << "Invalid input! " << endl;
             cin >> sortMenu;
         }
+<<<<<<< HEAD
     } while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5); */
     return DB.sortScientistsFromDb(sortMenu);
+
 }
 
 vector<Computer> Domain::sortAndDisplayComputer(string sortMenu)
 {        // sorterar vektorinn...
+
     /*do{
         if(sortMenu.compare("1") == 0) {
+=======
+    do{
+        if(sortMenu.compare("1") == 0)
+        {
+>>>>>>> 39ae4e08f7f21891762f24244df4bdcce84a09a2
             sort(ve.begin(), ve.end());
         }
-        else if(sortMenu.compare("2") == 0) {
+        else if(sortMenu.compare("2") == 0)
+        {
             sort(ve.rbegin(), ve.rend());
         }
-        else if(sortMenu.compare("3") == 0) {
+        else if(sortMenu.compare("3") == 0)
+        {
             sort(ve.begin(), ve.end());
             sort(ve.begin(), ve.end(), sortByYearOfBuilt);
         }
-        else if(sortMenu.compare("4") == 0) {
+        else if(sortMenu.compare("4") == 0)
+        {
             sort(ve.begin(), ve.end());
             sort(ve.begin(), ve.end(), sortByType);
         }
-        else if(sortMenu.compare("Q") == 0 || sortMenu.compare("q") == 0) {
+        else if(sortMenu.compare("Q") == 0 || sortMenu.compare("q") == 0)
+        {
             return vector<Computer>();
         }
-        else {
+        else
+        {
             cout << "Invalid input! " << endl;
             cin >> sortMenu;
         }
+<<<<<<< HEAD
     } while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5);*/
     return DB.sortComputersFromDb(sortMenu);
 }
