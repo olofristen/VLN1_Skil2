@@ -41,7 +41,6 @@ class Person
         bool operator < (const Person& r);
         
         friend ostream& operator << (ostream& out, const Person& P);
-
 };
 
 

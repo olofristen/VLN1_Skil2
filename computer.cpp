@@ -60,7 +60,6 @@ int Computer::getId()
 
 ostream& operator << (ostream& out, const Computer& C)
 {
-    out << "ID: " << C.ID << endl;
     out << "Name: " << C.name << endl
         << "Type: " << C.type << endl;
     if(C.wasBuilt == false)
@@ -71,7 +70,7 @@ ostream& operator << (ostream& out, const Computer& C)
     {
         out << "Built: This computer was built in " << C.buildYear << endl;
     }
-
+    out << endl;
     out << "Info: " << C.info << endl;
     out << "------------------------------------------------------------------" << endl;
 
