@@ -173,20 +173,21 @@ vector<Computer> Database::searchComputerFromDb(string num, string search)
 
     if(num.compare("1") == 0)
     {
-        query.exec("SELECT * FROM scientists WHERE Name LIKE '%" + QString::fromStdString(search) + "%'");
+        query.exec("SELECT * FROM computers WHERE Name LIKE '%" + QString::fromStdString(search) + "%'");
     }
     else if(num.compare("2") == 0)
     {
-        query.exec("SELECT * FROM scientists WHERE Type LIKE '%" + QString::fromStdString(search) + "%'");
+        query.exec("SELECT * FROM computers WHERE BuildYear LIKE '%" + QString::fromStdString(search) + "%'");
     }
     else if(num.compare("3") == 0)
     {
-        query.exec("SELECT * FROM scientists WHERE WB LIKE '%" + QString::fromStdString(search) + "%'");
+        query.exec("SELECT * FROM computers WHERE Type LIKE '%" + QString::fromStdString(search) + "%'");
     }
-    else if(num.compare("4") == 0)
+   /* else if(num.compare("4") == 0)  Hvernig viljum við útfæra þetta?  (Boolean-breytan wasBuilt)
     {
-        query.exec("SELECT * FROM scientists WHERE BuildYear LIKE '%" + QString::fromStdString(search) + "%'");
-    }
+        query.exec("SELECT * FROM computers WHERE WB LIKE '%" + QString::fromStdString(search) + "%'");
+    }*/
+
     if(db.isOpen())
     {
         while(query.next())
