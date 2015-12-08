@@ -88,7 +88,7 @@ void UI::choices()
     else if(menu.compare("8") == 0)
     {
         clearScreen();
-        cout << "Links in the database: " << endl;
+        allLinksMessage();
         displayDatabaseLinks();
     }
     else
@@ -151,16 +151,27 @@ void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á e
     cout << "   |    3.  By gender                                              |" << endl;
     cout << "   |    4.  By year of birth                                       |" << endl;
     cout << "   |    5.  By year of death                                       |" << endl;
-    cout << "   |    6.  Just those who are alive ! (in alphabetical order..)   |" << endl;
+    cout << "   |    6.  Just those who are alive ! (A-Z..)                     |" << endl;
+    cout << "   |    7.  A-Z list of all registerd scientists                     |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
 
     cin >> sortMenu;
-
-    vector<Person> vec = myDom.sortAndDisplayScientist(sortMenu);
-    if(!vec.empty())
+    if(sortMenu == "7")
     {
-        displayDatabaseScientist(vec);
+        vector<Person> ve = myDom.sortAndDisplayScientist(sortMenu);
+        if(!ve.empty())
+        {
+               displayDatabaseScientistShort(ve);
+        }
+    }
+    else
+    {
+        vector<Person> vec = myDom.sortAndDisplayScientist(sortMenu);
+        if(!vec.empty())
+        {
+            displayDatabaseScientist(vec);
+        }
     }
 }
 
@@ -558,7 +569,7 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
     cout << "Scientists from the database: " << endl;
     displayDatabaseScientistShort(myDom.returnAllScientists());
     cout << endl << "Scientist ID: ";
-//<<<<<<< ATH
+
     while(!(cin >> sid) ||  sid > myDom.scientistsSize()-1 || sid < 0)
     {
         cin.clear();
@@ -590,7 +601,7 @@ void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorin
         cout << endl << "Computers: ";
         vector<Computer> comp = myDom.getCompFromLinks(v[i].getId());
 
-        for(int i = 0; i < comp.size(); i++) {
+        for(unsigned int i = 0; i < comp.size(); i++) {
             cout << comp[i].getName() << ", ";
         }
         cout << endl
@@ -601,8 +612,8 @@ void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorin
 
 void UI::displayDatabaseScientistShort(vector<Person> v)
 {
-    cout << endl << "ID   NAME                       BIRTH YEAR" << endl << endl;
-
+    cout << endl << "ID   NAME                       BIRTH YEAR   DEATH YEAR" << endl;
+    cout << "----------------------------------------------------------" << endl;
 
     for(unsigned int i = 0; i < v.size(); i++)
     {
@@ -614,12 +625,13 @@ void UI::displayDatabaseScientistShort(vector<Person> v)
 
 void UI::displayDatabaseComputerShort(vector<Computer> ve)
 {
-    cout << endl << "ID   NAME                          YEAR" << endl << endl;
+    cout << endl << "ID   NAME                          YEAR    TYPE" << endl;
+    cout << "---------------------------------------------------------" << endl;
 
 
     for(unsigned int i = 0; i < ve.size(); i++)
     {
-        cout << setw(5) <<left << i;
+        cout << setw(5) << left << i;
         displayShortCom(ve[i]);
     }
     cout << endl << ve.size() << " computers!" << endl;
@@ -633,7 +645,7 @@ void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út vektor
         cout << endl << "Scientists: ";
         vector<Person> sci = myDom.getSciFromLinks(ve[i].getId());
 
-        for(int i = 0; i < sci.size(); i++)
+        for(unsigned int i = 0; i < sci.size(); i++)
         {
             cout << sci[i].getName() << ", ";
         }
@@ -664,22 +676,36 @@ void UI::displayDatabaseLinks()
     vector<pair<Person, Computer> > vLink = myDom.returnAllLinks();
 
     sort(vLink.begin(), vLink.end(), sortPairVector);
-    cout << endl << "       SCIENTISTS:             COMPUTERS:" << endl << endl;
+    cout << endl << " #   SCIENTISTS               COMPUTERS" << endl;
+    cout << "--------------------------------------------------------------" << endl;
     for(unsigned int i = 0; i < vLink.size(); i++)
     {
-        cout << "  " << i << ":  " << setw(25) << left << vLink[i].first.getName()
-        << vLink[i].second.getName() << endl << endl;
+        cout << " " << i << ":  " << setw(25) << left << vLink[i].first.getName()
+        << vLink[i].second.getName() << endl;
     }
     cout << endl << vLink.size() << " links!" << endl;
 }
 
 void UI::displayShort(Person P)
-{   
+{
     cout << setw(30) << left << P.getName();
-    cout << P.getBirthYear() << endl;
+    cout << P.getBirthYear() << left << P.getDeathYear() << endl;
+    cout << setw(8) << left << P.getBirthYear();
+    if(P.getDeathYear() == -1)
+        cout << setw(9) << right << "" << endl;
+    else
+        cout << setw(9) << right << P.getDeathYear() << endl;
 }
 
 void UI::displayShortCom(Computer C)
 {
-    cout << setw(30) << left << C.getName() << C.getBuildYear() << endl;
+    cout << setw(30) << left << C.getName() << setw(8) << left << C.getBuildYear() << setw(15) << left << C.getType() << endl;
+}
+
+void UI::allLinksMessage()
+{
+    cout << "   =================================================================" << endl;
+    cout << "   |     ALL LINKS IN DATABASE                                     |" << endl;
+    cout << "   =================================================================" << endl;
+    cout << endl;
 }
