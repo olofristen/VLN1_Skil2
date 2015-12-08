@@ -544,18 +544,41 @@ void UI::readingComputer()
 
 void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
 {
-    int sid, cid;
+    int sid = 0, cid = 0;
+    string tempScientistId = "", tempComputerId = "";
     cout << "Choose one scientist (ID) and one computer (ID)!" << endl << endl;
     cout << "Scientists from the database: " << endl;
     displayDatabaseScientistShort(myDom.returnAllScientists());
     cout << endl << "Scientist ID: ";
 //<<<<<<< ATH
-    cin >> sid; // Tekur inn vector gildi en ekki ID úr gagnagrunni!
-//-------
+
+    cin >> tempScientistId; // Tekur inn vector gildi en ekki ID úr gagnagrunni!
+
+    do
+    {
+        if(tempScientistId < "1" || tempScientistId > "1000")
+        {
+            cout << "Invalid input!" << endl;
+            cin >> tempScientistId;
+        }
+    }
+    while(tempScientistId < "1" || tempScientistId > "1000");
+    sid = atoi(tempScientistId.c_str());
+
     cout << endl << "Computers in the database: " << endl;
     displayDatabaseComputerShort(myDom.returnAllComputers());
     cout << endl << "Computer ID: ";
-    cin >> cid;
+    cin >> tempComputerId;
+    do
+    {
+        if(tempComputerId < "0" || tempComputerId > "1000")
+        {
+            cout << "Invalid input!" << endl;
+            cin >> tempComputerId;
+        }
+    }
+    while(tempComputerId < "0" || tempComputerId > "1000");
+    sid = atoi(tempComputerId.c_str());
     pair<Person, Computer> link = myDom.addNewLink(sid, cid);
     cout << endl << "----------------------------------------" << endl;
     cout << "New link: " << endl << endl;
