@@ -126,6 +126,83 @@ vector<Computer> Database::readComputerFromDb()
     return computer;
 }
 
+vector<Person> Database::sortScientistsFromDb(string sortMenu)
+{
+    vector<Person> scientists;
+    QSqlQuery query(db);
+
+    if(sortMenu.compare("1") == 0)
+    {
+        query.exec("SELECT * FROM scientists ORDER BY Name ASC");
+    }
+    else if(sortMenu.compare("2") == 0)
+    {
+        query.exec("SELECT * FROM scientists ORDER BY Name DESC");
+    }
+    else if(sortMenu.compare("3") == 0)
+    {
+        query.exec("SELECT * FROM scientists ORDER BY Gender ASC");
+    }
+    else if(sortMenu.compare("4") == 0)
+    {
+        query.exec("SELECT * FROM scientists ORDER BY DOB ASC");
+    }
+    else if(sortMenu.compare("5") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE DOD <> -1 ORDER BY DOD ASC");
+    }
+    else if(sortMenu.compare("6") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE DOD = -1 ORDER BY Name ASC");
+    }
+    if(db.isOpen())
+    {
+        while(query.next()){
+            scientists.push_back(Person(query));        // So beautiful..
+        }
+    }
+    else {
+        cerr << "Unable to open database!" << endl;
+    }
+
+    return scientists;
+}
+
+vector<Computer> Database::sortComputersFromDb(string sortMenu)
+{
+    vector<Computer> computers;
+    QSqlQuery query(db);
+
+    if(sortMenu.compare("1") == 0)
+    {
+        query.exec("SELECT * FROM computers ORDER BY Name ASC");
+    }
+    else if(sortMenu.compare("2") == 0)
+    {
+        query.exec("SELECT * FROM computers ORDER BY Name DESC");
+    }
+    else if(sortMenu.compare("3") == 0)
+    {
+        query.exec("SELECT * FROM computers ORDER BY BuildYear ASC");
+    }
+    else if(sortMenu.compare("4") == 0)
+    {
+        query.exec("SELECT * FROM computers ORDER BY Type ASC");
+    }
+
+    if(db.isOpen())
+    {
+        while(query.next()){
+            computers.push_back(Computer(query));        // So beautiful..
+        }
+    }
+    else {
+        cerr << "Unable to open database!" << endl;
+    }
+
+    return computers;
+}
+
 vector<Person> Database::searchScientistFromDb(string num, string search)
 {
     vector<Person> scientists;
@@ -177,6 +254,14 @@ vector<Computer> Database::searchComputerFromDb(string num, string search)
     }
     else if(num.compare("2") == 0)
     {
+        query.exec("SELECT * FROM computers WHERE Type LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("3") == 0)
+    {
+        query.exec("SELECT * FROM computers WHERE WB LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("4") == 0)
+    {
         query.exec("SELECT * FROM computers WHERE BuildYear LIKE '%" + QString::fromStdString(search) + "%'");
     }
     else if(num.compare("3") == 0)
@@ -185,6 +270,10 @@ vector<Computer> Database::searchComputerFromDb(string num, string search)
     }
    /* else if(num.compare("4") == 0)  Hvernig viljum við útfæra þetta?  (Boolean-breytan wasBuilt)
     {
+<<<<<<< HEAD
+        query.exec("SELECT * FROM computers WHERE Info LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+=======
         query.exec("SELECT * FROM computers WHERE WB LIKE '%" + QString::fromStdString(search) + "%'");
     }*/
 

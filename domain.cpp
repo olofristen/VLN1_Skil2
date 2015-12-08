@@ -116,9 +116,14 @@ pair<Person, Computer> Domain::addNewLink(int pInd, int cInd)   // Setur linknar
 
 vector<Person> Domain::sortAndDisplayScientist(string sortMenu)
 {        // sorterar vektorinn...
+
+    /*do{
+        if(sortMenu.compare("1") == 0) {
+=======
     do{
         if(sortMenu.compare("1") == 0)
         {
+>>>>>>> 39ae4e08f7f21891762f24244df4bdcce84a09a2
             sort(v.begin(), v.end());
         }
         else if(sortMenu.compare("2") == 0)
@@ -149,16 +154,22 @@ vector<Person> Domain::sortAndDisplayScientist(string sortMenu)
             cout << "Invalid input! " << endl;
             cin >> sortMenu;
         }
-    }
-    while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5);
-    return v;
+<<<<<<< HEAD
+    } while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5); */
+    return DB.sortScientistsFromDb(sortMenu);
+
 }
 
 vector<Computer> Domain::sortAndDisplayComputer(string sortMenu)
 {        // sorterar vektorinn...
+
+    /*do{
+        if(sortMenu.compare("1") == 0) {
+=======
     do{
         if(sortMenu.compare("1") == 0)
         {
+>>>>>>> 39ae4e08f7f21891762f24244df4bdcce84a09a2
             sort(ve.begin(), ve.end());
         }
         else if(sortMenu.compare("2") == 0)
@@ -184,9 +195,9 @@ vector<Computer> Domain::sortAndDisplayComputer(string sortMenu)
             cout << "Invalid input! " << endl;
             cin >> sortMenu;
         }
-    }
-    while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5);
-    return ve;
+<<<<<<< HEAD
+    } while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5);*/
+    return DB.sortComputersFromDb(sortMenu);
 }
 
 vector<Person> Domain::searchStringScientist(string num, string search)
