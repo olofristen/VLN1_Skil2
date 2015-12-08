@@ -28,7 +28,7 @@ void Database::add_new_scientist(Person P)
     QString q = "CREATE TABLE IF NOT EXISTS scientists ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT UNIQUE, 'Name' TEXT NOT NULL , 'Gender' TEXT NOT NULL , 'DOB' INTEGER, 'DOD' INTEGER, 'Bio' TEXT)";
     query.exec(q);
 
-    query.prepare("INSERT INTO scientists (Name, Gender, DOB, DOD, Bio ) VALUES(:name,:gender,:dob,:dod,:bio)");
+    query.prepare("INSERT INTO scientists (Name, Gender, DOB, DOD, Bio ) VALUES(:id, :name,:gender,:dob,:dod,:bio)");
     query.bindValue(":name", QString::fromStdString(P.getname()));
     query.bindValue(":gender", QString::fromStdString(P.getgender()));
     query.bindValue(":dob", P.getbirthyear());
@@ -43,7 +43,7 @@ void Database::add_new_computer(Computer C)
     QString q = "CREATE TABLE IF NOT EXISTS computers ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT, 'Name' TEXT NOT NULL , 'Type' TEXT NOT NULL, 'WB' BOOL NOT NULL, 'BuildYear' INTEGER, 'Info' TEXT NOT NULL)";
     query.exec(q);
 
-    query.prepare("INSERT INTO computers (Name, Type, WB, BuildYear, Info) VALUES(:name,:type,:wb,:buildyear,:info)");
+    query.prepare("INSERT INTO computers (Name, Type, WB, BuildYear, Info) VALUES(:id, :name,:type,:wb,:buildyear,:info)");
     query.bindValue(":name", QString::fromStdString(C.getname()));
     query.bindValue(":type", QString::fromStdString(C.gettype()));
     query.bindValue(":wb", C.getwasbuilt());

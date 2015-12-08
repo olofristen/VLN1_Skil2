@@ -55,8 +55,8 @@ string Person::getbio()
 ostream& operator << (ostream& out, const Person& P)
 {
     out << "Name: " << P.name << endl
-         << "Gender: " << P.gender << endl
-         << "Year of birth: " << P.birthYear << endl;
+        << "Gender: " << P.gender << endl
+        << "Year of birth: " << P.birthYear << endl;
     if(P.deathYear == -1) {
         out << "Alive and well!" << endl;
     }

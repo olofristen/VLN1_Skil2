@@ -25,7 +25,6 @@ class Computer
         Computer();
         Computer(string name, string type, bool wasBuilt, int buildYear, string info);
         Computer(QSqlQuery q);
-
         string getname();
         int getbuildyear();
         string gettype();

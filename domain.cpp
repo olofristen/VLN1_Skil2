@@ -37,10 +37,12 @@ Domain::Domain()
     ve = DB.read_Computer_from_DB();
 }
 
-int Domain::scientistsSize() {
+int Domain::scientistsSize()
+{
     return v.size();
 }
-int Domain::computersSize() {
+int Domain::computersSize()
+{
     return ve.size();
 }
 

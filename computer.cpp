@@ -54,7 +54,7 @@ string Computer::getinfo()
 ostream& operator << (ostream& out, const Computer& C)
 {
     out << "Name: " << C.name << endl
-         << "Type: " << C.type << endl;
+        << "Type: " << C.type << endl;
     if(C.wasBuilt == false)
     {
         out << "Built: This computer was never built, but it was documented in " << C.buildYear << endl;
