@@ -239,8 +239,10 @@ void UI::searchComputer()
     cout << "   =================================================================" << endl;
     cout << "   |  in which category would you prefer to search?                |" << endl;
     cout << "   |    1.  By name                                                |" << endl;
-    cout << "   |    2.  By year it was built                                   |" << endl;
-    cout << "   |    3.  By type                                                |" << endl;
+    cout << "   |    2.  By type                                                |" << endl;
+    cout << "   |    3.  By the year it was built                               |" << endl;
+    cout << "   |    4.  By if it was built or not                              |" << endl;
+    cout << "   |    5.  By info                                                |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
 
@@ -253,11 +255,15 @@ void UI::searchComputer()
         }
         else if(searchMenu.compare("2") == 0)
         {
-            cout << "What year was the computer built?: ";
+            cout << "Which type was the computer?: ";
+        }
+        else if(searchMenu.compare("2") == 0)
+        {
+            cout << "So was the computer built or not?: ";
         }
         else if(searchMenu.compare("3") == 0)
         {
-            cout << "Which type was the computer?: ";
+            cout << "Enter some word and we will see..: ";
         }
         else if(searchMenu.compare("Q") == 0 || searchMenu.compare("q") == 0)
         {
