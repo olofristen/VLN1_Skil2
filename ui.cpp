@@ -42,6 +42,7 @@ void UI::choices()
     cout << "   |    5.  See all computers registered                           |" << endl;
     cout << "   |    6.  Search for a scientist                                 |" << endl;
     cout << "   |    7.  Search for a computer                                  |" << endl;
+    cout << "   |    8.  See all registered links                               |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
     cin >> menu;
