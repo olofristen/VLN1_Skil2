@@ -667,7 +667,6 @@ void UI::displayDatabaseLinks()
     cout << endl << "       SCIENTISTS:             COMPUTERS:" << endl << endl;
     for(unsigned int i = 0; i < vLink.size(); i++)
     {
-
         cout << "  " << i << ":  " << setw(25) << left << vLink[i].first.getName()
         << vLink[i].second.getName() << endl << endl;
     }
