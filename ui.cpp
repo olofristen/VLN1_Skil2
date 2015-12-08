@@ -220,7 +220,8 @@ void UI::searchScientist()
         }
     }  while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
 
-    cin >> search;
+    cin.ignore();
+    getline(cin, search);
     vector<Person> vec = myDom.searchStringScientist(searchMenu, search);
 
     displayDatabaseScientist(vec);
