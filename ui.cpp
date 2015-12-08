@@ -508,6 +508,14 @@ void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorin
     for(unsigned int i = 0; i < v.size(); i++)
     {
         cout << endl << v[i];
+        cout << endl << "Computers: ";
+        vector<Computer> comp = myDom.getCompFromLinks(v[i].getId());
+
+        for(int i = 0; i < comp.size(); i++) {
+            cout << comp[i].getName() << ", ";
+        }
+        cout << endl
+        << "------------------------------------------------------------------" << endl;
     }
     cout << endl << v.size() << " scientists!" << endl;
 }
@@ -543,6 +551,15 @@ void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út vektor
     for(unsigned int i = 0; i < ve.size(); i++)
     {
         cout << endl << ve[i];
+        cout << endl << "Scientists: ";
+        vector<Person> sci = myDom.getSciFromLinks(ve[i].getId());
+
+        for(int i = 0; i < sci.size(); i++)
+        {
+            cout << sci[i].getName() << ", ";
+        }
+        cout << endl
+             << "------------------------------------------------------------------" << endl;
     }
     cout << endl << ve.size() << " computers!" << endl;
 }

@@ -27,6 +27,8 @@ public:
     vector<Computer> sortAndDisplayComputer(string sortMenu);
     vector<Person>  searchStringScientist(string num, string search);
     vector<Computer>  searchStringComputer(string num, string search);
+    vector<Computer> getCompFromLinks(int pID);
+    vector<Person> getSciFromLinks(int cID);
 
     vector<pair<Person, Computer> > returnAllLinks();
     vector<Person> returnAllScientists();

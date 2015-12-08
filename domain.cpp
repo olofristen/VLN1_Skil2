@@ -63,6 +63,27 @@ void Domain::addNewComputer(string name, int buildYear, string type, bool wasBui
     ve.push_back(newC);
 }
 
+vector<Computer> Domain::getCompFromLinks(int pID)
+{
+    vector<Computer> comp;
+    for(int i = 0; i < vLink.size(); i++) {
+        if(pID == vLink[i].first.getId()) {
+            comp.push_back(vLink[i].second);
+        }
+    }
+    return comp;
+}
+vector<Person> Domain::getSciFromLinks(int cID)
+{
+    vector<Person> comp;
+    for(int i = 0; i < vLink.size(); i++) {
+        if(cID == vLink[i].second.getId()) {
+            comp.push_back(vLink[i].first);
+        }
+    }
+    return comp;
+}
+
 vector<Person> Domain::returnAllScientists()
 {
     return v;
