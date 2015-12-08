@@ -6,6 +6,7 @@ bool Person::operator < (const Person &r) {
 
 Person::Person()
 {
+    ID = 0;
     name = " ";
     gender = " ";
     birthYear = 0;
@@ -27,33 +28,38 @@ Person::Person(QSqlQuery query)
     readData(query);
 }
 
-string Person::getname()
+string Person::getName()
 {
     return name;
 }
 
-string Person::getgender()
+string Person::getGender()
 {
     return gender;
 }
 
-int Person::getbirthyear()
+int Person::getBirthYear()
 {
     return birthYear;
 }
 
-int Person::getdeathyear()
+int Person::getDeathYear()
 {
     return deathYear;
 }
 
-string Person::getbio()
+string Person::getBio()
 {
     return bio;
+}
+int Person::getId()
+{
+    return ID;
 }
 
 ostream& operator << (ostream& out, const Person& P)
 {
+    out << "ID: "  << P.ID << endl;
     out << "Name: " << P.name << endl
         << "Gender: " << P.gender << endl
         << "Year of birth: " << P.birthYear << endl;
@@ -70,9 +76,14 @@ ostream& operator << (ostream& out, const Person& P)
 
 void Person::readData(QSqlQuery query)
 {
+    ID = query.value("ID").toUInt();
     name = query.value("Name").toString().toStdString();
     gender = query.value("Gender").toString().toStdString();
     birthYear = query.value("DOB").toUInt();
     deathYear = query.value("DOD").toUInt();
     bio = query.value("Bio").toString().toStdString();
+}
+void Person::setId(int id)
+{
+    ID = id;
 }

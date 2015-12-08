@@ -18,12 +18,12 @@ private:
 public:
     Database();
     ~Database();
-    void add_new_scientist(Person P);
-    void add_new_computer(Computer C);
-    void add_new_link(pair<Person, Computer> link);
+    unsigned int addNewScientist(Person P);
+    unsigned int addNewComputer(Computer C);
+    void addNewLink(pair<Person, Computer> link);
 
-    vector<Person> read_Scientist_from_DB();
-    vector<Computer> read_Computer_from_DB();
+    vector<Person> readScientistFromDb();
+    vector<Computer> readComputerFromDb();
 };
 
 
