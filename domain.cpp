@@ -117,7 +117,6 @@ pair<Person, Computer> Domain::addNewLink(int pInd, int cInd)   // Setur linknar
 vector<Person> Domain::sortAndDisplayScientist(string sortMenu)
 {        // sorterar vektorinn...
     return DB.sortScientistsFromDb(sortMenu);
-
 }
 
 vector<Computer> Domain::sortAndDisplayComputer(string sortMenu)

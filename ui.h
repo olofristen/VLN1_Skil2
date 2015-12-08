@@ -5,6 +5,7 @@
 #include <QtSql>
 #include <sstream>
 #include <iomanip>
+#include <limits>
 
 // Klasi sem heldur utan um notendaviðmótið.  Notandinn getur t.d. bætt inn nýjum einstakling, lesið alla einstaklingana út
 // á skjáinn með ákveðinni röðun og leitað af einverju sem tengist einstaklingnum.
