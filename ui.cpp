@@ -498,6 +498,8 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
     cout << endl << "Computer ID: ";
     cin >> cid;
     pair<Person, Computer> link = myDom.addNewLink(sid, cid);
+    cout << endl << "----------------------------------------" << endl;
+    cout << "New link: " << endl << endl;
     displayLink(link);
 }
 
@@ -512,12 +514,12 @@ void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorin
 
 void UI::displayDatabaseScientistShort(vector<Person> v)
 {
-    cout << "ID   NAME                       BIRTH YEAR" << endl;
+    cout << endl << "ID   NAME                       BIRTH YEAR" << endl << endl;
 
 
     for(unsigned int i = 0; i < v.size(); i++)
     {
-        cout << setw(5) << std::left << i;
+        cout << setw(5) << left << i;
         displayShort(v[i]);
     }
     cout << endl << v.size() << " scientists!" << endl;
@@ -525,12 +527,12 @@ void UI::displayDatabaseScientistShort(vector<Person> v)
 
 void UI::displayDatabaseComputerShort(vector<Computer> ve)
 {
-    cout << "ID   NAME" << endl;
+    cout << endl << "ID   NAME                          YEAR" << endl << endl;
 
 
     for(unsigned int i = 0; i < ve.size(); i++)
     {
-        cout << setw(5) << std::left << i;
+        cout << setw(5) <<left << i;
         displayShortCom(ve[i]);
     }
     cout << endl << ve.size() << " computers!" << endl;
@@ -554,24 +556,33 @@ void UI::displayLink(pair<Person, Computer> link)      // Prentar út par af Per
     //cout << endl << vlink.size() << " links!" << endl;
 }
 
+
+bool sortPairVector(pair<Person, Computer>& la, pair<Person, Computer>& lb)
+{
+    return la.first < lb.first;
+}
+
 void UI::displayDatabaseLinks()
 {
     vector<pair<Person, Computer> > vLink = myDom.returnAllLinks();
 
+    sort(vLink.begin(), vLink.end(), sortPairVector);
+    cout << endl << " SCIENTISTS:              COMPUTERS:" << endl << endl;
     for(unsigned int i = 0; i < vLink.size(); i++) {
-        cout << "Link " << i << ":" << endl;
-        displayLink(vLink[i]);
+
+        cout << "  " << i << ":  " << setw(25) << left << vLink[i].first.getName()
+        << vLink[i].second.getName() << endl << endl;
     }
     cout << endl << vLink.size() << " links!" << endl;
 }
 
 void UI::displayShort(Person P)
 {   
-    cout << setw(30) << std::left << P.getName();
+    cout << setw(30) << left << P.getName();
     cout << P.getBirthYear() << endl;
 }
 
 void UI::displayShortCom(Computer C)
 {
-    cout << setw(30) << std::left << C.getName() << endl;
+    cout << setw(30) << left << C.getName() << C.getBuildYear() << endl;
 }

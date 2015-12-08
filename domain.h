@@ -21,7 +21,8 @@ public:
     Domain();
     void addNewPerson(string name, string gender, int birthYear, int deathYear, string bio);
     void addNewComputer(string name, int buildYear, string type, bool wasBuilt, string info);
-    pair<Person, Computer> addNewLink(int pID, int cID);
+
+    pair<Person, Computer> addNewLink(int pInd, int cInd);
     vector<Person> sortAndDisplayScientist(string sortMenu);
     vector<Computer> sortAndDisplayComputer(string sortMenu);
     vector<Person>  searchStringScientist(string num, string search);

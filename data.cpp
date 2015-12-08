@@ -194,7 +194,7 @@ vector<Computer> Database::searchComputerFromDb(string num, string search)
     return computers;
 }
 
-vector<pair<Person, Computer> > Database::readLinkFromDb()   //VIRKAR ÓMÆGAD!
+vector<pair<Person, Computer> > Database::readLinkFromDb()
 {
     vector<pair<Person, Computer> > vlink;
 

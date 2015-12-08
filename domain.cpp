@@ -31,6 +31,7 @@ bool sortByWasBuilt (const Computer& a, const Computer &b)
     return a.wasBuilt < b.wasBuilt;
 }
 
+
 Domain::Domain()
 {
     v = DB.readScientistFromDb();
@@ -76,10 +77,17 @@ vector<pair<Person, Computer> > Domain::returnAllLinks()
     return vLink;
 }
 
-pair<Person, Computer> Domain::addNewLink(int pID, int cID)
+pair<Person, Computer> Domain::addNewLink(int pInd, int cInd)   // Setur linknar saman Person og Computer fyrir database og pair vektor!
 {
-    pair<Person, Computer> link = make_pair(v[pID-1],ve[cID-1]);
-    vLink.push_back(link);
+    pair<Person, Computer> link = make_pair(v[pInd],ve[cInd]);
+    for(int i = 0; i < vLink.size(); i++) {
+        if((vLink[i].first.getId() == link.first.getId()) && (vLink[i].second.getId() == link.second.getId()))  {
+
+            cout << endl << "Found duplicate link! This command was not confirmed."  << endl;
+            return link;
+        }
+     }
+    vLink.push_back(link);      // Hoppum yfir þetta ef við finnum parið nú þegar í vektornum
     DB.addNewLink(link);
     return link;
 }
