@@ -135,18 +135,20 @@ vector<pair<Person, Computer>> Database::readLinkFromDb()   //VIRKAR ÓMÆGAD!
         //int ID = query.value("S.ID").toUInt();
         string name = query.value(3).toString().toStdString();
         string gender = query.value(4).toString().toStdString();
-        int birthYear = query.value(5).toUInt();
-        int deathYear = query.value(6).toUInt();
+        int birthYear = query.value(5).toInt();
+        int deathYear = query.value(6).toInt();
         string bio = query.value(7).toString().toStdString();
         Person P = Person(name, gender, birthYear, deathYear, bio);
+        P.setId(query.value(2).toInt());
 
         //ID = query.value("ID").toInt();
         name = query.value(9).toString().toStdString();
-        int buildYear = query.value(10).toInt();
-        string type = query.value(11).toString().toStdString();
-        bool wasBuilt = query.value(12).toBool();
+        string type = query.value(10).toString().toStdString();
+        bool wasBuilt = query.value(11).toBool();
+        int buildYear = query.value(12).toInt();
         string info = query.value(13).toString().toStdString();
         Computer C = Computer(name, type, wasBuilt, buildYear, info);
+        C.setId(query.value(8).toInt());
 
         vlink.push_back(make_pair(P,C));
     }
