@@ -35,7 +35,7 @@ Domain::Domain()
 {
     v = DB.readScientistFromDb();
     ve = DB.readComputerFromDb();
-    //vLink = DB.readLinkFromDb();
+    vLink = DB.readLinkFromDb();
 }
 
 int Domain::scientistsSize()
