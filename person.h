@@ -42,7 +42,6 @@ class Person
         
         friend ostream& operator << (ostream& out, const Person& P);
 
-
 };
 
 

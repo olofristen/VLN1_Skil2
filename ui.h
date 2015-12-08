@@ -30,9 +30,11 @@ public:
     void linkTogether();
     
     void displayDatabaseScientist(vector<Person> v);
+    void displayDatabaseScientistShort(vector<Person> v);
     void displayDatabaseComputer(vector<Computer> ve);
     void displayLink(pair<Person, Computer> link);
     void displayDatabaseLinks();
+    void displayShort(Person P);
     //void displayDatabaseLink(vector<pair<Person, Computer> > vlink);
 
 };

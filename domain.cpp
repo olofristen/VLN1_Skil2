@@ -66,6 +66,7 @@ vector<Person> Domain::returnAllScientists()
 {
     return v;
 }
+
 vector<Computer> Domain::returnAllComputers()
 {
     return ve;

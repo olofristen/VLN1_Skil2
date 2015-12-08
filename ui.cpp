@@ -488,7 +488,7 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
     int sid, cid;
     cout << "Choose one scientist (ID) and one computer (ID)!" << endl << endl;
     cout << "Scientists in the database: " << endl;
-    //displayDatabaseScientist(myDom.returnAllScientists());
+    displayDatabaseScientistShort(myDom.returnAllScientists());
     cout << endl << "Scientist ID: ";
     cin >> sid;
     cout << endl << "Computers in the database: " << endl;
@@ -504,6 +504,15 @@ void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorin
     for(unsigned int i = 0; i < v.size(); i++)
     {
         cout << endl << v[i];
+    }
+    cout << endl << v.size() << " scientists!" << endl;
+}
+void UI::displayDatabaseScientistShort(vector<Person> v)      // Prentar út vektorinn...
+{
+    for(unsigned int i = 0; i < v.size(); i++)
+    {
+        displayShort(v[i]);
+        //cout << endl << vs[i];
     }
     cout << endl << v.size() << " scientists!" << endl;
 }
@@ -534,5 +543,18 @@ void UI::displayDatabaseLinks()
         displayLink(vLink[i]);
     }
     cout << endl << vLink.size() << " links!" << endl;
+}
+
+void UI::displayShort(Person P)
+{
+    int nameSize = 30 - P.getName().size();
+    cout << P.getId() << "   " << P.getName();
+    for(int i = 0; i < nameSize; i++)
+    {
+        cout << " ";
+    }
+    cout << P.getBirthYear() << endl;
+
+   // cout << "Name: " << P.getName() << endl;
 }
 
