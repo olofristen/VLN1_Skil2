@@ -371,7 +371,6 @@ void UI::readingPerson()
     }
 }
 
-
 void UI::readingComputer()
 {
     string number = "";
@@ -488,12 +487,14 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
 {
     int sid, cid;
     cout << "Choose one scientist (ID) and one computer (ID)!" << endl << endl;
-    cout << "Scientists in the database: " << endl;
+    cout << "Scientists from the database: " << endl;
     displayDatabaseScientistShort(myDom.returnAllScientists());
     cout << endl << "Scientist ID: ";
-    cin >> sid;
+//<<<<<<< ATH
+    cin >> sid; // Tekur inn vector gildi en ekki ID úr gagnagrunni!
+//-------
     cout << endl << "Computers in the database: " << endl;
-   // displayDatabaseComputer(myDom.returnAllComputers());
+    displayDatabaseComputerShort(myDom.returnAllComputers());
     cout << endl << "Computer ID: ";
     cin >> cid;
     pair<Person, Computer> link = myDom.addNewLink(sid, cid);
@@ -508,13 +509,31 @@ void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorin
     }
     cout << endl << v.size() << " scientists!" << endl;
 }
-void UI::displayDatabaseScientistShort(vector<Person> v)      // Prentar út vektorinn...
+
+void UI::displayDatabaseScientistShort(vector<Person> v)
 {
+    cout << "ID   NAME                       BIRTH YEAR" << endl;
+
+
     for(unsigned int i = 0; i < v.size(); i++)
     {
+        cout << setw(5) << std::left << i;
         displayShort(v[i]);
     }
     cout << endl << v.size() << " scientists!" << endl;
+}
+
+void UI::displayDatabaseComputerShort(vector<Computer> ve)
+{
+    cout << "ID   NAME" << endl;
+
+
+    for(unsigned int i = 0; i < ve.size(); i++)
+    {
+        cout << setw(5) << std::left << i;
+        displayShortCom(ve[i]);
+    }
+    cout << endl << ve.size() << " computers!" << endl;
 }
 
 void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út vektorinn...
@@ -534,11 +553,12 @@ void UI::displayLink(pair<Person, Computer> link)      // Prentar út par af Per
 
     //cout << endl << vlink.size() << " links!" << endl;
 }
+
 void UI::displayDatabaseLinks()
 {
     vector<pair<Person, Computer> > vLink = myDom.returnAllLinks();
 
-    for(int i = 0; i < vLink.size(); i++) {
+    for(unsigned int i = 0; i < vLink.size(); i++) {
         cout << "Link " << i << ":" << endl;
         displayLink(vLink[i]);
     }
@@ -546,15 +566,12 @@ void UI::displayDatabaseLinks()
 }
 
 void UI::displayShort(Person P)
-{
-    int nameSize = 30 - P.getName().size();
-    cout << P.getId() << "   " << P.getName();
-    for(int i = 0; i < nameSize; i++)
-    {
-        cout << " ";
-    }
+{   
+    cout << setw(30) << std::left << P.getName();
     cout << P.getBirthYear() << endl;
-
-   // cout << "Name: " << P.getName() << endl;
 }
 
+void UI::displayShortCom(Computer C)
+{
+    cout << setw(30) << std::left << C.getName() << endl;
+}
