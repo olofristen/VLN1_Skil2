@@ -21,12 +21,13 @@ public:
     Domain();
     void add_new_person(string name, string gender, int birthyear, int deathyear, string bio);
     void add_new_computer(string name, int buildyear, string type, bool wasBuilt, string info);
-    void add_new_link(int pID, int cID);
+    pair<Person, Computer> add_new_link(int pID, int cID);
     vector<Person> sort_and_displayScientist(string sortMenu);
     vector<Computer> sort_and_displayComputer(string sortMenu);
     vector<Person>  searchStringScientist(string num, string search);
     vector<Computer>  searchStringComputer(string num, string search);
 
+    vector<pair<Person, Computer>> returnAllLinks();
     vector<Person> returnAllScientists();
     vector<Computer> returnAllComputers();
     int size();

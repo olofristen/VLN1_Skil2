@@ -68,12 +68,17 @@ vector<Computer> Domain::returnAllComputers()
 {
     return ve;
 }
+vector<pair<Person, Computer>> Domain::returnAllLinks()
+{
+    return vlink;
+}
 
-void Domain::add_new_link(int pID, int cID)
+pair<Person, Computer> Domain::add_new_link(int pID, int cID)
 {
     pair<Person, Computer> link = make_pair(v[pID-1],ve[cID-1]);
     vlink.push_back(link);
     DB.add_new_link(link);
+    return link;
 }
 
 

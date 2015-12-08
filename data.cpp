@@ -25,7 +25,7 @@ Database::~Database()
 unsigned int Database::add_new_scientist(Person P)
 {
     QSqlQuery query(db);
-    QString q = "CREATE TABLE IF NOT EXISTS scientists ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT UNIQUE, 'Name' TEXT NOT NULL , 'Gender' TEXT NOT NULL , 'DOB' INTEGER, 'DOD' INTEGER, 'Bio' TEXT)";
+    QString q = "CREATE TABLE IF NOT EXISTS scientists ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT, 'Name' TEXT NOT NULL , 'Gender' TEXT NOT NULL , 'DOB' INTEGER, 'DOD' INTEGER, 'Bio' TEXT)";
     query.exec(q);
 
     query.prepare("INSERT INTO scientists (Name, Gender, DOB, DOD, Bio ) VALUES(:name,:gender,:dob,:dod,:bio)");
@@ -121,3 +121,7 @@ vector<Computer> Database::read_Computer_from_DB()
 
     return computer;
 }
+/*void Database::read_link_from_DB()
+{
+
+}*/

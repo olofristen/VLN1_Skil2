@@ -77,6 +77,11 @@ void UI::choices()
         clear_screen();
         searchComputer();
     }
+    else if(menu.compare("8") == 0) {
+        clear_screen();
+        cout << "Links in the database: " << endl;
+        displayDatabaseLinks();
+    }
     else {
         cout << "Invalid input! " << endl;
     }
@@ -482,16 +487,15 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
     int sid, cid;
     cout << "Choose one scientist (ID) and one computer (ID)!" << endl << endl;
     cout << "Scientists in the database: " << endl;
-    displayDatabaseScientist(my_dom.returnAllScientists());
+    //displayDatabaseScientist(my_dom.returnAllScientists());
     cout << endl << "Scientist ID: ";
     cin >> sid;
     cout << endl << "Computers in the database: " << endl;
-    displayDatabaseComputer(my_dom.returnAllComputers());
+   // displayDatabaseComputer(my_dom.returnAllComputers());
     cout << endl << "Computer ID: ";
     cin >> cid;
-    my_dom.add_new_link(sid, cid);
-    // Vantar að skila til baka því sem var tengt saman...
-
+    pair<Person, Computer> link = my_dom.add_new_link(sid, cid);
+    displayLink(link);
 }
 
 void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorinn...
@@ -512,12 +516,21 @@ void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út vektor
     cout << endl << ve.size() << " computers!" << endl;
 }
 
-void UI::displayDatabaseLink(vector<pair<Person, Computer> > vlink)      // Prentar út par af Person og Computer...
+void UI::displayLink(pair<Person, Computer> link)      // Prentar út par af Person og Computer...
 {
-    for(unsigned int i = 0; i < vlink.size(); i++)
-    {
-        cout << endl << vlink[i].first;     // Person
-        cout << endl << vlink[i].second;    // Computer
+    //cout << "Link: " << endl;
+    cout << endl << link.first;     // Person
+    cout << endl << link.second;    // Computer
+
+    //cout << endl << vlink.size() << " links!" << endl;
+}
+void UI::displayDatabaseLinks()
+{
+    vector<pair<Person, Computer>> vlink = my_dom.returnAllLinks();
+
+    for(int i = 0; i < vlink.size(); i++) {
+        cout << "Link " << i << ":" << endl;
+        displayLink(vlink[i]);
     }
     cout << endl << vlink.size() << " links!" << endl;
 }
