@@ -1,41 +1,41 @@
 #include "domain.h"
 
-bool sortbyyearofbirth (const Person& a, const Person &b)
+bool sortByYearOfBirth (const Person& a, const Person &b)
 {
     return a.birthYear < b.birthYear;
 }
 
-bool sortbygender (const Person& a, const Person &b)
+bool sortByGender (const Person& a, const Person &b)
 {
     return a.gender < b.gender;
 }
 
-bool sortbyyearofdeath (const Person& a, const Person &b)
+bool sortByYearOfDeath (const Person& a, const Person &b)
 {
     return a.deathYear < b.deathYear;
 
 }
 
-bool sortbyyearofbuilt (const Computer& a, const Computer &b)
+bool sortByYearOfBuilt (const Computer& a, const Computer &b)
 {
     return a.buildYear < b.buildYear;
 }
 
-bool sortbytype (const Computer& a, const Computer &b)
+bool sortByType (const Computer& a, const Computer &b)
 {
     return a.type < b.type;
 }
 
-bool sortbywasBuilt (const Computer& a, const Computer &b)
+bool sortByWasBuilt (const Computer& a, const Computer &b)
 {
     return a.wasBuilt < b.wasBuilt;
 }
 
 Domain::Domain()
 {
-    v = DB.read_Scientist_from_DB();
-    ve = DB.read_Computer_from_DB();
-    //vlink = DB.read_link_from_DB();
+    v = DB.readScientistFromDb();
+    ve = DB.readComputerFromDb();
+    //vLink = DB.readLinkFromDb();
 }
 
 int Domain::scientistsSize() {
@@ -45,18 +45,18 @@ int Domain::computersSize() {
     return ve.size();
 }
 
-void Domain::add_new_person(string name, string gender, int birthyear, int deathyear, string bio)
+void Domain::addNewPerson(string name, string gender, int birthYear, int deathYear, string bio)
 {     // Bætir nýrri persónu inn i vektorinn...
-    Person newP = Person(name, gender, birthyear, deathyear, bio);
-    newP.setID(DB.add_new_scientist(newP));
+    Person newP = Person(name, gender, birthYear, deathYear, bio);
+    newP.setId(DB.addNewScientist(newP));
     v.push_back(newP);
 }
 
-void Domain::add_new_computer(string name, int buildYear, string type, bool wasBuilt, string info)
+void Domain::addNewComputer(string name, int buildYear, string type, bool wasBuilt, string info)
 {     // Bætir nýrri tölvu inn i vektorinn...
 
     Computer newC = Computer(name, type, wasBuilt, buildYear, info);
-    newC.setID(DB.add_new_computer(newC));
+    newC.setId(DB.addNewComputer(newC));
     ve.push_back(newC);
 }
 
@@ -68,21 +68,21 @@ vector<Computer> Domain::returnAllComputers()
 {
     return ve;
 }
-vector<pair<Person, Computer>> Domain::returnAllLinks()
+vector<pair<Person, Computer> > Domain::returnAllLinks()
 {
-    return vlink;
+    return vLink;
 }
 
-pair<Person, Computer> Domain::add_new_link(int pID, int cID)
+pair<Person, Computer> Domain::addNewLink(int pID, int cID)
 {
     pair<Person, Computer> link = make_pair(v[pID-1],ve[cID-1]);
-    vlink.push_back(link);
-    DB.add_new_link(link);
+    vLink.push_back(link);
+    DB.addNewLink(link);
     return link;
 }
 
 
-vector<Person> Domain::sort_and_displayScientist(string sortMenu)
+vector<Person> Domain::sortAndDisplayScientist(string sortMenu)
 {        // sorterar vektorinn...
     do{
         if(sortMenu.compare("1") == 0) {
@@ -93,15 +93,15 @@ vector<Person> Domain::sort_and_displayScientist(string sortMenu)
         }
         else if(sortMenu.compare("3") == 0) {
             sort(v.begin(), v.end());
-            sort(v.begin(), v.end(), sortbygender);
+            sort(v.begin(), v.end(), sortByGender);
         }
         else if(sortMenu.compare("4") == 0) {
             sort(v.begin(), v.end());
-            sort(v.begin(), v.end(), sortbyyearofbirth);
+            sort(v.begin(), v.end(), sortByYearOfBirth);
         }
         else if(sortMenu.compare("5") == 0) {
             sort(v.begin(), v.end());
-            sort(v.begin(), v.end(), sortbyyearofdeath);
+            sort(v.begin(), v.end(), sortByYearOfDeath);
         }
         else if(sortMenu.compare("Q") == 0 || sortMenu.compare("q") == 0) {
             return vector<Person>();
@@ -114,7 +114,7 @@ vector<Person> Domain::sort_and_displayScientist(string sortMenu)
     return v;
 }
 
-vector<Computer> Domain::sort_and_displayComputer(string sortMenu)
+vector<Computer> Domain::sortAndDisplayComputer(string sortMenu)
 {        // sorterar vektorinn...
     do{
         if(sortMenu.compare("1") == 0) {
@@ -125,11 +125,11 @@ vector<Computer> Domain::sort_and_displayComputer(string sortMenu)
         }
         else if(sortMenu.compare("3") == 0) {
             sort(ve.begin(), ve.end());
-            sort(ve.begin(), ve.end(), sortbyyearofbuilt);
+            sort(ve.begin(), ve.end(), sortByYearOfBuilt);
         }
         else if(sortMenu.compare("4") == 0) {
             sort(ve.begin(), ve.end());
-            sort(ve.begin(), ve.end(), sortbytype);
+            sort(ve.begin(), ve.end(), sortByType);
         }
         else if(sortMenu.compare("Q") == 0 || sortMenu.compare("q") == 0) {
             return vector<Computer>();
@@ -149,7 +149,7 @@ vector<Person> Domain::searchStringScientist(string num, string search)
     if(num.compare("1") == 0) {
         for(unsigned int i = 0; i < v.size(); i++)
         {
-            if (v[i].getname().find(search) != string::npos)
+            if (v[i].getName().find(search) != string::npos)
             {
                 vec.push_back(v[i]);
             }
@@ -158,7 +158,7 @@ vector<Person> Domain::searchStringScientist(string num, string search)
     else if(num.compare("2") == 0) {
         for(unsigned int i = 0; i < v.size(); i++)
         {
-            if (v[i].getgender().find(search) != string::npos)
+            if (v[i].getGender().find(search) != string::npos)
             {
                 vec.push_back(v[i]);
             }
@@ -167,7 +167,7 @@ vector<Person> Domain::searchStringScientist(string num, string search)
     else if(num.compare("3") == 0) {
          for(unsigned int i = 0; i < v.size(); i++)
         {
-            if (v[i].getbirthyear() == atoi(search.c_str()))
+            if (v[i].getBirthYear() == atoi(search.c_str()))
             {
                 vec.push_back(v[i]);
             }
@@ -176,7 +176,7 @@ vector<Person> Domain::searchStringScientist(string num, string search)
     else if(num.compare("4") == 0) {
         for(unsigned int i = 0; i < v.size(); i++)
         {
-            if (v[i].getdeathyear()== atoi(search.c_str()))
+            if (v[i].getDeathYear()== atoi(search.c_str()))
             {
                 vec.push_back(v[i]);
             }
@@ -185,7 +185,7 @@ vector<Person> Domain::searchStringScientist(string num, string search)
     else if(num.compare("5") == 0) {
         for(unsigned int i = 0; i < v.size(); i++)
         {
-            if (v[i].getbio().find(search) != string::npos)
+            if (v[i].getBio().find(search) != string::npos)
             {
                 vec.push_back(v[i]);
             }
@@ -201,7 +201,7 @@ vector<Computer> Domain::searchStringComputer(string num, string search) {
     if(num.compare("1") == 0) {
         for(unsigned int i = 0; i < ve.size(); i++)
         {
-            if (ve[i].getname().find(search) != string::npos)
+            if (ve[i].getName().find(search) != string::npos)
             {
                 vec.push_back(ve[i]);
             }
@@ -210,7 +210,7 @@ vector<Computer> Domain::searchStringComputer(string num, string search) {
     else if(num.compare("2") == 0) {
         for(unsigned int i = 0; i < ve.size(); i++)
         {
-            if (ve[i].getbuildyear() == atoi(search.c_str()))
+            if (ve[i].getBuildYear() == atoi(search.c_str()))
             {
                 vec.push_back(ve[i]);
             }
@@ -219,7 +219,7 @@ vector<Computer> Domain::searchStringComputer(string num, string search) {
     else if(num.compare("3") == 0) {
          for(unsigned int i = 0; i < ve.size(); i++)
         {
-            if (ve[i].gettype().find(search) != string::npos)
+            if (ve[i].getType().find(search) != string::npos)
             {
                 vec.push_back(ve[i]);
             }
@@ -228,7 +228,7 @@ vector<Computer> Domain::searchStringComputer(string num, string search) {
     else if(num.compare("4") == 0) {  //þarf að útfæra þetta fall nánar
         for(unsigned int i = 0; i < ve.size(); i++)
         {
-            if (ve[i].getwasbuilt() == true)
+            if (ve[i].getWasBuilt() == true)
             {
                 vec.push_back(ve[i]);
             }

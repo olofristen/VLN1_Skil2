@@ -28,31 +28,31 @@ Person::Person(QSqlQuery query)
     readData(query);
 }
 
-string Person::getname()
+string Person::getName()
 {
     return name;
 }
 
-string Person::getgender()
+string Person::getGender()
 {
     return gender;
 }
 
-int Person::getbirthyear()
+int Person::getBirthYear()
 {
     return birthYear;
 }
 
-int Person::getdeathyear()
+int Person::getDeathYear()
 {
     return deathYear;
 }
 
-string Person::getbio()
+string Person::getBio()
 {
     return bio;
 }
-int Person::getID()
+int Person::getId()
 {
     return ID;
 }
@@ -83,7 +83,7 @@ void Person::readData(QSqlQuery query)
     deathYear = query.value("DOD").toUInt();
     bio = query.value("Bio").toString().toStdString();
 }
-void Person::setID(int id)
+void Person::setId(int id)
 {
     ID = id;
 }

@@ -27,17 +27,17 @@ class Person
         Person();
         Person (string name, string gender, int birthYear, int deathYear, string bio);
         Person(QSqlQuery query);
-        string getname();
-        string getgender();
-        string getbio();
-        int getbirthyear();
-        int getdeathyear();
-        int getID();
-        void setID(int id);
+        string getName();
+        string getGender();
+        string getBio();
+        int getBirthYear();
+        int getDeathYear();
+        int getId();
+        void setId(int id);
 
-        friend bool sortbyyearofbirth (const Person& a, const Person &b);
-        friend bool sortbyyearofdeath (const Person& a, const Person &b);
-        friend bool sortbygender (const Person& a, const Person &b);
+        friend bool sortByyearOfBirth (const Person& a, const Person &b);
+        friend bool sortByyearOfDeath (const Person& a, const Person &b);
+        friend bool sortByGender (const Person& a, const Person &b);
         bool operator < (const Person& r);
         
         friend ostream& operator << (ostream& out, const Person& P);

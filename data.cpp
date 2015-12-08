@@ -22,21 +22,21 @@ Database::~Database()
     }
 }
 
-unsigned int Database::add_new_scientist(Person P)
+unsigned int Database::addNewScientist(Person P)
 {
     QSqlQuery query(db);
     QString q = "CREATE TABLE IF NOT EXISTS scientists ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT, 'Name' TEXT NOT NULL , 'Gender' TEXT NOT NULL , 'DOB' INTEGER, 'DOD' INTEGER, 'Bio' TEXT)";
     query.exec(q);
 
     query.prepare("INSERT INTO scientists (Name, Gender, DOB, DOD, Bio ) VALUES(:name,:gender,:dob,:dod,:bio)");
-    query.bindValue(":name", QString::fromStdString(P.getname()));
-    query.bindValue(":gender", QString::fromStdString(P.getgender()));
-    query.bindValue(":dob", P.getbirthyear());
-    query.bindValue(":dod", P.getdeathyear());
-    query.bindValue(":bio", QString::fromStdString(P.getbio()));
+    query.bindValue(":name", QString::fromStdString(P.getName()));
+    query.bindValue(":gender", QString::fromStdString(P.getGender()));
+    query.bindValue(":dob", P.getBirthYear());
+    query.bindValue(":dod", P.getDeathYear());
+    query.bindValue(":bio", QString::fromStdString(P.getBio()));
     query.exec();
     query.prepare("SELECT ID FROM scientists WHERE Name = :name");        //4
-    query.bindValue(":name", QString::fromStdString(P.getname()));
+    query.bindValue(":name", QString::fromStdString(P.getName()));
     query.exec();
     if(query.next())
     {
@@ -44,22 +44,22 @@ unsigned int Database::add_new_scientist(Person P)
    }
 }
 
-unsigned int Database::add_new_computer(Computer C)
+unsigned int Database::addNewComputer(Computer C)
 {
     QSqlQuery query(db);
     QString q = "CREATE TABLE IF NOT EXISTS computers ('ID' INTEGER PRIMARY KEY  AUTOINCREMENT, 'Name' TEXT NOT NULL , 'Type' TEXT NOT NULL, 'WB' BOOL NOT NULL, 'BuildYear' INTEGER, 'Info' TEXT NOT NULL)";
     query.exec(q);
 
     query.prepare("INSERT INTO computers (Name, Type, WB, BuildYear, Info) VALUES(:name,:type,:wb,:buildyear,:info)");
-    query.bindValue(":name", QString::fromStdString(C.getname()));
-    query.bindValue(":type", QString::fromStdString(C.gettype()));
-    query.bindValue(":wb", C.getwasbuilt());
-    query.bindValue(":buildyear", C.getbuildyear());
-    query.bindValue(":info", QString::fromStdString(C.getinfo()));
+    query.bindValue(":name", QString::fromStdString(C.getName()));
+    query.bindValue(":type", QString::fromStdString(C.getType()));
+    query.bindValue(":wb", C.getWasBuilt());
+    query.bindValue(":buildyear", C.getBuildYear());
+    query.bindValue(":info", QString::fromStdString(C.getInfo()));
     query.exec();
 
     query.prepare("SELECT ID FROM computers WHERE Name = :name");        //4
-    query.bindValue(":name", QString::fromStdString(C.getname()));
+    query.bindValue(":name", QString::fromStdString(C.getName()));
     query.exec();
     if(query.next())
     {
@@ -67,7 +67,7 @@ unsigned int Database::add_new_computer(Computer C)
    }
 }
 
-void Database::add_new_link(pair<Person, Computer> link)
+void Database::addNewLink(pair<Person, Computer> link)
 {
     QSqlQuery query(db);
     QString q = "CREATE TABLE links ('SID' INTEGER, 'CID' INTEGER, FOREIGN KEY (SID) REFERENCES scientists(ID), FOREIGN KEY (CID) REFERENCES computers(ID), PRIMARY KEY(SID, CID))";
@@ -75,14 +75,14 @@ void Database::add_new_link(pair<Person, Computer> link)
 
     query.prepare("INSERT INTO links (SID, CID) VALUES (:sid, :cid)");
 
-    query.bindValue(":sid", link.first.getID());
-    query.bindValue(":cid", link.second.getID());
+    query.bindValue(":sid", link.first.getId());
+    query.bindValue(":cid", link.second.getId());
     query.exec();
 
 }
 
 
-vector<Person> Database::read_Scientist_from_DB()
+vector<Person> Database::readScientistFromDb()
 {
     vector<Person> scientists;
     QSqlQuery query(db);
@@ -101,7 +101,7 @@ vector<Person> Database::read_Scientist_from_DB()
     return scientists;
 }
 
-vector<Computer> Database::read_Computer_from_DB()
+vector<Computer> Database::readComputerFromDb()
 {
     vector<Computer> computer;
 
@@ -121,7 +121,7 @@ vector<Computer> Database::read_Computer_from_DB()
 
     return computer;
 }
-/*void Database::read_link_from_DB()
+/*void Database::readLinkFromDb()
 {
 
 }*/

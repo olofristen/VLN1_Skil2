@@ -27,17 +27,17 @@ class Computer
         Computer(string name, string type, bool wasBuilt, int buildYear, string info);
         Computer(QSqlQuery q);
 
-        string getname();
-        int getbuildyear();
-        string gettype();
-        bool getwasbuilt();
-        string getinfo();
-        int getID();
-        void setID(int id);
+        string getName();
+        int getBuildYear();
+        string getType();
+        bool getWasBuilt();
+        string getInfo();
+        int getId();
+        void setId(int id);
 
-        friend bool sortbyyearofbuilt(const Computer& a, const Computer &b);
-        friend bool sortbytype(const Computer& a, const Computer &b);
-        friend bool sortbywasBuilt(const Computer& a, const Computer &b);
+        friend bool sortByYearOfBuilt(const Computer& a, const Computer &b);
+        friend bool sortByType(const Computer& a, const Computer &b);
+        friend bool sortByWasBuilt(const Computer& a, const Computer &b);
         bool operator < (const Computer& r);
 
         friend ostream& operator << (ostream& out, const Computer& C);

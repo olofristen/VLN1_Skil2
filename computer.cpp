@@ -29,31 +29,31 @@ Computer::Computer(QSqlQuery q)     // Þvílík snilld...
     readData(q);
 }
 
-string Computer::getname()
+string Computer::getName()
 {
     return name;
 }
 
-int Computer::getbuildyear()
+int Computer::getBuildYear()
 {
     return buildYear;
 }
 
-string Computer::gettype()
+string Computer::getType()
 {
     return type;
 }
 
-bool Computer::getwasbuilt()
+bool Computer::getWasBuilt()
 {
     return wasBuilt;
 }
 
-string Computer::getinfo()
+string Computer::getInfo()
 {
     return info;
 }
-int Computer::getID()
+int Computer::getId()
 {
     return ID;
 }
@@ -87,7 +87,7 @@ void Computer::readData(QSqlQuery query)
     wasBuilt = query.value("WB").toBool();
     info = query.value("Info").toString().toStdString();
 }
-void Computer::setID(int id)
+void Computer::setId(int id)
 {
     ID = id;
 }

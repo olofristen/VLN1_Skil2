@@ -14,20 +14,20 @@ private:
 
     vector<Person> v;
     vector<Computer> ve;
-    vector<pair<Person, Computer> > vlink;
+    vector<pair<Person, Computer> > vLink;
     Database DB;
 
 public:
     Domain();
-    void add_new_person(string name, string gender, int birthyear, int deathyear, string bio);
-    void add_new_computer(string name, int buildyear, string type, bool wasBuilt, string info);
-    pair<Person, Computer> add_new_link(int pID, int cID);
-    vector<Person> sort_and_displayScientist(string sortMenu);
-    vector<Computer> sort_and_displayComputer(string sortMenu);
+    void addNewPerson(string name, string gender, int birthYear, int deathYear, string bio);
+    void addNewComputer(string name, int buildYear, string type, bool wasBuilt, string info);
+    pair<Person, Computer> addNewLink(int pID, int cID);
+    vector<Person> sortAndDisplayScientist(string sortMenu);
+    vector<Computer> sortAndDisplayComputer(string sortMenu);
     vector<Person>  searchStringScientist(string num, string search);
     vector<Computer>  searchStringComputer(string num, string search);
 
-    vector<pair<Person, Computer>> returnAllLinks();
+    vector<pair<Person, Computer> > returnAllLinks();
     vector<Person> returnAllScientists();
     vector<Computer> returnAllComputers();
     int size();
