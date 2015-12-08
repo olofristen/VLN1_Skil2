@@ -25,6 +25,8 @@ public:
     void registerMessageScientist();
     void registerMessageComputer();
     void registerMessageLink();
+    void allLinksMessage();
+
     void searchMessage();
     void searchScientist();
     void searchComputer();
