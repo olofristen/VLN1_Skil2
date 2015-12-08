@@ -46,43 +46,52 @@ void UI::choices()
     cout << "   =================================================================" << endl;
     cin >> menu;
 
-    if(menu.compare("1") == 0){
+    if(menu.compare("1") == 0)
+    {
         clearScreen();
         registerMessageScientist();
         readingPerson();
     }
-    else if(menu.compare("2") == 0){
+    else if(menu.compare("2") == 0)
+    {
         clearScreen();
         registerMessageComputer();
         readingComputer();
     }
-    else if(menu.compare("3") == 0){
+    else if(menu.compare("3") == 0)
+    {
         clearScreen();
         registerMessageLink();
         linkTogether();
     }
-    else if(menu.compare("4") == 0) {
+    else if(menu.compare("4") == 0)
+    {
         clearScreen();
         sortMessageScientist();
     }
-    else if(menu.compare("5") == 0) {
+    else if(menu.compare("5") == 0)
+    {
         clearScreen();
         sortMessageComputer();
     }
-    else if(menu.compare("6") == 0) {
+    else if(menu.compare("6") == 0)
+    {
         clearScreen();
         searchScientist();
     }
-    else if(menu.compare("7") == 0) {
+    else if(menu.compare("7") == 0)
+    {
         clearScreen();
         searchComputer();
     }
-    else if(menu.compare("8") == 0) {
+    else if(menu.compare("8") == 0)
+    {
         clearScreen();
         cout << "Links in the database: " << endl;
         displayDatabaseLinks();
     }
-    else {
+    else
+    {
         cout << "Invalid input! " << endl;
     }
 }
@@ -147,7 +156,8 @@ void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á e
     cin >> sortMenu;
 
     vector<Person> vec = myDom.sortAndDisplayScientist(sortMenu);
-    if(!vec.empty()) {
+    if(!vec.empty())
+    {
         displayDatabaseScientist(vec);
     }
 }
@@ -174,7 +184,8 @@ void UI::sortMessageComputer()     // sleppa því að taka inn vektorinn, á ek
     cin >> sortMenu;
 
     vector<Computer> vec = myDom.sortAndDisplayComputer(sortMenu);
-    if(!vec.empty()) {
+    if(!vec.empty())
+    {
         displayDatabaseComputer(vec);
     }
 }
@@ -197,28 +208,35 @@ void UI::searchScientist()
     do{
         cin >> searchMenu;
 
-        if(searchMenu.compare("1") == 0) {
+        if(searchMenu.compare("1") == 0)
+        {
             cout << "What name would you like to find?: ";
         }
-        else if(searchMenu.compare("2") == 0) {
+        else if(searchMenu.compare("2") == 0)
+        {
             cout << "A lady or a man? Or maybe a dog?: ";
         }
-        else if(searchMenu.compare("3") == 0) {
+        else if(searchMenu.compare("3") == 0)
+        {
             cout << "When was the person born?: ";
         }
-        else if(searchMenu.compare("4") == 0) {
+        else if(searchMenu.compare("4") == 0)
+        {
             cout << "When did the person die?: ";
         }
-        else if(searchMenu.compare("5") == 0) {
+        else if(searchMenu.compare("5") == 0)
+        {
             cout << "Enter some word and we will see..: ";
         }
-        else if(searchMenu.compare("Q") == 0 || searchMenu.compare("q") == 0) {
+        else if(searchMenu.compare("Q") == 0 || searchMenu.compare("q") == 0)
+        {
             return ;
         }
         else {
             cout << "Invalid input! " << endl;
         }
-    }  while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
+    }
+    while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
 
     cin.ignore();
     getline(cin, search);
@@ -267,7 +285,8 @@ void UI::searchComputer()
         {
             cout << "Invalid input! " << endl;
         }
-    }  while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
+    }
+    while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
 
     cin.ignore();
     getline(cin, search);
@@ -286,18 +305,22 @@ void UI::readingPerson()
     string number = "";
     int num = 0;
 
-    do{
+    do
+    {
         cout << "How many computing geniuses do you want to register? ";
         cin >> number;
 
-        if(number == "Q" || number == "q") {
+        if(number == "Q" || number == "q")
+        {
             return;
         }
         num = atoi(number.c_str());
-        if(num <= 0) {
+        if(num <= 0)
+        {
             cout << "Invalid input! " << endl;
         }
-    } while(num <= 0);
+    }
+    while(num <= 0);
 
     cout << endl << "Type in person: " << endl << endl;
 
@@ -309,58 +332,75 @@ void UI::readingPerson()
     {
         cout << "Name: ";
         if (i == 0)
+        {
             cin.ignore();
+        }
         getline(cin, name);
 
-        do{
+        do
+        {
             cout << "Gender (F/M): ";
             cin >> a;
 
-            if(a.compare("f") == 0 || a.compare("F") == 0){
+            if(a.compare("f") == 0 || a.compare("F") == 0)
+            {
                 gender = "Female";
             }
-            else if(a.compare("m") == 0 || a.compare("M") == 0){
+            else if(a.compare("m") == 0 || a.compare("M") == 0)
+            {
                 gender = "Male";
             }
-            else{
+            else
+            {
                 cout << "Invalid input" << endl;
             }
-        }while(gender == "");
+        }
+        while(gender == "");
 
-        do{
+        do
+        {
             cout << "Year of birth (1600 - 2010): ";
             cin >> year;
 
-            if(year < "1600" || year > "2010") {
+            if(year < "1600" || year > "2010")
+            {
                 cout << "Invalid input" << endl;
             }
-        }while(year < "1600" || year > "2010");
+        }
+        while(year < "1600" || year > "2010");
 
         birthYear = atoi(year.c_str());
 
         cout << "Is the scientist dead (Y/N)?: ";
         cin >> dead;
-        do{
-            if(dead.compare("y") == 0 || dead.compare("Y") == 0) {
+
+        do
+        {
+            if(dead.compare("y") == 0 || dead.compare("Y") == 0)
+            {
                 cout << "Year of death: ";  // Dauður
                 cin >> year;
                 deathYear = atoi(year.c_str());
 
-                if(deathYear < birthYear || deathYear > 2015) {
+                if(deathYear < birthYear || deathYear > 2015)
+                {
                     cout << "Invalid input! " << endl;
                     cin >> dead;
                 }
             }
-            else if(dead.compare("n") == 0 || dead.compare("N") == 0) {
+            else if(dead.compare("n") == 0 || dead.compare("N") == 0)
+            {
                 deathYear = -1;     // Ekki dauður
             }
 
-            else{          // Ekki vitað, spyr aftur
+            else
+            {          // Ekki vitað, spyr aftur
                 cout << "Invalid input! " << endl;
                 cin >> dead;
             }
 
-        }while((deathYear != -1) && ((deathYear < birthYear) || (deathYear > 2015)));
+        }
+        while((deathYear != -1) && ((deathYear < birthYear) || (deathYear > 2015)));
 
         cout << "Bio: ";
         cin.ignore();
@@ -376,18 +416,22 @@ void UI::readingComputer()
     string number = "";
     int num = 0;
 
-    do{
+    do
+    {
         cout << "How many computers do you want to register? ";
         cin >> number;
 
-        if(number == "Q" || number == "q") {
+        if(number == "Q" || number == "q")
+        {
             return;
         }
         num = atoi(number.c_str());
-        if(num <= 0) {
+        if(num <= 0)
+        {
             cout << "Invalid input! " << endl;
         }
-    } while(num <= 0);
+    }
+    while(num <= 0);
 
     cout << endl << "Type in computer: " << endl << endl;
 
@@ -399,7 +443,9 @@ void UI::readingComputer()
     {
         cout << "Name: ";
         if(i == 0)
+        {
             cin.ignore();
+        }
         getline(cin, name);
 
 
@@ -408,68 +454,81 @@ void UI::readingComputer()
             cout << "2. Electronic" << endl;
             cout << "3. Transistor computer" << endl;
             cout << "4. Other" << endl;
-        do{
+        do
+        {
             cin >> a;
 
-            if(a.compare("1") == 0){
+            if(a.compare("1") == 0)
+            {
                 type = "Mechanic";
             }
-            else if(a.compare("2") == 0){
+            else if(a.compare("2") == 0)
+            {
                 type = "Electronic";
             }
-            else if(a.compare("3") == 0){
+            else if(a.compare("3") == 0)
+            {
                 type = "Transistor computer";
             }
-            else if(a.compare("4") == 0){
+            else if(a.compare("4") == 0)
+            {
                 type = "Other";
             }
-            else{
+            else
+            {
                 cout << "Invalid input" << endl;
             }
-        }while(type == "");
+        }
+        while(type == "");
 
-        do{
+        do
+        {
             cout << "Was the computer ever made (Y/N)? " ;
             cin >> wb;
 
-            if(wb == "Y" || wb == "y"){
-
+            if(wb == "Y" || wb == "y")
+            {
                 wasBuilt = true;
             }
-            else if(wb == "N" || wb == "n"){
-
+            else if(wb == "N" || wb == "n")
+            {
                 wasBuilt = false;
             }
-            else{
-
+            else
+            {
                 cout << "Invalid input" << endl;
                 wb = "";
             }
-        }while(wb == "");
+        }
+        while(wb == "");
 
         if(wasBuilt == true)
         {
-            do{
+            do
+            {
                 cout << "Year of production (1700 - 2010): ";
                 cin >> buildYear;
 
-                if(buildYear < "1700" || buildYear > "2010") {
+                if(buildYear < "1700" || buildYear > "2010")
+                {
                     cout << "Invalid input" << endl;
                 }
-            }while(buildYear < "1700" || buildYear > "2010");
+            }
+            while(buildYear < "1700" || buildYear > "2010");
         }
         else
         {
             cout << "When was the computer documented? ";
-            do{
-
+            do
+            {
                 cin >> buildYear;
 
-                if(buildYear < "1700" || buildYear > "2015"){
-
+                if(buildYear < "1700" || buildYear > "2015")
+                {
                     cout << "Invalid input" << endl;
                 }
-            }while(buildYear < "1700" || buildYear > "2015");
+            }
+            while(buildYear < "1700" || buildYear > "2015");
         }
 
         tempBy = atoi(buildYear.c_str());
@@ -569,7 +628,6 @@ void UI::displayLink(pair<Person, Computer> link)      // Prentar út par af Per
     //cout << "Link: " << endl;
     cout << endl << link.first;     // Person
     cout << endl << link.second;    // Computer
-
     //cout << endl << vlink.size() << " links!" << endl;
 }
 
@@ -585,7 +643,8 @@ void UI::displayDatabaseLinks()
 
     sort(vLink.begin(), vLink.end(), sortPairVector);
     cout << endl << " SCIENTISTS:              COMPUTERS:" << endl << endl;
-    for(unsigned int i = 0; i < vLink.size(); i++) {
+    for(unsigned int i = 0; i < vLink.size(); i++)
+    {
 
         cout << "  " << i << ":  " << setw(25) << left << vLink[i].first.getName()
         << vLink[i].second.getName() << endl << endl;

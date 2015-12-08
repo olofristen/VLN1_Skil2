@@ -8,7 +8,8 @@
 #include <QtDebug>
 #include <QtSql>
 
-class Database {
+class Database
+{
 
 // Klasi fyrir gagnalagið.  Skrifar út í skrá frá vektor og úr skrá í vektor.
 // Vektorinn síðan tekinn og sendur inn í domain-lagið.

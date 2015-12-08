@@ -9,7 +9,8 @@
 // Klasi sem heldur utan um notendaviðmótið.  Notandinn getur t.d. bætt inn nýjum einstakling, lesið alla einstaklingana út
 // á skjáinn með ákveðinni röðun og leitað af einverju sem tengist einstaklingnum.
 
-class UI {
+class UI
+{
 private:
     Domain myDom;
 

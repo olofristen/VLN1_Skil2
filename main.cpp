@@ -14,7 +14,8 @@ int main()
 
     char check = 'y';
 
-    do{
+    do
+    {
         ui.welcome();
         ui.choices();
 
@@ -23,5 +24,6 @@ int main()
         cin >> check;
         ui.clearScreen();
 
-    } while(check == 'y' || check == 'Y');
+    }
+    while(check == 'y' || check == 'Y');
 }

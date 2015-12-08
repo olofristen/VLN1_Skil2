@@ -5,7 +5,8 @@
 #include <algorithm>
 //#include <cstdlib>
 
-class Domain {
+class Domain
+{
 
 // Domain-klasinn geymir vektor með Person-klösum og sér um að umraða, leita í og bæta í hann.  Geymir Database-klasa og
 // kemur gögnunum þannig á milli notendaviðmótsins og gagnagrunnsins.

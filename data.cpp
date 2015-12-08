@@ -16,7 +16,8 @@ Database::Database()        // Database búinn til/opnaður í constructor
 
 Database::~Database()
 {
-    if(db.isOpen()) {
+    if(db.isOpen())
+    {
         db.close();
         //cout << "closing db..." << endl;
     }
@@ -90,11 +91,13 @@ vector<Person> Database::readScientistFromDb()
 
     if(db.isOpen())
     {
-        while(query.next()){
+        while(query.next())
+        {
             scientists.push_back(Person(query));        // So beautiful..
         }
     }
-    else {
+    else
+    {
         cerr << "Unable to open database!" << endl;
     }
 
@@ -115,7 +118,8 @@ vector<Computer> Database::readComputerFromDb()
             computer.push_back(Computer(query));        // Oh, so pretty...
         }
     }
-    else {
+    else
+    {
         cerr << "Unable to open database!" << endl;
     }
 
@@ -149,11 +153,13 @@ vector<Person> Database::searchScientistFromDb(string num, string search)
     }
     if(db.isOpen())
     {
-        while(query.next()){
+        while(query.next())
+        {
             scientists.push_back(Person(query));        // So beautiful..
         }
     }
-    else {
+    else
+    {
         cerr << "Unable to open database!" << endl;
     }
 
@@ -184,11 +190,13 @@ vector<Computer> Database::searchComputerFromDb(string num, string search)
 
     if(db.isOpen())
     {
-        while(query.next()){
+        while(query.next())
+        {
             computers.push_back(Computer(query));        // So beautiful..
         }
     }
-    else {
+    else
+    {
         cerr << "Unable to open database!" << endl;
     }
 
