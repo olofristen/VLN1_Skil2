@@ -152,7 +152,7 @@ void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á e
     cout << "   |    4.  By year of birth                                       |" << endl;
     cout << "   |    5.  By year of death                                       |" << endl;
     cout << "   |    6.  Just those who are alive ! (A-Z..)                     |" << endl;
-    cout << "   |    7.  A-Z list of all registerd scientists                     |" << endl;
+    cout << "   |    7.  A-Z shortlist of all registerd scientists              |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
 
@@ -186,20 +186,32 @@ void UI::sortMessageComputer()     // sleppa því að taka inn vektorinn, á ek
     cout << "   Press Q/q to exit" << endl << endl;
 
     cout << "   =================================================================" << endl;
-    cout << "   |  How do you want the computing geniuses to appear?            |" << endl;
+    cout << "   |  How do you want the computers to appear?                     |" << endl;
     cout << "   |    1.  A-Z                                                    |" << endl;
     cout << "   |    2.  Z-A                                                    |" << endl;
     cout << "   |    3.  By year it was built                                   |" << endl;
     cout << "   |    4.  By type                                                |" << endl;
+    cout << "   |    5.  A-Z shortlist of all registered computers              |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
 
     cin >> sortMenu;
 
-    vector<Computer> vec = myDom.sortAndDisplayComputer(sortMenu);
-    if(!vec.empty())
+    if(sortMenu == "5")
     {
-        displayDatabaseComputer(vec);
+        vector<Computer> ve = myDom.sortAndDisplayComputer(sortMenu);
+        if(!ve.empty())
+        {
+               displayDatabaseComputerShort(ve);
+        }
+    }
+    else
+    {
+        vector<Computer> vec = myDom.sortAndDisplayComputer(sortMenu);
+        if(!vec.empty())
+        {
+            displayDatabaseComputer(vec);
+        }
     }
 }
 
@@ -612,12 +624,12 @@ void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorin
 
 void UI::displayDatabaseScientistShort(vector<Person> v)
 {
-    cout << endl << "ID   NAME                       BIRTH YEAR   DEATH YEAR" << endl;
+    cout << endl << "     NAME                          BIRTH YEAR   DEATH YEAR" << endl;
     cout << "----------------------------------------------------------" << endl;
 
     for(unsigned int i = 0; i < v.size(); i++)
     {
-        cout << setw(5) << left << i;
+        cout << setw(5) << left;
         displayShort(v[i]);
     }
     cout << endl << v.size() << " scientists!" << endl;
@@ -625,13 +637,13 @@ void UI::displayDatabaseScientistShort(vector<Person> v)
 
 void UI::displayDatabaseComputerShort(vector<Computer> ve)
 {
-    cout << endl << "ID   NAME                          YEAR    TYPE" << endl;
+    cout << endl << "     NAME                          YEAR    TYPE" << endl;
     cout << "---------------------------------------------------------" << endl;
 
 
     for(unsigned int i = 0; i < ve.size(); i++)
     {
-        cout << setw(5) << left << i;
+        cout << setw(5) << left;
         displayShortCom(ve[i]);
     }
     cout << endl << ve.size() << " computers!" << endl;
@@ -689,18 +701,18 @@ void UI::displayDatabaseLinks()
 
 void UI::displayShort(Person P)
 {   
-    cout << setw(30) << left << P.getName();
-    cout << P.getBirthYear() << left << P.getDeathYear() << endl;
+    cout << " " << setw(30) << left << P.getName();
     cout << setw(8) << left << P.getBirthYear();
     if(P.getDeathYear() == -1)
         cout << setw(9) << right << "" << endl;
-    else
+       else
         cout << setw(9) << right << P.getDeathYear() << endl;
 }
 
 void UI::displayShortCom(Computer C)
 {
-    cout << setw(30) << left << C.getName() << setw(8) << left << C.getBuildYear() << setw(15) << left << C.getType() << endl;
+    cout << " " << setw(30) << left << C.getName() << setw(8) << left << C.getBuildYear();
+    cout << setw(15) << left << C.getType() << endl;
 }
 
 void UI::allLinksMessage()

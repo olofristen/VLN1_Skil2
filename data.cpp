@@ -193,6 +193,10 @@ vector<Computer> Database::sortComputersFromDb(string sortMenu)
     {
         query.exec("SELECT * FROM computers ORDER BY Type ASC");
     }
+    else if(sortMenu.compare("5") == 0)
+    {
+        query.exec("SELECT * FROM computers ORDER BY Name ASC");
+    }
 
     if(db.isOpen())
     {
