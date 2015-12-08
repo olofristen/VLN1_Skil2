@@ -152,7 +152,7 @@ void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á e
     cout << "   |    4.  By year of birth                                       |" << endl;
     cout << "   |    5.  By year of death                                       |" << endl;
     cout << "   |    6.  Just those who are alive ! (A-Z..)                     |" << endl;
-    cout << "   |    7.  A-Z list of all registerd scientists                     |" << endl;
+    cout << "   |    7.  A-Z list of all registerd scientists                   |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
 
@@ -612,12 +612,12 @@ void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorin
 
 void UI::displayDatabaseScientistShort(vector<Person> v)
 {
-    cout << endl << "ID   NAME                       BIRTH YEAR   DEATH YEAR" << endl;
+    cout << endl << "NAME                       BIRTH YEAR   DEATH YEAR" << endl;
     cout << "----------------------------------------------------------" << endl;
 
     for(unsigned int i = 0; i < v.size(); i++)
     {
-        cout << setw(5) << left << i;
+        //cout << setw(5) << left << i;
         displayShort(v[i]);
     }
     cout << endl << v.size() << " scientists!" << endl;
@@ -625,13 +625,13 @@ void UI::displayDatabaseScientistShort(vector<Person> v)
 
 void UI::displayDatabaseComputerShort(vector<Computer> ve)
 {
-    cout << endl << "ID   NAME                          YEAR    TYPE" << endl;
+    cout << endl << "NAME                          YEAR    TYPE" << endl;
     cout << "---------------------------------------------------------" << endl;
 
 
     for(unsigned int i = 0; i < ve.size(); i++)
     {
-        cout << setw(5) << left << i;
+        //cout << setw(5) << left << i;
         displayShortCom(ve[i]);
     }
     cout << endl << ve.size() << " computers!" << endl;
