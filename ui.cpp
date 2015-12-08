@@ -269,7 +269,8 @@ void UI::searchComputer()
         }
     }  while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
 
-    cin >> search;
+    cin.ignore();
+    getline(cin, search);
     vector<Computer> vec = myDom.searchStringComputer(searchMenu, search);
 
     displayDatabaseComputer(vec);
@@ -489,7 +490,9 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
     cout << "Scientists from the database: " << endl;
     displayDatabaseScientistShort(myDom.returnAllScientists());
     cout << endl << "Scientist ID: ";
-    cin >> sid;
+//<<<<<<< ATH
+    cin >> sid; // Tekur inn vector gildi en ekki ID úr gagnagrunni!
+//-------
     cout << endl << "Computers in the database: " << endl;
     displayDatabaseComputerShort(myDom.returnAllComputers());
     cout << endl << "Computer ID: ";

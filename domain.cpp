@@ -147,96 +147,10 @@ vector<Computer> Domain::sortAndDisplayComputer(string sortMenu)
 
 vector<Person> Domain::searchStringScientist(string num, string search)
 {
-    vector<Person> vec;
-
-    if(num.compare("1") == 0) {
-        for(unsigned int i = 0; i < v.size(); i++)
-        {
-            if (v[i].getName().find(search) != string::npos)
-            {
-                vec.push_back(v[i]);
-            }
-        }
-    }
-    else if(num.compare("2") == 0) {
-        for(unsigned int i = 0; i < v.size(); i++)
-        {
-            if (v[i].getGender().find(search) != string::npos)
-            {
-                vec.push_back(v[i]);
-            }
-        }
-    }
-    else if(num.compare("3") == 0) {
-         for(unsigned int i = 0; i < v.size(); i++)
-        {
-            if (v[i].getBirthYear() == atoi(search.c_str()))
-            {
-                vec.push_back(v[i]);
-            }
-        }
-    }
-    else if(num.compare("4") == 0) {
-        for(unsigned int i = 0; i < v.size(); i++)
-        {
-            if (v[i].getDeathYear()== atoi(search.c_str()))
-            {
-                vec.push_back(v[i]);
-            }
-        }
-    }
-    else if(num.compare("5") == 0) {
-        for(unsigned int i = 0; i < v.size(); i++)
-        {
-            if (v[i].getBio().find(search) != string::npos)
-            {
-                vec.push_back(v[i]);
-            }
-        }
-    }
-    return vec;
+    return DB.searchScientistFromDb(num, search);
 }
 
-vector<Computer> Domain::searchStringComputer(string num, string search) {
-
-    vector<Computer> vec;
-
-    if(num.compare("1") == 0) {
-        for(unsigned int i = 0; i < ve.size(); i++)
-        {
-            if (ve[i].getName().find(search) != string::npos)
-            {
-                vec.push_back(ve[i]);
-            }
-        }
-    }
-    else if(num.compare("2") == 0) {
-        for(unsigned int i = 0; i < ve.size(); i++)
-        {
-            if (ve[i].getBuildYear() == atoi(search.c_str()))
-            {
-                vec.push_back(ve[i]);
-            }
-        }
-    }
-    else if(num.compare("3") == 0) {
-         for(unsigned int i = 0; i < ve.size(); i++)
-        {
-            if (ve[i].getType().find(search) != string::npos)
-            {
-                vec.push_back(ve[i]);
-            }
-        }
-    }
-    else if(num.compare("4") == 0) {  //þarf að útfæra þetta fall nánar
-        for(unsigned int i = 0; i < ve.size(); i++)
-        {
-            if (ve[i].getWasBuilt() == true)
-            {
-                vec.push_back(ve[i]);
-            }
-        }
-    }
-
-    return vec;
+vector<Computer> Domain::searchStringComputer(string num, string search)
+{
+    return DB.searchComputerFromDb(num, search);
 }

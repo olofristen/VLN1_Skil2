@@ -121,9 +121,82 @@ vector<Computer> Database::readComputerFromDb()
 
     return computer;
 }
-vector<pair<Person, Computer>> Database::readLinkFromDb()   //VIRKAR ÓMÆGAD!
+
+vector<Person> Database::searchScientistFromDb(string num, string search)
 {
-    vector<pair<Person, Computer>> vlink;
+    vector<Person> scientists;
+    QSqlQuery query(db);
+
+    if(num.compare("1") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE Name LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("2") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE Gender LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("3") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE DOB LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("4") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE DOD LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("5") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE Bio LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    if(db.isOpen())
+    {
+        while(query.next()){
+            scientists.push_back(Person(query));        // So beautiful..
+        }
+    }
+    else {
+        cerr << "Unable to open database!" << endl;
+    }
+
+    return scientists;
+}
+
+vector<Computer> Database::searchComputerFromDb(string num, string search)
+{
+    vector<Computer> computers;
+    QSqlQuery query(db);
+
+    if(num.compare("1") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE Name LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("2") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE Type LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("3") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE WB LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    else if(num.compare("4") == 0)
+    {
+        query.exec("SELECT * FROM scientists WHERE BuildYear LIKE '%" + QString::fromStdString(search) + "%'");
+    }
+    if(db.isOpen())
+    {
+        while(query.next()){
+            computers.push_back(Computer(query));        // So beautiful..
+        }
+    }
+    else {
+        cerr << "Unable to open database!" << endl;
+    }
+
+    return computers;
+}
+
+vector<pair<Person, Computer> > Database::readLinkFromDb()   //VIRKAR ÓMÆGAD!
+{
+    vector<pair<Person, Computer> > vlink;
 
     QSqlQuery query(db);
     QString q = "SELECT * FROM links L, scientists S, computers C WHERE S.ID = L.SID AND C.ID = L.CID";
