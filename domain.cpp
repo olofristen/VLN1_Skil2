@@ -1,37 +1,5 @@
 #include "domain.h"
 
-bool sortByYearOfBirth (const Person& a, const Person &b)
-{
-    return a.birthYear < b.birthYear;
-}
-
-bool sortByGender (const Person& a, const Person &b)
-{
-    return a.gender < b.gender;
-}
-
-bool sortByYearOfDeath (const Person& a, const Person &b)
-{
-    return a.deathYear < b.deathYear;
-
-}
-
-bool sortByYearOfBuilt (const Computer& a, const Computer &b)
-{
-    return a.buildYear < b.buildYear;
-}
-
-bool sortByType (const Computer& a, const Computer &b)
-{
-    return a.type < b.type;
-}
-
-bool sortByWasBuilt (const Computer& a, const Computer &b)
-{
-    return a.wasBuilt < b.wasBuilt;
-}
-
-
 Domain::Domain()
 {
     v = DB.readScientistFromDb();

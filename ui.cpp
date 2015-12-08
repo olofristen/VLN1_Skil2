@@ -151,16 +151,27 @@ void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á e
     cout << "   |    3.  By gender                                              |" << endl;
     cout << "   |    4.  By year of birth                                       |" << endl;
     cout << "   |    5.  By year of death                                       |" << endl;
-    cout << "   |    6.  Just those who are alive ! (in alphabetical order..)   |" << endl;
+    cout << "   |    6.  Just those who are alive ! (A-Z..)                     |" << endl;
+    cout << "   |    7.  A-Z list of all registerd scientists                     |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
 
     cin >> sortMenu;
-
-    vector<Person> vec = myDom.sortAndDisplayScientist(sortMenu);
-    if(!vec.empty())
+    if(sortMenu == "7")
     {
-        displayDatabaseScientist(vec);
+        vector<Person> ve = myDom.sortAndDisplayScientist(sortMenu);
+        if(!ve.empty())
+        {
+               displayDatabaseScientistShort(ve);
+        }
+    }
+    else
+    {
+        vector<Person> vec = myDom.sortAndDisplayScientist(sortMenu);
+        if(!vec.empty())
+        {
+            displayDatabaseScientist(vec);
+        }
     }
 }
 
@@ -558,7 +569,7 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
     cout << "Scientists from the database: " << endl;
     displayDatabaseScientistShort(myDom.returnAllScientists());
     cout << endl << "Scientist ID: ";
-//<<<<<<< ATH
+
     while(!(cin >> sid) ||  sid > myDom.scientistsSize()-1 || sid < 0)
     {
         cin.clear();
@@ -677,7 +688,7 @@ void UI::displayDatabaseLinks()
 void UI::displayShort(Person P)
 {   
     cout << setw(30) << left << P.getName();
-    cout << P.getBirthYear() << endl;
+    cout << P.getBirthYear() << left << P.getDeathYear() << endl;
 }
 
 void UI::displayShortCom(Computer C)

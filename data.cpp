@@ -155,6 +155,10 @@ vector<Person> Database::sortScientistsFromDb(string sortMenu)
     {
         query.exec("SELECT * FROM scientists WHERE DOD = -1 ORDER BY Name ASC");
     }
+    else if(sortMenu.compare("7") == 0)
+    {
+        query.exec("SELECT * FROM scientists ORDER BY Name ASC");
+    }
     if(db.isOpen())
     {
         while(query.next()){
