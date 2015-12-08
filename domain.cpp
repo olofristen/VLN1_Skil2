@@ -115,78 +115,13 @@ pair<Person, Computer> Domain::addNewLink(int pInd, int cInd)   // Setur linknar
 
 
 vector<Person> Domain::sortAndDisplayScientist(string sortMenu)
-{        // sorterar vektorinn...
-    do{
-        if(sortMenu.compare("1") == 0)
-        {
-            sort(v.begin(), v.end());
-        }
-        else if(sortMenu.compare("2") == 0)
-        {
-            sort(v.rbegin(), v.rend());
-        }
-        else if(sortMenu.compare("3") == 0)
-        {
-            sort(v.begin(), v.end());
-            sort(v.begin(), v.end(), sortByGender);
-        }
-        else if(sortMenu.compare("4") == 0)
-        {
-            sort(v.begin(), v.end());
-            sort(v.begin(), v.end(), sortByYearOfBirth);
-        }
-        else if(sortMenu.compare("5") == 0)
-        {
-            sort(v.begin(), v.end());
-            sort(v.begin(), v.end(), sortByYearOfDeath);
-        }
-        else if(sortMenu.compare("Q") == 0 || sortMenu.compare("q") == 0)
-        {
-            return vector<Person>();
-        }
-        else
-        {
-            cout << "Invalid input! " << endl;
-            cin >> sortMenu;
-        }
-    }
-    while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5);
-    return v;
+{
+    return DB.sortScientistsFromDb(sortMenu);
 }
 
 vector<Computer> Domain::sortAndDisplayComputer(string sortMenu)
 {        // sorterar vektorinn...
-    do{
-        if(sortMenu.compare("1") == 0)
-        {
-            sort(ve.begin(), ve.end());
-        }
-        else if(sortMenu.compare("2") == 0)
-        {
-            sort(ve.rbegin(), ve.rend());
-        }
-        else if(sortMenu.compare("3") == 0)
-        {
-            sort(ve.begin(), ve.end());
-            sort(ve.begin(), ve.end(), sortByYearOfBuilt);
-        }
-        else if(sortMenu.compare("4") == 0)
-        {
-            sort(ve.begin(), ve.end());
-            sort(ve.begin(), ve.end(), sortByType);
-        }
-        else if(sortMenu.compare("Q") == 0 || sortMenu.compare("q") == 0)
-        {
-            return vector<Computer>();
-        }
-        else
-        {
-            cout << "Invalid input! " << endl;
-            cin >> sortMenu;
-        }
-    }
-    while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5);
-    return ve;
+    return DB.sortComputersFromDb(sortMenu);
 }
 
 vector<Person> Domain::searchStringScientist(string num, string search)
