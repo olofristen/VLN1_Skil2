@@ -559,6 +559,7 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
         if(tempScientistId < "1" || tempScientistId > "1000")
         {
             cout << "Invalid input!" << endl;
+            cout << "tempScientistID: " << tempScientistId << endl;
             cin >> tempScientistId;
         }
     }
