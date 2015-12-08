@@ -489,7 +489,9 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
     cout << "Scientists from the database: " << endl;
     displayDatabaseScientistShort(myDom.returnAllScientists());
     cout << endl << "Scientist ID: ";
-    cin >> sid;
+//<<<<<<< ATH
+    cin >> sid; // Tekur inn vector gildi en ekki ID úr gagnagrunni!
+//-------
     cout << endl << "Computers in the database: " << endl;
     displayDatabaseComputerShort(myDom.returnAllComputers());
     cout << endl << "Computer ID: ";

@@ -24,7 +24,7 @@ public:
 
     vector<Person> readScientistFromDb();
     vector<Computer> readComputerFromDb();
-    vector<pair<Person, Computer>> readLinkFromDb();
+    vector<pair<Person, Computer> > readLinkFromDb();
 };
 
 

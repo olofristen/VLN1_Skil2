@@ -121,9 +121,9 @@ vector<Computer> Database::readComputerFromDb()
 
     return computer;
 }
-vector<pair<Person, Computer>> Database::readLinkFromDb()   //VIRKAR ÓMÆGAD!
+vector<pair<Person, Computer> > Database::readLinkFromDb()   //VIRKAR ÓMÆGAD!
 {
-    vector<pair<Person, Computer>> vlink;
+    vector<pair<Person, Computer> > vlink;
 
     QSqlQuery query(db);
     QString q = "SELECT * FROM links L, scientists S, computers C WHERE S.ID = L.SID AND C.ID = L.CID";
