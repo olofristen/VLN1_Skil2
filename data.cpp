@@ -72,7 +72,7 @@ unsigned int Database::addNewComputer(Computer C)
 void Database::addNewLink(pair<Person, Computer> link)
 {
     QSqlQuery query(db);
-    QString q = "CREATE TABLE links ('SID' INTEGER, 'CID' INTEGER, FOREIGN KEY (SID) REFERENCES scientists(ID), FOREIGN KEY (CID) REFERENCES computers(ID), PRIMARY KEY(SID, CID))";
+    QString q = "CREATE TABLE IF NOT EXISTS links ('SID' INTEGER, 'CID' INTEGER, FOREIGN KEY (SID) REFERENCES scientists(ID), FOREIGN KEY (CID) REFERENCES computers(ID), PRIMARY KEY(SID, CID))";
     query.exec(q);
 
     query.prepare("INSERT INTO links (SID, CID) VALUES (:sid, :cid)");
