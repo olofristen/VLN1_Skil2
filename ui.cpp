@@ -690,7 +690,6 @@ void UI::displayDatabaseLinks()
 void UI::displayShort(Person P)
 {   
     cout << setw(30) << left << P.getName();
-    cout << P.getBirthYear() << left << P.getDeathYear() << endl;
     cout << setw(8) << left << P.getBirthYear();
     if(P.getDeathYear() == -1)
         cout << setw(9) << right << "" << endl;
