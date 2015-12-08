@@ -141,6 +141,7 @@ void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á e
     cout << "   |    3.  By gender                                              |" << endl;
     cout << "   |    4.  By year of birth                                       |" << endl;
     cout << "   |    5.  By year of death                                       |" << endl;
+    cout << "   |    6.  Just those who are alive ! (in alphabetical order..)   |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
 

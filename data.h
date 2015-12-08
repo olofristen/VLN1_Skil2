@@ -24,6 +24,8 @@ public:
 
     vector<Person> readScientistFromDb();
     vector<Computer> readComputerFromDb();
+    vector<Person> sortScientistsFromDb(string sortMenu);
+    vector<Computer> sortComputersFromDb(string sortMenu);
     vector<Person> searchScientistFromDb(string num, string search);
     vector<Computer> searchComputerFromDb(string num, string search);
     vector<pair<Person, Computer> > readLinkFromDb();

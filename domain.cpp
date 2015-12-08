@@ -87,7 +87,7 @@ pair<Person, Computer> Domain::addNewLink(int pID, int cID)
 
 vector<Person> Domain::sortAndDisplayScientist(string sortMenu)
 {        // sorterar vektorinn...
-    do{
+    /*do{
         if(sortMenu.compare("1") == 0) {
             sort(v.begin(), v.end());
         }
@@ -113,13 +113,13 @@ vector<Person> Domain::sortAndDisplayScientist(string sortMenu)
             cout << "Invalid input! " << endl;
             cin >> sortMenu;
         }
-    } while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5);
-    return v;
+    } while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5); */
+    return DB.sortScientistsFromDb(sortMenu);
 }
 
 vector<Computer> Domain::sortAndDisplayComputer(string sortMenu)
 {        // sorterar vektorinn...
-    do{
+    /*do{
         if(sortMenu.compare("1") == 0) {
             sort(ve.begin(), ve.end());
         }
@@ -141,8 +141,8 @@ vector<Computer> Domain::sortAndDisplayComputer(string sortMenu)
             cout << "Invalid input! " << endl;
             cin >> sortMenu;
         }
-    } while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5);
-    return ve;
+    } while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5);*/
+    return DB.sortComputersFromDb(sortMenu);
 }
 
 vector<Person> Domain::searchStringScientist(string num, string search)
