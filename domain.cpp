@@ -60,9 +60,18 @@ void Domain::add_new_computer(string name, int buildYear, string type, bool wasB
     ve.push_back(newC);
 }
 
-void Domain::add_new_link(Person p, Computer c)
-{     // Bætir nýrri tölvu inn i vektorinn...
-    pair<Person, Computer> link = make_pair(p,c);
+vector<Person> Domain::returnAllScientists()
+{
+    return v;
+}
+vector<Computer> Domain::returnAllComputers()
+{
+    return ve;
+}
+
+void Domain::add_new_link(int pID, int cID)
+{
+    pair<Person, Computer> link = make_pair(v[pID-1],ve[cID-1]);
     vlink.push_back(link);
     DB.add_new_link(link);
 }

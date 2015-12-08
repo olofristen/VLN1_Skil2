@@ -53,6 +53,10 @@ string Computer::getinfo()
 {
     return info;
 }
+int Computer::getID()
+{
+    return ID;
+}
 
 ostream& operator << (ostream& out, const Computer& C)
 {

@@ -52,6 +52,10 @@ string Person::getbio()
 {
     return bio;
 }
+int Person::getID()
+{
+    return ID;
+}
 
 ostream& operator << (ostream& out, const Person& P)
 {
@@ -79,7 +83,7 @@ void Person::readData(QSqlQuery query)
     deathYear = query.value("DOD").toUInt();
     bio = query.value("Bio").toString().toStdString();
 }
-void Person::setID(unsigned int id)
+void Person::setID(int id)
 {
     ID = id;
 }

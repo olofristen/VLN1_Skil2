@@ -27,6 +27,7 @@ public:
     void searchComputer();
     void return_home();
     void clear_screen();
+    void linkTogether();
     
     void displayDatabaseScientist(vector<Person> v);
     void displayDatabaseComputer(vector<Computer> ve);

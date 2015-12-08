@@ -59,6 +59,7 @@ void UI::choices()
     else if(menu.compare("3") == 0){
         clear_screen();
         registerMessageLink();
+        linkTogether();
     }
     else if(menu.compare("4") == 0) {
         clear_screen();
@@ -474,6 +475,23 @@ void UI::reading_computer()
     }
 }
 
+void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
+{
+    int sid, cid;
+    cout << "Choose one scientist (ID) and one computer (ID)!" << endl << endl;
+    cout << "Scientists in the database: " << endl;
+    displayDatabaseScientist(my_dom.returnAllScientists());
+    cout << endl << "Scientist ID: ";
+    cin >> sid;
+    cout << endl << "Computers in the database: " << endl;
+    displayDatabaseComputer(my_dom.returnAllComputers());
+    cout << endl << "Computer ID: ";
+    cin >> cid;
+    my_dom.add_new_link(sid, cid);
+    // Vantar að skila til baka því sem var tengt saman...
+
+}
+
 void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorinn...
 {
     for(unsigned int i = 0; i < v.size(); i++)
@@ -501,3 +519,4 @@ void UI::displayDatabaseLink(vector<pair<Person, Computer>> vlink)      // Prent
     }
     cout << endl << vlink.size() << " links!" << endl;
 }
+

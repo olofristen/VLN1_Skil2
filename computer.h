@@ -32,6 +32,7 @@ class Computer
         string gettype();
         bool getwasbuilt();
         string getinfo();
+        int getID();
         void setID(int id);
 
         friend bool sortbyyearofbuilt(const Computer& a, const Computer &b);
