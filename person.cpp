@@ -70,8 +70,7 @@ ostream& operator << (ostream& out, const Person& P)
     {
         out << "Year of death: " << P.deathYear << endl;
     }
-    out << endl << "Bio: " << P.bio << endl
-         << "------------------------------------------------------------------" << endl;
+    out << endl << "Bio: " << P.bio << endl;
     return out;
 }
 

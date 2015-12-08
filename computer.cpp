@@ -72,7 +72,6 @@ ostream& operator << (ostream& out, const Computer& C)
     }
     out << endl;
     out << "Info: " << C.info << endl;
-    out << "------------------------------------------------------------------" << endl;
 
     return out;
 }
