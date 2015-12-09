@@ -16,6 +16,11 @@ int Domain::computersSize()
     return ve.size();
 }
 
+int Domain::linkSize()
+{
+    return vLink.size();
+}
+
 void Domain::addNewPerson(string name, string gender, int birthYear, int deathYear, string bio)
 {     // Bætir nýrri persónu inn i vektorinn...
     Person newP = Person(name, gender, birthYear, deathYear, bio);

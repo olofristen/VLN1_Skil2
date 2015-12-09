@@ -23,10 +23,10 @@ void UI::welcome()
     cout << "                         |     the Computing Database      |" << endl;
     cout << "                         ===================================" << endl;
     cout << endl;
-    cout << "In this program you will be able to register and go through the most known "
-         << "computer scientists of all time!" << endl;
+    cout << "In this program you will be able to register and go through the most important " << endl
+         << "computer scientists AND computers OF ALL TIME!" << endl;
     cout << endl;
-    cout << "Now, the database includes: " << myDom.scientistsSize() << " scientist(s) & " << myDom.computersSize() << " computer(s)!" << endl << endl;
+    cout << "Now, the database includes: " << myDom.scientistsSize() << " scientist(s), " << myDom.computersSize() << " computer(s) and " << myDom.linkSize() << " links!!" << endl << endl;
 }
 
 void UI::choices()
@@ -121,7 +121,6 @@ void UI::registerMessageLink()
     cout << "   |     REGISTER A LINK BETWEEN SCIENTIST/S AND COMPUTER/S        |" << endl;
     cout << "   =================================================================" << endl;
     cout << endl;
-    cout << "   Press Q/q to exit" << endl << endl;
 }
 
 void UI::searchMessage()
@@ -353,7 +352,7 @@ void UI::searchComputer()
 
     if(vec.size() == 0)
     {
-        cout << "Sorry, no match." << endl;
+        cout << "Sorry, no match :(" << endl;
     }
 }
 
