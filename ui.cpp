@@ -617,7 +617,7 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
         {
             return;
         }
-        else if(tempScientistId > "-1" && tempScientistId < "1000")
+        else if(tempScientistId > "-1" || tempScientistId < "1000")
         {
             sid = atoi(tempScientistId.c_str());
         }
@@ -640,7 +640,7 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
         {
             return;
         }
-        else if(tempComputerId > "-1" && tempComputerId < "1000")
+        else if(tempComputerId > "-1" || tempComputerId < "1000")
         {
             cid = atoi(tempComputerId.c_str());
         }
