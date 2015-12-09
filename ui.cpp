@@ -176,7 +176,12 @@ void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á e
             }
         }
     }
-    else {
+    else if(sortMenu == "Q" || sortMenu == "q")
+    {
+        return;
+    }
+    else
+    {
         cout << "Invalid input!";
     }
 }
@@ -221,7 +226,12 @@ void UI::sortMessageComputer()     // sleppa því að taka inn vektorinn, á ek
             }
         }
     }
-    else {
+    else if(sortMenu == "Q" || sortMenu == "q")
+    {
+        return;
+    }
+    else
+    {
         cout << "Invalid input!";
     }
 }
