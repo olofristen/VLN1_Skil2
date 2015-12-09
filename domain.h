@@ -37,6 +37,7 @@ public:
     int size();
     int scientistsSize();
     int computersSize();
+    int linkSize();
 
 
 };

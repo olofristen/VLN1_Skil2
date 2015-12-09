@@ -23,10 +23,10 @@ void UI::welcome()
     cout << "                         |     the Computing Database      |" << endl;
     cout << "                         ===================================" << endl;
     cout << endl;
-    cout << "In this program you will be able to register and go through the most known "
-         << "computer scientists of all time!" << endl;
+    cout << "In this program you will be able to register and go through the most important " << endl
+         << "computer scientists AND computers OF ALL TIME!" << endl;
     cout << endl;
-    cout << "Now, the database includes: " << myDom.scientistsSize() << " scientist(s) & " << myDom.computersSize() << " computer(s)!" << endl << endl;
+    cout << "Now, the database includes: " << myDom.scientistsSize() << " scientist(s), " << myDom.computersSize() << " computer(s) and " << myDom.linkSize() << " links!!" << endl << endl;
 }
 
 void UI::choices()
@@ -42,6 +42,7 @@ void UI::choices()
     cout << "   |    5.  See all computers registered                           |" << endl;
     cout << "   |    6.  Search for a scientist                                 |" << endl;
     cout << "   |    7.  Search for a computer                                  |" << endl;
+    cout << "   |    8.  See all registered links                               |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
     cin >> menu;
@@ -87,7 +88,7 @@ void UI::choices()
     else if(menu.compare("8") == 0)
     {
         clearScreen();
-        cout << "Links in the database: " << endl;
+        allLinksMessage();
         displayDatabaseLinks();
     }
     else
@@ -120,7 +121,6 @@ void UI::registerMessageLink()
     cout << "   |     REGISTER A LINK BETWEEN SCIENTIST/S AND COMPUTER/S        |" << endl;
     cout << "   =================================================================" << endl;
     cout << endl;
-    cout << "   Press Q/q to exit" << endl << endl;
 }
 
 void UI::searchMessage()
@@ -150,15 +150,42 @@ void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á e
     cout << "   |    3.  By gender                                              |" << endl;
     cout << "   |    4.  By year of birth                                       |" << endl;
     cout << "   |    5.  By year of death                                       |" << endl;
+    cout << "   |    6.  Just those who are alive ! (A-Z..)                     |" << endl;
+    cout << "   |    7.  A-Z shortlist of all registerd scientists              |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
 
     cin >> sortMenu;
-
-    vector<Person> vec = myDom.sortAndDisplayScientist(sortMenu);
-    if(!vec.empty())
+    if(sortMenu == "Q" || sortMenu == "q")
     {
-        displayDatabaseScientist(vec);
+        return;
+    }
+    if(sortMenu == "1" || sortMenu == "2" || sortMenu == "3" || sortMenu == "4" || sortMenu == "5" || sortMenu == "6" || sortMenu == "7")
+    {
+        if(sortMenu == "7")
+        {
+            vector<Person> ve = myDom.sortAndDisplayScientist(sortMenu);
+            if(!ve.empty())
+            {
+                displayDatabaseScientistShort(ve);
+            }
+        }
+        else
+        {
+            vector<Person> vec = myDom.sortAndDisplayScientist(sortMenu);
+            if(!vec.empty())
+            {
+                displayDatabaseScientist(vec);
+            }
+        }
+    }
+    else if(sortMenu == "Q" || sortMenu == "q")
+    {
+        return;
+    }
+    else
+    {
+        cout << "Invalid input!";
     }
 }
 
@@ -173,20 +200,42 @@ void UI::sortMessageComputer()     // sleppa því að taka inn vektorinn, á ek
     cout << "   Press Q/q to exit" << endl << endl;
 
     cout << "   =================================================================" << endl;
-    cout << "   |  How do you want the computing geniuses to appear?            |" << endl;
+    cout << "   |  How do you want the computers to appear?                     |" << endl;
     cout << "   |    1.  A-Z                                                    |" << endl;
     cout << "   |    2.  Z-A                                                    |" << endl;
     cout << "   |    3.  By year it was built                                   |" << endl;
     cout << "   |    4.  By type                                                |" << endl;
+    cout << "   |    5.  A-Z shortlist of all registered computers              |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
 
     cin >> sortMenu;
-
-    vector<Computer> vec = myDom.sortAndDisplayComputer(sortMenu);
-    if(!vec.empty())
+    if(sortMenu == "1" || sortMenu == "2" || sortMenu == "3" || sortMenu == "4" || sortMenu == "5")
     {
-        displayDatabaseComputer(vec);
+        if(sortMenu == "5")
+        {
+            vector<Computer> ve = myDom.sortAndDisplayComputer(sortMenu);
+            if(!ve.empty())
+            {
+                displayDatabaseComputerShort(ve);
+            }
+        }
+        else
+        {
+            vector<Computer> vec = myDom.sortAndDisplayComputer(sortMenu);
+            if(!vec.empty())
+            {
+                displayDatabaseComputer(vec);
+            }
+        }
+    }
+    else if(sortMenu == "Q" || sortMenu == "q")
+    {
+        return;
+    }
+    else
+    {
+        cout << "Invalid input!";
     }
 }
 
@@ -214,7 +263,7 @@ void UI::searchScientist()
         }
         else if(searchMenu.compare("2") == 0)
         {
-            cout << "A lady or a man? Or maybe a dog?: ";
+            cout << "Male or female?: ";
         }
         else if(searchMenu.compare("3") == 0)
         {
@@ -271,9 +320,20 @@ void UI::searchComputer()
         }
         else if(searchMenu.compare("2") == 0)
         {
+
             cout << "What year was the computer built?: ";
+
         }
         else if(searchMenu.compare("3") == 0)
+        {
+            cout << "Which type was the computer?: ";
+        }
+        else if(searchMenu.compare("4") == 0)
+        {
+            cout << "So was the computer built or not? " << endl;
+            cout << "Please pick 1 for yes and 0 for no. Pick now: ";
+        }
+        else if(searchMenu.compare("5") == 0)
         {
             cout << "Which type was the computer?: ";
         }
@@ -296,7 +356,7 @@ void UI::searchComputer()
 
     if(vec.size() == 0)
     {
-        cout << "Sorry, no match." << endl;
+        cout << "Sorry, no match :(" << endl;
     }
 }
 
@@ -506,15 +566,15 @@ void UI::readingComputer()
         {
             do
             {
-                cout << "Year of production (1700 - 2010): ";
+                cout << "Year of production (1600 - 2010): ";
                 cin >> buildYear;
 
-                if(buildYear < "1700" || buildYear > "2010")
+                if(buildYear < "1600" || buildYear > "2010")
                 {
                     cout << "Invalid input" << endl;
                 }
             }
-            while(buildYear < "1700" || buildYear > "2010");
+            while(buildYear < "1600" || buildYear > "2010");
         }
         else
         {
@@ -523,12 +583,12 @@ void UI::readingComputer()
             {
                 cin >> buildYear;
 
-                if(buildYear < "1700" || buildYear > "2015")
+                if(buildYear < "1600" || buildYear > "2015")
                 {
                     cout << "Invalid input" << endl;
                 }
             }
-            while(buildYear < "1700" || buildYear > "2015");
+            while(buildYear < "1600" || buildYear > "2015");
         }
 
         tempBy = atoi(buildYear.c_str());
@@ -550,10 +610,6 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
     cout << "Scientists from the database: " << endl;
     displayDatabaseScientistShort(myDom.returnAllScientists());
     cout << endl << "Scientist ID: ";
-//<<<<<<< ATH
-
-
-
     do
     {
         cin >> tempScientistId; // Tekur inn vector gildi en ekki ID úr gagnagrunni!
@@ -611,8 +667,12 @@ void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorin
         cout << endl << "Computers: ";
         vector<Computer> comp = myDom.getCompFromLinks(v[i].getId());
 
-        for(int i = 0; i < comp.size(); i++) {
-            cout << comp[i].getName() << ", ";
+        for(unsigned int i = 0; i < comp.size(); i++) {
+            cout << comp[i].getName();
+            if(i != comp.size() - 1)
+            {
+                cout << ", ";
+            }
         }
         cout << endl
         << "------------------------------------------------------------------" << endl;
@@ -622,8 +682,8 @@ void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorin
 
 void UI::displayDatabaseScientistShort(vector<Person> v)
 {
-    cout << endl << "ID   NAME                       BIRTH YEAR" << endl << endl;
-
+    cout << endl << "ID    NAME                          BIRTH YEAR   DEATH YEAR" << endl;
+    cout << "----------------------------------------------------------" << endl;
 
     for(unsigned int i = 0; i < v.size(); i++)
     {
@@ -635,12 +695,13 @@ void UI::displayDatabaseScientistShort(vector<Person> v)
 
 void UI::displayDatabaseComputerShort(vector<Computer> ve)
 {
-    cout << endl << "ID   NAME                          YEAR" << endl << endl;
+    cout << endl << "ID    NAME                          YEAR    TYPE" << endl;
+    cout << "---------------------------------------------------------" << endl;
 
 
     for(unsigned int i = 0; i < ve.size(); i++)
     {
-        cout << setw(5) <<left << i;
+        cout << setw(5) << left << i;
         displayShortCom(ve[i]);
     }
     cout << endl << ve.size() << " computers!" << endl;
@@ -654,9 +715,13 @@ void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út vektor
         cout << endl << "Scientists: ";
         vector<Person> sci = myDom.getSciFromLinks(ve[i].getId());
 
-        for(int i = 0; i < sci.size(); i++)
+        for(unsigned int i = 0; i < sci.size(); i++)
         {
-            cout << sci[i].getName() << ", ";
+            cout << sci[i].getName();
+            if(i != sci.size()-1)
+            {
+                cout << ", ";
+            }
         }
         cout << endl
              << "------------------------------------------------------------------" << endl;
@@ -668,8 +733,10 @@ void UI::displayLink(pair<Person, Computer> link)      // Prentar út par af Per
 {
     //cout << "Link: " << endl;
     cout << endl << link.first;     // Person
+    cout << endl << "---------------------------------------------- " << endl;
     cout << endl << link.second;    // Computer
     //cout << endl << vlink.size() << " links!" << endl;
+    cout << endl << "---------------------------------------------- " << endl;
 }
 
 
@@ -683,23 +750,40 @@ void UI::displayDatabaseLinks()
     vector<pair<Person, Computer> > vLink = myDom.returnAllLinks();
 
     sort(vLink.begin(), vLink.end(), sortPairVector);
-    cout << endl << " SCIENTISTS:              COMPUTERS:" << endl << endl;
+    cout << endl << "#    SCIENTISTS               COMPUTERS" << endl;
+    cout << "--------------------------------------------------------------" << endl;
     for(unsigned int i = 0; i < vLink.size(); i++)
     {
-
-        cout << "  " << i << ":  " << setw(25) << left << vLink[i].first.getName()
-        << vLink[i].second.getName() << endl << endl;
+        cout << " " << setw(4) << left << i << setw(25) << left << vLink[i].first.getName();
+        cout << setw(25) << left << vLink[i].second.getName() << endl;
     }
     cout << endl << vLink.size() << " links!" << endl;
 }
 
 void UI::displayShort(Person P)
-{
-    cout << setw(30) << left << P.getName();
-    cout << P.getBirthYear() << endl;
+{   
+    cout << " " << setw(30) << left << P.getName();
+    cout << setw(8) << left << P.getBirthYear();
+    if(P.getDeathYear() == -1)
+    {
+        cout << setw(9) << right << "" << endl;
+    }
+    else
+    {
+        cout << setw(9) << right << P.getDeathYear() << endl;
+    }
 }
 
 void UI::displayShortCom(Computer C)
 {
-    cout << setw(30) << left << C.getName() << C.getBuildYear() << endl;
+    cout << " " << setw(30) << left << C.getName() << setw(8) << left << C.getBuildYear();
+    cout << setw(15) << left << C.getType() << endl;
+}
+
+void UI::allLinksMessage()
+{
+    cout << "   =================================================================" << endl;
+    cout << "   |     ALL LINKS IN DATABASE                                     |" << endl;
+    cout << "   =================================================================" << endl;
+    cout << endl;
 }

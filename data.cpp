@@ -7,7 +7,7 @@
 Database::Database()        // Database búinn til/opnaður í constructor
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbSoC = "database.sqlite";
+    QString dbSoC = "database1.sqlite";
     db.setDatabaseName(dbSoC);
 
     db.open();
@@ -126,7 +126,7 @@ vector<Computer> Database::readComputerFromDb()
     return computer;
 }
 
-vector<Person> Database::sortScientistsFromDb(string sortMenu)
+vector<Person> Database::sortScientistsFromDb(string sortMenu) // sortar person að hætti sql
 {
     vector<Person> scientists;
     QSqlQuery query(db);
@@ -155,10 +155,14 @@ vector<Person> Database::sortScientistsFromDb(string sortMenu)
     {
         query.exec("SELECT * FROM scientists WHERE DOD = -1 ORDER BY Name ASC");
     }
+    else if(sortMenu.compare("7") == 0)
+    {
+        query.exec("SELECT * FROM scientists ORDER BY Name ASC");
+    }
     if(db.isOpen())
     {
         while(query.next()){
-            scientists.push_back(Person(query));        // So beautiful..
+            scientists.push_back(Person(query));
         }
     }
     else {
@@ -168,7 +172,7 @@ vector<Person> Database::sortScientistsFromDb(string sortMenu)
     return scientists;
 }
 
-vector<Computer> Database::sortComputersFromDb(string sortMenu)
+vector<Computer> Database::sortComputersFromDb(string sortMenu)  // sortar computer með sql
 {
     vector<Computer> computers;
     QSqlQuery query(db);
@@ -189,11 +193,15 @@ vector<Computer> Database::sortComputersFromDb(string sortMenu)
     {
         query.exec("SELECT * FROM computers ORDER BY Type ASC");
     }
+    else if(sortMenu.compare("5") == 0)
+    {
+        query.exec("SELECT * FROM computers ORDER BY Name ASC");
+    }
 
     if(db.isOpen())
     {
         while(query.next()){
-            computers.push_back(Computer(query));        // So beautiful..
+            computers.push_back(Computer(query));
         }
     }
     else {
@@ -203,7 +211,7 @@ vector<Computer> Database::sortComputersFromDb(string sortMenu)
     return computers;
 }
 
-vector<Person> Database::searchScientistFromDb(string num, string search)
+vector<Person> Database::searchScientistFromDb(string num, string search)  // leitar í person með sql
 {
     vector<Person> scientists;
     QSqlQuery query(db);
@@ -232,7 +240,7 @@ vector<Person> Database::searchScientistFromDb(string num, string search)
     {
         while(query.next())
         {
-            scientists.push_back(Person(query));        // So beautiful..
+            scientists.push_back(Person(query));
         }
     }
     else
@@ -243,7 +251,7 @@ vector<Person> Database::searchScientistFromDb(string num, string search)
     return scientists;
 }
 
-vector<Computer> Database::searchComputerFromDb(string num, string search)
+vector<Computer> Database::searchComputerFromDb(string num, string search) // leitar í computer með sql
 {
     vector<Computer> computers;
     QSqlQuery query(db);
@@ -258,30 +266,22 @@ vector<Computer> Database::searchComputerFromDb(string num, string search)
     }
     else if(num.compare("3") == 0)
     {
-        query.exec("SELECT * FROM computers WHERE WB LIKE '%" + QString::fromStdString(search) + "%'");
+        query.exec("SELECT * FROM computers WHERE BuildYear LIKE '%" + QString::fromStdString(search) + "%'");
     }
     else if(num.compare("4") == 0)
     {
-        query.exec("SELECT * FROM computers WHERE BuildYear LIKE '%" + QString::fromStdString(search) + "%'");
+        query.exec("SELECT * FROM computers WHERE WB LIKE '%" + QString::fromStdString(search) + "%'");
     }
-    else if(num.compare("3") == 0)
+    else if(num.compare("5") == 0)
     {
-        query.exec("SELECT * FROM computers WHERE Type LIKE '%" + QString::fromStdString(search) + "%'");
-    }
-   /* else if(num.compare("4") == 0)  Hvernig viljum við útfæra þetta?  (Boolean-breytan wasBuilt)
-    {
-<<<<<<< HEAD
         query.exec("SELECT * FROM computers WHERE Info LIKE '%" + QString::fromStdString(search) + "%'");
     }
-=======
-        query.exec("SELECT * FROM computers WHERE WB LIKE '%" + QString::fromStdString(search) + "%'");
-    }*/
 
     if(db.isOpen())
     {
         while(query.next())
         {
-            computers.push_back(Computer(query));        // So beautiful..
+            computers.push_back(Computer(query));
         }
     }
     else
