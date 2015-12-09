@@ -689,12 +689,12 @@ void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út person-v
 
 void UI::displayDatabaseScientistShort(vector<Person> v)
 {
-    cout << endl << "ID    NAME                          BIRTH YEAR   DEATH YEAR" << endl;
+    cout << endl << " #     NAME                          BIRTH YEAR   DEATH YEAR" << endl;
     cout << "----------------------------------------------------------" << endl;
 
     for(unsigned int i = 0; i < v.size(); i++)
     {
-        cout << setw(5) << left << i + 1;
+        cout << " " << setw(5) << left << i + 1;
         displayShort(v[i]);
     }
     cout << endl << v.size() << " scientists!" << endl;
@@ -724,13 +724,13 @@ void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út Comput
 
 void UI::displayDatabaseComputerShort(vector<Computer> ve)
 {
-    cout << endl << "ID    NAME                          YEAR    TYPE" << endl;
+    cout << endl << " #     NAME                          YEAR    TYPE" << endl;
     cout << "---------------------------------------------------------" << endl;
 
 
     for(unsigned int i = 0; i < ve.size(); i++)
     {
-        cout << setw(5) << left << i + 1;
+        cout << " " << setw(5) << left << i + 1;
         displayShortCom(ve[i]);
     }
     cout << endl << ve.size() << " computers!" << endl;
@@ -758,11 +758,11 @@ void UI::displayDatabaseLinks()     // Prentum út allar tengingarnar, þ.e. nö
     vector<pair<Person, Computer> > vLink = myDom.returnAllLinks();
 
     sort(vLink.begin(), vLink.end(), sortPairVector);
-    cout << endl << "#    SCIENTISTS               COMPUTERS" << endl;
+    cout << endl << " #   SCIENTISTS               COMPUTERS" << endl;
     cout << "--------------------------------------------------------------" << endl;
     for(unsigned int i = 0; i < vLink.size(); i++)
     {
-        cout << " " << setw(4) << left << i << setw(25) << left << vLink[i].first.getName();
+        cout << " " << setw(4) << left << i + 1 << setw(25) << left << vLink[i].first.getName();
         cout << setw(25) << left << vLink[i].second.getName() << endl;
     }
     cout << endl << vLink.size() << " links!" << endl;
