@@ -150,7 +150,6 @@ void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á e
     cout << "   |    3.  By gender                                              |" << endl;
     cout << "   |    4.  By year of birth                                       |" << endl;
     cout << "   |    5.  By year of death                                       |" << endl;
-    cout << "   |    6.  Just those who are alive ! (in alphabetical order..)   |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
 
@@ -258,10 +257,8 @@ void UI::searchComputer()
     cout << "   =================================================================" << endl;
     cout << "   |  in which category would you prefer to search?                |" << endl;
     cout << "   |    1.  By name                                                |" << endl;
-    cout << "   |    2.  By type                                                |" << endl;
-    cout << "   |    3.  By the year it was built                               |" << endl;
-    cout << "   |    4.  By if it was built or not                              |" << endl;
-    cout << "   |    5.  By info                                                |" << endl;
+    cout << "   |    2.  By year it was built                                   |" << endl;
+    cout << "   |    3.  By type                                                |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
 
@@ -274,15 +271,11 @@ void UI::searchComputer()
         }
         else if(searchMenu.compare("2") == 0)
         {
-            cout << "Which type was the computer?: ";
-        }
-        else if(searchMenu.compare("2") == 0)
-        {
-            cout << "So was the computer built or not?: ";
+            cout << "What year was the computer built?: ";
         }
         else if(searchMenu.compare("3") == 0)
         {
-            cout << "Enter some word and we will see..: ";
+            cout << "Which type was the computer?: ";
         }
         else if(searchMenu.compare("Q") == 0 || searchMenu.compare("q") == 0)
         {
@@ -551,30 +544,59 @@ void UI::readingComputer()
 
 void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
 {
-    int sid = 0, cid = 0;
+    int sid = -1, cid = -1;
     string tempScientistId = "", tempComputerId = "";
     cout << "Choose one scientist (ID) and one computer (ID)!" << endl << endl;
     cout << "Scientists from the database: " << endl;
     displayDatabaseScientistShort(myDom.returnAllScientists());
     cout << endl << "Scientist ID: ";
 //<<<<<<< ATH
-    while(!(cin >> sid) ||  sid > myDom.scientistsSize()-1 || sid < 0)
+
+
+
+    do
     {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Invalid input.  Try again: ";
+        cin >> tempScientistId; // Tekur inn vector gildi en ekki ID úr gagnagrunni!
+        if(tempScientistId == "q" || tempScientistId == "Q")
+        {
+            return;
+        }
+        else if(tempScientistId > "-1" && tempScientistId < "1000")
+        {
+            sid = atoi(tempScientistId.c_str());
+        }
+        else
+        {
+            cout << "Invalid Input" << endl;
+        }
+        cout << sid << endl;
     }
+    while(sid > 999 || sid < 0);
+
 
     cout << endl << "Computers in the database: " << endl;
     displayDatabaseComputerShort(myDom.returnAllComputers());
     cout << endl << "Computer ID: ";
 
-    while(!(cin >> cid) ||  cid > myDom.computersSize()-1 || cid < 0)
+    do
     {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Invalid input.  Try again: ";
+        cin >> tempComputerId; // Tekur inn vector gildi en ekki ID úr gagnagrunni!
+        if(tempComputerId == "q" || tempComputerId == "Q")
+        {
+            return;
+        }
+        else if(tempComputerId > "-1" && tempComputerId < "1000")
+        {
+            cid = atoi(tempComputerId.c_str());
+        }
+        else
+        {
+            cout << "Invalid Input" << endl;
+        }
+        cout << cid << endl;
     }
+    while(cid > 999 || cid < 0);
+    sid = atoi(tempComputerId.c_str());
     pair<Person, Computer> link = myDom.addNewLink(sid, cid);
     cout << endl << "----------------------------------------" << endl;
     cout << "New link: " << endl << endl;
@@ -672,7 +694,7 @@ void UI::displayDatabaseLinks()
 }
 
 void UI::displayShort(Person P)
-{   
+{
     cout << setw(30) << left << P.getName();
     cout << P.getBirthYear() << endl;
 }
