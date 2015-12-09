@@ -7,7 +7,7 @@
 Database::Database()        // Database búinn til/opnaður í constructor
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbSoC = "database.sqlite";
+    QString dbSoC = "database1.sqlite";
     db.setDatabaseName(dbSoC);
 
     db.open();
