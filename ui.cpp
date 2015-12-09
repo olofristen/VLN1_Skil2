@@ -625,7 +625,6 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
         {
             cout << "Invalid Input" << endl;
         }
-        cout << sid << endl;
     }
     while(sid > 999 || sid < 0);
 
@@ -649,7 +648,6 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
         {
             cout << "Invalid Input" << endl;
         }
-        cout << cid << endl;
     }
     while(cid > 999 || cid < 0);
     sid = atoi(tempComputerId.c_str());
