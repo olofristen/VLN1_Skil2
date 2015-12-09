@@ -276,14 +276,6 @@ vector<Computer> Database::searchComputerFromDb(string num, string search) // le
     {
         query.exec("SELECT * FROM computers WHERE Info LIKE '%" + QString::fromStdString(search) + "%'");
     }
-   /* else if(num.compare("4") == 0)  Hvernig viljum við útfæra þetta?  (Boolean-breytan wasBuilt)
-    {
-<<<<<<< HEAD
-        query.exec("SELECT * FROM computers WHERE Info LIKE '%" + QString::fromStdString(search) + "%'");
-    }
-=======
-        query.exec("SELECT * FROM computers WHERE WB LIKE '%" + QString::fromStdString(search) + "%'");
-    }*/
 
     if(db.isOpen())
     {
