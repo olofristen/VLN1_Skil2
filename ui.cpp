@@ -14,7 +14,7 @@ void UI::clearScreen()
 #endif
 }
 
-void UI::welcome()
+void UI::welcome()      // "Heimaskjárinn"
 {
 
     cout << "                         ===================================" << endl;
@@ -29,7 +29,7 @@ void UI::welcome()
     cout << "Now, the database includes: " << myDom.scientistsSize() << " scientist(s), " << myDom.computersSize() << " computer(s) and " << myDom.linkSize() << " links!!" << endl << endl;
 }
 
-void UI::choices()
+void UI::choices()  // Aðalvalmyndin
 {
     string menu = "";
 
@@ -96,7 +96,7 @@ void UI::choices()
         cout << "Invalid input! " << endl;
     }
 }
-
+// Nokkrir hausar
 void UI::registerMessageScientist()
 {
     cout << "   =================================================================" << endl;
@@ -133,7 +133,15 @@ void UI::searchMessage()
 
 }
 
-void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á ekki að vera hér...
+void UI::allLinksMessage()
+{
+    cout << "   =================================================================" << endl;
+    cout << "   |     ALL LINKS IN DATABASE                                     |" << endl;
+    cout << "   =================================================================" << endl;
+    cout << endl;
+}
+
+void UI::sortMessageScientist()     // Sorting-valmyndin fyrir vísindamenn
 {
     string sortMenu = "";
 
@@ -179,7 +187,7 @@ void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á e
             }
         }
     }
-    else if(sortMenu == "Q" || sortMenu == "q")
+    else if(sortMenu == "Q" || sortMenu == "q")      // Hættum að sjálfsögðu með Q (eða q)!
     {
         return;
     }
@@ -189,7 +197,7 @@ void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á e
     }
 }
 
-void UI::sortMessageComputer()     // sleppa því að taka inn vektorinn, á ekki að vera hér...
+void UI::sortMessageComputer()     // Sorting-valmynd fyrir tölvur
 {
     string sortMenu = "";
 
@@ -229,7 +237,7 @@ void UI::sortMessageComputer()     // sleppa því að taka inn vektorinn, á ek
             }
         }
     }
-    else if(sortMenu == "Q" || sortMenu == "q")
+    else if(sortMenu == "Q" || sortMenu == "q")     // Hættum að sjálfsögðu með Q (eða q)!
     {
         return;
     }
@@ -239,7 +247,7 @@ void UI::sortMessageComputer()     // sleppa því að taka inn vektorinn, á ek
     }
 }
 
-void UI::searchScientist()
+void UI::searchScientist()      // Leitunarvalmyndin fyrir vísindamennina...
 {
     string searchMenu = "", search = "";
     searchMessage();
@@ -298,7 +306,7 @@ void UI::searchScientist()
         cout << "Sorry, no match." << endl;
     }
 }
-void UI::searchComputer()
+void UI::searchComputer()       // Leitunarvalmynd fyrir tölvurnar...
 {
     string searchMenu = "", search = "";
     searchMessage();
@@ -360,7 +368,7 @@ void UI::searchComputer()
     }
 }
 
-void UI::readingPerson()
+void UI::readingPerson()        // Lesum inn nýjan vísindamann inn í gagnagrunninn
 {
     string number = "";
     int num = 0;
@@ -450,7 +458,7 @@ void UI::readingPerson()
             }
             else if(dead.compare("n") == 0 || dead.compare("N") == 0)
             {
-                deathYear = -1;     // Ekki dauður
+                deathYear = -1;     // Ekki dauður, skilum -1 fyrir deathYear
             }
 
             else
@@ -471,7 +479,7 @@ void UI::readingPerson()
     }
 }
 
-void UI::readingComputer()
+void UI::readingComputer()      // Ný tölva í gagnagrunninn...
 {
     string number = "";
     int num = 0;
@@ -602,10 +610,9 @@ void UI::readingComputer()
     }
 }
 
-void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
+void UI::linkTogether()     // Skrifum einstaklingana og tölvurnar út á skjáinn og notandinn velur númer til að tengja saman!
 {
     int sid = 0, cid = 0;
-    string tempScientistId = "", tempComputerId = "";
     cout << "Choose one scientist (ID) and one computer (ID)!" << endl << endl;
     cout << "Scientists from the database: " << endl;
     displayDatabaseScientistShort(myDom.returnAllScientists());
@@ -634,7 +641,8 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
     displayLink(link);
 }
 
-void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorinn...
+// Hin og þessi prentföll...
+void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út person-vektor...
 {
     for(unsigned int i = 0; i < v.size(); i++)
     {
@@ -668,6 +676,28 @@ void UI::displayDatabaseScientistShort(vector<Person> v)
     cout << endl << v.size() << " scientists!" << endl;
 }
 
+void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út Computer-vektor...
+{
+    for(unsigned int i = 0; i < ve.size(); i++)
+    {
+        cout << endl << ve[i];
+        cout << endl << "Scientists: ";
+        vector<Person> sci = myDom.getSciFromLinks(ve[i].getId());
+
+        for(unsigned int i = 0; i < sci.size(); i++)
+        {
+            cout << sci[i].getName();
+            if(i != sci.size() - 1)
+            {
+                cout << ", ";
+            }
+        }
+        cout << endl
+             << "------------------------------------------------------------------" << endl;
+    }
+    cout << endl << ve.size() << " computers!" << endl;
+}
+
 void UI::displayDatabaseComputerShort(vector<Computer> ve)
 {
     cout << endl << "ID    NAME                          YEAR    TYPE" << endl;
@@ -682,27 +712,6 @@ void UI::displayDatabaseComputerShort(vector<Computer> ve)
     cout << endl << ve.size() << " computers!" << endl;
 }
 
-void UI::displayDatabaseComputer(vector<Computer> ve)      // Prentar út vektorinn...
-{
-    for(unsigned int i = 0; i < ve.size(); i++)
-    {
-        cout << endl << ve[i];
-        cout << endl << "Scientists: ";
-        vector<Person> sci = myDom.getSciFromLinks(ve[i].getId());
-
-        for(unsigned int i = 0; i < sci.size(); i++)
-        {
-            cout << sci[i].getName();
-            if(i != sci.size()-1)
-            {
-                cout << ", ";
-            }
-        }
-        cout << endl
-             << "------------------------------------------------------------------" << endl;
-    }
-    cout << endl << ve.size() << " computers!" << endl;
-}
 
 void UI::displayLink(pair<Person, Computer> link)      // Prentar út par af Person og Computer...
 {
@@ -715,12 +724,12 @@ void UI::displayLink(pair<Person, Computer> link)      // Prentar út par af Per
 }
 
 
-bool sortPairVector(pair<Person, Computer>& la, pair<Person, Computer>& lb)
+bool sortPairVector(pair<Person, Computer>& la, pair<Person, Computer>& lb)     // Notað í fallinu hér að neðan fyrir sort á pair
 {
     return la.first < lb.first;
 }
 
-void UI::displayDatabaseLinks()
+void UI::displayDatabaseLinks()     // Prentum út allar tengingarnar, þ.e. nöfn á einstaklingum og tölvum
 {
     vector<pair<Person, Computer> > vLink = myDom.returnAllLinks();
 
@@ -749,12 +758,4 @@ void UI::displayShortCom(Computer C)
 {
     cout << " " << setw(30) << left << C.getName() << setw(8) << left << C.getBuildYear();
     cout << setw(15) << left << C.getType() << endl;
-}
-
-void UI::allLinksMessage()
-{
-    cout << "   =================================================================" << endl;
-    cout << "   |     ALL LINKS IN DATABASE                                     |" << endl;
-    cout << "   =================================================================" << endl;
-    cout << endl;
 }

@@ -7,8 +7,8 @@
 #include <iomanip>
 #include <limits>
 
-// Klasi sem heldur utan um notendaviðmótið.  Notandinn getur t.d. bætt inn nýjum einstakling, lesið alla einstaklingana út
-// á skjáinn með ákveðinni röðun og leitað af einverju sem tengist einstaklingnum.
+// Klasi sem heldur utan um notendaviðmótið.  Notandinn getur t.d. bætt inn nýjum einstakling, tölvu og link, lesið allt út
+// á skjáinn með ákveðinni röðun og leitað af einverju sem tengist einstaklingnum eða tölvunni.
 
 class UI
 {
@@ -30,10 +30,10 @@ public:
     void searchMessage();
     void searchScientist();
     void searchComputer();
-    void returnHome();
     void clearScreen();
     void linkTogether();
-    
+
+    // Alls konar skemmtilegt display-föll sem skrifa dót úr á skjáinn...
     void displayDatabaseScientist(vector<Person> v);
     void displayDatabaseScientistShort(vector<Person> v);
     void displayDatabaseComputer(vector<Computer> ve);
@@ -42,7 +42,6 @@ public:
     void displayDatabaseLinks();
     void displayShort(Person P);
     void displayShortCom(Computer C);
-    //void displayDatabaseLink(vector<pair<Person, Computer> > vlink);
 
 };
 
