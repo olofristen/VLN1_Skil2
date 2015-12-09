@@ -537,15 +537,15 @@ void UI::readingComputer()
         {
             do
             {
-                cout << "Year of production (1700 - 2010): ";
+                cout << "Year of production (1600 - 2010): ";
                 cin >> buildYear;
 
-                if(buildYear < "1700" || buildYear > "2010")
+                if(buildYear < "1600" || buildYear > "2010")
                 {
                     cout << "Invalid input" << endl;
                 }
             }
-            while(buildYear < "1700" || buildYear > "2010");
+            while(buildYear < "1600" || buildYear > "2010");
         }
         else
         {
@@ -554,12 +554,12 @@ void UI::readingComputer()
             {
                 cin >> buildYear;
 
-                if(buildYear < "1700" || buildYear > "2015")
+                if(buildYear < "1600" || buildYear > "2015")
                 {
                     cout << "Invalid input" << endl;
                 }
             }
-            while(buildYear < "1700" || buildYear > "2015");
+            while(buildYear < "1600" || buildYear > "2015");
         }
 
         tempBy = atoi(buildYear.c_str());
