@@ -157,21 +157,27 @@ void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á e
     cout << "   =================================================================" << endl;
 
     cin >> sortMenu;
-    if(sortMenu == "7")
+    if(sortMenu == "1" || sortMenu == "2" || sortMenu == "3" || sortMenu == "4" || sortMenu == "5" || sortMenu == "6" || sortMenu == "7")
     {
-        vector<Person> ve = myDom.sortAndDisplayScientist(sortMenu);
-        if(!ve.empty())
+        if(sortMenu == "7")
         {
-               displayDatabaseScientistShort(ve);
+            vector<Person> ve = myDom.sortAndDisplayScientist(sortMenu);
+            if(!ve.empty())
+            {
+                displayDatabaseScientistShort(ve);
+            }
+        }
+        else
+        {
+            vector<Person> vec = myDom.sortAndDisplayScientist(sortMenu);
+            if(!vec.empty())
+            {
+                displayDatabaseScientist(vec);
+            }
         }
     }
-    else
-    {
-        vector<Person> vec = myDom.sortAndDisplayScientist(sortMenu);
-        if(!vec.empty())
-        {
-            displayDatabaseScientist(vec);
-        }
+    else {
+        cout << "Invalid input!";
     }
 }
 
@@ -196,22 +202,27 @@ void UI::sortMessageComputer()     // sleppa því að taka inn vektorinn, á ek
     cout << "   =================================================================" << endl;
 
     cin >> sortMenu;
-
-    if(sortMenu == "5")
+    if(sortMenu == "1" || sortMenu == "2" || sortMenu == "3" || sortMenu == "4" || sortMenu == "5")
     {
-        vector<Computer> ve = myDom.sortAndDisplayComputer(sortMenu);
-        if(!ve.empty())
+        if(sortMenu == "5")
         {
-               displayDatabaseComputerShort(ve);
+            vector<Computer> ve = myDom.sortAndDisplayComputer(sortMenu);
+            if(!ve.empty())
+            {
+                displayDatabaseComputerShort(ve);
+            }
+        }
+        else
+        {
+            vector<Computer> vec = myDom.sortAndDisplayComputer(sortMenu);
+            if(!vec.empty())
+            {
+                displayDatabaseComputer(vec);
+            }
         }
     }
-    else
-    {
-        vector<Computer> vec = myDom.sortAndDisplayComputer(sortMenu);
-        if(!vec.empty())
-        {
-            displayDatabaseComputer(vec);
-        }
+    else {
+        cout << "Invalid input!";
     }
 }
 
@@ -300,11 +311,15 @@ void UI::searchComputer()
         {
             cout << "Which type was the computer?: ";
         }
-        else if(searchMenu.compare("2") == 0)
+        else if(searchMenu.compare("3") == 0)
+        {
+            cout << "When was the computer built?: ";
+        }
+        else if(searchMenu.compare("4") == 0)
         {
             cout << "So was the computer built or not?: ";
         }
-        else if(searchMenu.compare("3") == 0)
+        else if(searchMenu.compare("5") == 0)
         {
             cout << "Enter some word and we will see..: ";
         }
