@@ -602,7 +602,51 @@ void UI::readingComputer()
     }
 }
 
-void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
+/*void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
+{
+    int sid = -1, cid = -1;
+    string tempScientistId = "", tempComputerId = "";
+    cout << "Choose one scientist (ID) and one computer (ID)!" << endl << endl;
+    cout << "Scientists from the database: " << endl;
+    displayDatabaseScientistShort(myDom.returnAllScientists());
+
+    do
+    {
+        cout << endl << "Scientist ID: ";
+        cin >> tempScientistId; // Tekur inn vector gildi en ekki ID úr gagnagrunni!
+        if(tempScientistId == "q" || tempScientistId == "Q")
+        {
+            return;
+        }
+        sid = atoi(tempScientistId.c_str());
+        if(sid > myDom.scientistsSize()-1 || sid < 1)
+            {
+                cout << "Invalid input" << endl;
+            }
+    }
+    while(sid > myDom.scientistsSize()-1 || sid < 1);
+
+
+    cout << endl << "Computers in the database: " << endl;
+    displayDatabaseComputerShort(myDom.returnAllComputers());
+
+    do
+    {
+        cout << endl << "Computer ID: ";
+        cin >> tempComputerId; // Tekur inn vector gildi en ekki ID úr gagnagrunni!
+        cid = atoi(tempScientistId.c_str());
+        if(cid > myDom.computersSize()-1 || cid < 1)
+            {
+                cout << "Invalid input" << endl;
+            }
+    }
+    while(cid > myDom.computersSize()-1 || cid < 1);
+    pair<Person, Computer> link = myDom.addNewLink(sid, cid);
+    cout << endl << "----------------------------------------" << endl;
+    cout << "New link: " << endl << endl;
+    displayLink(link);
+}*/
+void UI::linkTogether()     // Skrifum einstaklingana og tölvurnar út á skjáinn og notandinn velur númer til að tengja saman!
 {
     int sid = -1, cid = -1;
     string tempScientistId = "", tempComputerId = "";
@@ -617,7 +661,8 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
         {
             return;
         }
-        else if(tempScientistId > "-1" || tempScientistId < "1000")
+        else if(atoi(tempScientistId.c_str()) > 0 && atoi(tempScientistId.c_str()) <= myDom.scientistsSize())
+
         {
             sid = atoi(tempScientistId.c_str());
         }
@@ -626,8 +671,7 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
             cout << "Invalid Input" << endl;
         }
     }
-    while(sid > 999 || sid < 0);
-
+    while(sid <= 0 || sid > myDom.scientistsSize());
 
     cout << endl << "Computers in the database: " << endl;
     displayDatabaseComputerShort(myDom.returnAllComputers());
@@ -640,7 +684,7 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
         {
             return;
         }
-        else if(tempComputerId > "-1" || tempComputerId < "1000")
+        else if(atoi(tempComputerId.c_str()) > 0 && atoi(tempComputerId.c_str()) <= myDom.computersSize())
         {
             cid = atoi(tempComputerId.c_str());
         }
@@ -649,8 +693,9 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
             cout << "Invalid Input" << endl;
         }
     }
-    while(cid > 999 || cid < 0);
-    pair<Person, Computer> link = myDom.addNewLink(sid, cid);
+    while(cid <= 0 || cid > myDom.computersSize());
+
+    pair<Person, Computer> link = myDom.addNewLink(sid - 1, cid - 1);
     cout << endl << "----------------------------------------" << endl;
     cout << "New link: " << endl << endl;
     displayLink(link);
@@ -784,3 +829,5 @@ void UI::allLinksMessage()
     cout << "   =================================================================" << endl;
     cout << endl;
 }
+
+
