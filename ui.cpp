@@ -121,6 +121,7 @@ void UI::registerMessageLink()
     cout << "   |     REGISTER A LINK BETWEEN SCIENTIST/S AND COMPUTER/S        |" << endl;
     cout << "   =================================================================" << endl;
     cout << endl;
+    cout << "   Press Q/q to exit" << endl << endl;
 }
 
 void UI::searchMessage()
@@ -312,11 +313,11 @@ void UI::searchComputer()       // Leitunarvalmynd fyrir tölvurnar...
     searchMessage();
 
     cout << "   =================================================================" << endl;
-    cout << "   |  in which category would you prefer to search?                |" << endl;
+    cout << "   |  In which category would you prefer to search?                |" << endl;
     cout << "   |    1.  By name                                                |" << endl;
-    cout << "   |    2.  By year it was built                                   |" << endl;
-    cout << "   |    3.  By type                                                |" << endl;
-    cout << "   |    4.  Whether it was built or not                            |" << endl;
+    cout << "   |    2.  By type                                                |" << endl;
+    cout << "   |    3.  By the year it was built                               |" << endl;
+    cout << "   |    4.  By whether it was built or not                         |" << endl;
     cout << "   |    5.  By info                                                |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
@@ -330,13 +331,11 @@ void UI::searchComputer()       // Leitunarvalmynd fyrir tölvurnar...
         }
         else if(searchMenu.compare("2") == 0)
         {
-
-            cout << "What year was the computer built?: ";
-
+            cout << "Which type was the computer?: ";
         }
         else if(searchMenu.compare("3") == 0)
         {
-            cout << "Which type was the computer?: ";
+            cout << "When was the computer built?: ";
         }
         else if(searchMenu.compare("4") == 0)
         {
@@ -345,7 +344,7 @@ void UI::searchComputer()       // Leitunarvalmynd fyrir tölvurnar...
         }
         else if(searchMenu.compare("5") == 0)
         {
-            cout << "Which type was the computer?: ";
+            cout << "Enter some word and we will see..: ";
         }
         else if(searchMenu.compare("Q") == 0 || searchMenu.compare("q") == 0)
         {
@@ -627,7 +626,7 @@ void UI::linkTogether()     // Skrifum einstaklingana og tölvurnar út á skjá
         {
             return;
         }
-        else if(tempScientistId > "-1" && tempScientistId < "1000")
+        else if(atoi(tempScientistId.c_str()) > 0 && atoi(tempScientistId.c_str()) <= myDom.scientistsSize())
         {
             sid = atoi(tempScientistId.c_str());
         }
@@ -636,8 +635,7 @@ void UI::linkTogether()     // Skrifum einstaklingana og tölvurnar út á skjá
             cout << "Invalid Input" << endl;
         }
     }
-    while(sid > 999 || sid < 0);
-
+    while(sid <= 0 || sid > myDom.scientistsSize());
 
     cout << endl << "Computers in the database: " << endl;
     displayDatabaseComputerShort(myDom.returnAllComputers());
@@ -650,7 +648,7 @@ void UI::linkTogether()     // Skrifum einstaklingana og tölvurnar út á skjá
         {
             return;
         }
-        else if(tempComputerId > "-1" && tempComputerId < "1000")
+        else if(atoi(tempComputerId.c_str()) > 0 && atoi(tempComputerId.c_str()) <= myDom.computersSize())
         {
             cid = atoi(tempComputerId.c_str());
         }
@@ -659,15 +657,15 @@ void UI::linkTogether()     // Skrifum einstaklingana og tölvurnar út á skjá
             cout << "Invalid Input" << endl;
         }
     }
-    while(cid > 999 || cid < 0);
+    while(cid <= 0 || cid > myDom.computersSize());
+
     sid = atoi(tempComputerId.c_str());
-    pair<Person, Computer> link = myDom.addNewLink(sid, cid);
+    pair<Person, Computer> link = myDom.addNewLink(sid - 1, cid - 1);
     cout << endl << "----------------------------------------" << endl;
     cout << "New link: " << endl << endl;
     displayLink(link);
 }
 
-// Hin og þessi prentföll...
 void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út person-vektor...
 {
     for(unsigned int i = 0; i < v.size(); i++)
@@ -696,7 +694,7 @@ void UI::displayDatabaseScientistShort(vector<Person> v)
 
     for(unsigned int i = 0; i < v.size(); i++)
     {
-        cout << setw(5) << left << i;
+        cout << setw(5) << left << i + 1;
         displayShort(v[i]);
     }
     cout << endl << v.size() << " scientists!" << endl;
@@ -732,7 +730,7 @@ void UI::displayDatabaseComputerShort(vector<Computer> ve)
 
     for(unsigned int i = 0; i < ve.size(); i++)
     {
-        cout << setw(5) << left << i;
+        cout << setw(5) << left << i + 1;
         displayShortCom(ve[i]);
     }
     cout << endl << ve.size() << " computers!" << endl;
