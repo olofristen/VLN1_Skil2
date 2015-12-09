@@ -589,7 +589,7 @@ void UI::readingComputer()
 }
 
 void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
-{    
+{
     int sid = 0, cid = 0;
     string tempScientistId = "", tempComputerId = "";
     cout << "Choose one scientist (ID) and one computer (ID)!" << endl << endl;
@@ -639,12 +639,12 @@ void UI::displayDatabaseScientist(vector<Person> v)      // Prentar út vektorin
 
 void UI::displayDatabaseScientistShort(vector<Person> v)
 {
-    cout << endl << "     NAME                          BIRTH YEAR   DEATH YEAR" << endl;
+    cout << endl << "ID    NAME                          BIRTH YEAR   DEATH YEAR" << endl;
     cout << "----------------------------------------------------------" << endl;
 
     for(unsigned int i = 0; i < v.size(); i++)
     {
-        cout << setw(5) << left;
+        cout << setw(5) << left << i;
         displayShort(v[i]);
     }
     cout << endl << v.size() << " scientists!" << endl;
@@ -652,13 +652,13 @@ void UI::displayDatabaseScientistShort(vector<Person> v)
 
 void UI::displayDatabaseComputerShort(vector<Computer> ve)
 {
-    cout << endl << "     NAME                          YEAR    TYPE" << endl;
+    cout << endl << "ID    NAME                          YEAR    TYPE" << endl;
     cout << "---------------------------------------------------------" << endl;
 
 
     for(unsigned int i = 0; i < ve.size(); i++)
     {
-        cout << setw(5) << left;
+        cout << setw(5) << left << i;
         displayShortCom(ve[i]);
     }
     cout << endl << ve.size() << " computers!" << endl;
@@ -707,7 +707,6 @@ void UI::displayDatabaseLinks()
     cout << "--------------------------------------------------------------" << endl;
     for(unsigned int i = 0; i < vLink.size(); i++)
     {
-
         cout << " " << i << ":  " << setw(25) << left << vLink[i].first.getName()
         << vLink[i].second.getName() << endl;
     }
@@ -717,7 +716,6 @@ void UI::displayDatabaseLinks()
 void UI::displayShort(Person P)
 {   
     cout << " " << setw(30) << left << P.getName();
-    cout << setw(30) << left << P.getName();
     cout << setw(8) << left << P.getBirthYear();
     if(P.getDeathYear() == -1)
         cout << setw(9) << right << "" << endl;
