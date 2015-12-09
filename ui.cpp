@@ -713,12 +713,12 @@ void UI::displayDatabaseLinks()
     vector<pair<Person, Computer> > vLink = myDom.returnAllLinks();
 
     sort(vLink.begin(), vLink.end(), sortPairVector);
-    cout << endl << " #   SCIENTISTS               COMPUTERS" << endl;
+    cout << endl << "#    SCIENTISTS               COMPUTERS" << endl;
     cout << "--------------------------------------------------------------" << endl;
     for(unsigned int i = 0; i < vLink.size(); i++)
     {
-        cout << " " << i << ":  " << setw(25) << left << vLink[i].first.getName()
-        << vLink[i].second.getName() << endl;
+        cout << " " << setw(4) << left << i << setw(25) << left << vLink[i].first.getName();
+        cout << setw(25) << left << vLink[i].second.getName() << endl;
     }
     cout << endl << vLink.size() << " links!" << endl;
 }
