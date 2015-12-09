@@ -260,7 +260,7 @@ void UI::searchScientist()
         }
         else if(searchMenu.compare("2") == 0)
         {
-            cout << "A lady or a man? Or maybe a dog?: ";
+            cout << "Male or female?: ";
         }
         else if(searchMenu.compare("3") == 0)
         {
@@ -327,7 +327,8 @@ void UI::searchComputer()
         }
         else if(searchMenu.compare("4") == 0)
         {
-            cout << "So was the computer built or not?: ";
+            cout << "So was the computer built or not? " << endl;
+            cout << "Please pick 1 for yes and 0 for no. Pick now: ";
         }
         else if(searchMenu.compare("5") == 0)
         {
