@@ -650,7 +650,6 @@ void UI::linkTogether()     // Virkar bara ágætlega, nice...;)
         }
     }
     while(cid > 999 || cid < 0);
-    sid = atoi(tempComputerId.c_str());
     pair<Person, Computer> link = myDom.addNewLink(sid, cid);
     cout << endl << "----------------------------------------" << endl;
     cout << "New link: " << endl << endl;
