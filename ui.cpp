@@ -36,7 +36,7 @@ void UI::choices()  // Aðalvalmyndin
     cout << "   =================================================================" << endl;
     cout << "   |  What do you want to do?                                      |" << endl;
     cout << "   |    1.  Register new computer scientist/s                      |" << endl;
-    cout << "   |    2.  Register new computer                                  |" << endl;
+    cout << "   |    2.  Register new computer/s                                |" << endl;
     cout << "   |    3.  Register link between scientist/s and computer/s       |" << endl;
     cout << "   |    4.  See all computer scientists registered                 |" << endl;
     cout << "   |    5.  See all computers registered                           |" << endl;
@@ -627,6 +627,7 @@ void UI::linkTogether()     // Skrifum einstaklingana og tölvurnar út á skjá
             return;
         }
         else if(atoi(tempScientistId.c_str()) > 0 && atoi(tempScientistId.c_str()) <= myDom.scientistsSize())
+
         {
             sid = atoi(tempScientistId.c_str());
         }
@@ -659,7 +660,6 @@ void UI::linkTogether()     // Skrifum einstaklingana og tölvurnar út á skjá
     }
     while(cid <= 0 || cid > myDom.computersSize());
 
-    sid = atoi(tempComputerId.c_str());
     pair<Person, Computer> link = myDom.addNewLink(sid - 1, cid - 1);
     cout << endl << "----------------------------------------" << endl;
     cout << "New link: " << endl << endl;
