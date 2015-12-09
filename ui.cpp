@@ -157,6 +157,10 @@ void UI::sortMessageScientist()     // sleppa því að taka inn vektorinn, á e
     cout << "   =================================================================" << endl;
 
     cin >> sortMenu;
+    if(sortMenu == "Q" || sortMenu == "q")
+    {
+        return;
+    }
     if(sortMenu == "1" || sortMenu == "2" || sortMenu == "3" || sortMenu == "4" || sortMenu == "5" || sortMenu == "6" || sortMenu == "7")
     {
         if(sortMenu == "7")
