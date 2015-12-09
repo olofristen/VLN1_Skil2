@@ -93,11 +93,11 @@ vector<Computer> Domain::sortAndDisplayComputer(string sortMenu)
 }
 
 vector<Person> Domain::searchStringScientist(string num, string search)
-{
+{       // leitar í vektornum...
     return DB.searchScientistFromDb(num, search);
 }
 
 vector<Computer> Domain::searchStringComputer(string num, string search)
-{
+{       // leitar í vektornum...
     return DB.searchComputerFromDb(num, search);
 }
